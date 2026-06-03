@@ -1,0 +1,29 @@
+[project]
+name = "semi-research-direction-collect"
+version = "0.1.0"
+description = "Global semiconductor lab research direction collector & insight report generator for Hermes AI agent"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.0",
+    "pyyaml>=6.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.0.0",
+    "markdown>=3.6",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "arrow>=1.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "mypy>=1.0",
+    "ruff>=0.3.0",
+]
+pdf = [
+    "reportlab>=4.0",
+]
+
+[project.scripts]
+collect = "scripts.collect_and_report:main"

@@ -1,0 +1,1513 @@
+{
+  "report_meta": {
+    "title": "半导体研究方向洞察报告 2026-06-03",
+    "generated_at": "2026-06-03T00:03:49.070649+00:00",
+    "collection_date": "2026-06-03",
+    "focus": "全球半导体研究方向",
+    "labs_covered": 7,
+    "articles_collected": 23,
+    "trends_identified": 32
+  },
+  "top_trends": [
+    {
+      "direction": "Forksheet FETs",
+      "lifecycle": "emerging",
+      "confidence": 0.38,
+      "labs_active": [
+        "imec"
+      ],
+      "article_count": 2,
+      "domains": [
+        "advanced_process",
+        "semiconductor_materials",
+        "manufacturing_equipment"
+      ],
+      "keywords": [
+        "forksheet"
+      ],
+      "evidence": [
+        {
+          "lab": "imec",
+          "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+          "url": "https://www.imec-int.com/en/research"
+        },
+        {
+          "lab": "imec",
+          "title": "Forksheet Transistors: Bridge Between Nanosheet and CFET — imec Outer Wall Forksheet at VLSI 2025",
+          "url": "https://www.imec-int.com/en/research/cmos"
+        }
+      ],
+      "score": 1.52
+    },
+    {
+      "direction": "Through-Silicon Via (TSV)",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "imec"
+      ],
+      "article_count": 1,
+      "domains": [
+        "advanced_packaging"
+      ],
+      "keywords": [
+        "tsv"
+      ],
+      "evidence": [
+        {
+          "lab": "imec",
+          "title": "Imec and EVG Advance Hybrid Bonding for 3D Chip Architectures",
+          "url": "https://www.imec-int.com/en/research/advanced-packaging"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Quantum Computing",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "intel-labs"
+      ],
+      "article_count": 1,
+      "domains": [
+        "quantum_computing"
+      ],
+      "keywords": [
+        "qubit"
+      ],
+      "evidence": [
+        {
+          "lab": "intel-labs",
+          "title": "Intel and Argonne Deploy 12-Qubit Silicon Quantum Dot Processor",
+          "url": "https://www.intel.com/content/www/us/en/research/quantum-computing.html"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Silicon Quantum Computing",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "intel-labs"
+      ],
+      "article_count": 1,
+      "domains": [
+        "quantum_computing"
+      ],
+      "keywords": [
+        "silicon quantum"
+      ],
+      "evidence": [
+        {
+          "lab": "intel-labs",
+          "title": "Intel and Argonne Deploy 12-Qubit Silicon Quantum Dot Processor",
+          "url": "https://www.intel.com/content/www/us/en/research/quantum-computing.html"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Quantum Error Correction",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "intel-labs"
+      ],
+      "article_count": 1,
+      "domains": [
+        "quantum_computing"
+      ],
+      "keywords": [
+        "quantum error correction"
+      ],
+      "evidence": [
+        {
+          "lab": "intel-labs",
+          "title": "Intel and Argonne Deploy 12-Qubit Silicon Quantum Dot Processor",
+          "url": "https://www.intel.com/content/www/us/en/research/quantum-computing.html"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Nanosheet FETs",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "tsmc-research"
+      ],
+      "article_count": 1,
+      "domains": [
+        "advanced_process"
+      ],
+      "keywords": [
+        "nanosheet"
+      ],
+      "evidence": [
+        {
+          "lab": "tsmc-research",
+          "title": "TSMC N2 (2nm) GAA Nanosheet — 65-75% Yield, 25 Tapeouts",
+          "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Research: semiconductor_materials",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "tsmc-research"
+      ],
+      "article_count": 1,
+      "domains": [
+        "advanced_process",
+        "semiconductor_materials"
+      ],
+      "keywords": [
+        "semiconductor_materials"
+      ],
+      "evidence": [
+        {
+          "lab": "tsmc-research",
+          "title": "TSMC and Applied Materials Joint CFET R&D at EPIC Center",
+          "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "In-Memory / Near-Memory Computing",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "mit-mtl"
+      ],
+      "article_count": 1,
+      "domains": [
+        "semiconductor_materials",
+        "ai_chip_architecture"
+      ],
+      "keywords": [
+        "in-memory computing"
+      ],
+      "evidence": [
+        {
+          "lab": "mit-mtl",
+          "title": "MTL Research: Wafer-Scale 2D Logic and Memory for In-Memory Computing",
+          "url": "https://www.mtl.mit.edu/events-seminars/seminars/plasma-ai-hardware-wafer-scale-2d-logic-and-memory-memory-computing-0"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Hardware Security & Root of Trust",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "mit-mtl"
+      ],
+      "article_count": 1,
+      "domains": [
+        "security"
+      ],
+      "keywords": [
+        "hardware security"
+      ],
+      "evidence": [
+        {
+          "lab": "mit-mtl",
+          "title": "MTL: Terahertz and Low-Power Silicon Electronics for Hardware Security",
+          "url": "https://www.mtl.mit.edu/events-seminars/seminars/embedding-trust-physical-layer-securing-hardware-through-terahertz-and-low"
+        }
+      ],
+      "score": 1.36
+    },
+    {
+      "direction": "Research: security",
+      "lifecycle": "emerging",
+      "confidence": 0.34,
+      "labs_active": [
+        "mit-mtl"
+      ],
+      "article_count": 1,
+      "domains": [
+        "security"
+      ],
+      "keywords": [
+        "security"
+      ],
+      "evidence": [
+        {
+          "lab": "mit-mtl",
+          "title": "MTL: Terahertz and Low-Power Silicon Electronics for Hardware Security",
+          "url": "https://www.mtl.mit.edu/events-seminars/seminars/embedding-trust-physical-layer-securing-hardware-through-terahertz-and-low"
+        }
+      ],
+      "score": 1.36
+    }
+  ],
+  "domain_summary": {
+    "advanced_process": {
+      "label_en": "Advanced Process Technology",
+      "label_zh": "先进制程技术",
+      "total": 10,
+      "emerging": 3,
+      "growing": 4,
+      "mature": 2,
+      "declining": 1,
+      "labs": 4
+    },
+    "semiconductor_materials": {
+      "label_en": "Semiconductor Materials",
+      "label_zh": "半导体材料",
+      "total": 10,
+      "emerging": 3,
+      "growing": 4,
+      "mature": 2,
+      "declining": 1,
+      "labs": 4
+    },
+    "manufacturing_equipment": {
+      "label_en": "Manufacturing Equipment",
+      "label_zh": "制造装备与工艺",
+      "total": 10,
+      "emerging": 3,
+      "growing": 4,
+      "mature": 2,
+      "declining": 1,
+      "labs": 4
+    },
+    "advanced_packaging": {
+      "label_en": "Advanced Packaging",
+      "label_zh": "先进封装",
+      "total": 4,
+      "emerging": 1,
+      "growing": 0,
+      "mature": 2,
+      "declining": 1,
+      "labs": 4
+    },
+    "quantum_computing": {
+      "label_en": "Quantum Computing",
+      "label_zh": "量子计算",
+      "total": 3,
+      "emerging": 3,
+      "growing": 0,
+      "mature": 0,
+      "declining": 0,
+      "labs": 1
+    },
+    "ai_chip_architecture": {
+      "label_en": "AI Chip Architecture",
+      "label_zh": "AI芯片架构",
+      "total": 9,
+      "emerging": 5,
+      "growing": 3,
+      "mature": 0,
+      "declining": 1,
+      "labs": 4
+    },
+    "security": {
+      "label_en": "Hardware Security",
+      "label_zh": "硬件安全",
+      "total": 2,
+      "emerging": 2,
+      "growing": 0,
+      "mature": 0,
+      "declining": 0,
+      "labs": 1
+    },
+    "eda_design_automation": {
+      "label_en": "EDA & Design Automation",
+      "label_zh": "EDA设计自动化",
+      "total": 2,
+      "emerging": 2,
+      "growing": 0,
+      "mature": 0,
+      "declining": 0,
+      "labs": 1
+    },
+    "photonics": {
+      "label_en": "Silicon Photonics",
+      "label_zh": "硅光子学",
+      "total": 3,
+      "emerging": 1,
+      "growing": 2,
+      "mature": 0,
+      "declining": 0,
+      "labs": 2
+    },
+    "memory_technology": {
+      "label_en": "Memory Technology",
+      "label_zh": "存储器技术",
+      "total": 2,
+      "emerging": 2,
+      "growing": 0,
+      "mature": 0,
+      "declining": 0,
+      "labs": 1
+    }
+  },
+  "lab_activity": [
+    {
+      "lab": "imec",
+      "direction_count": 11,
+      "article_count": 11,
+      "top_directions": [
+        "Forksheet FETs",
+        "Through-Silicon Via (TSV)",
+        "CFET (Complementary FET)",
+        "2D Materials (Graphene, MoS2, etc.)",
+        "EUV Lithography"
+      ]
+    },
+    {
+      "lab": "semiengineering",
+      "direction_count": 11,
+      "article_count": 11,
+      "top_directions": [
+        "ML for EDA (AI-Driven Design Automation)",
+        "Physical Design & Routing Optimization",
+        "Co-Packaged Optics (CPO)",
+        "Research: manufacturing_equipment",
+        "Semiconductor Metrology & Inspection"
+      ]
+    },
+    {
+      "lab": "intel-labs",
+      "direction_count": 10,
+      "article_count": 10,
+      "top_directions": [
+        "Quantum Computing",
+        "Silicon Quantum Computing",
+        "Quantum Error Correction",
+        "EUV Lithography",
+        "High-NA EUV Lithography"
+      ]
+    },
+    {
+      "lab": "tsmc-research",
+      "direction_count": 9,
+      "article_count": 9,
+      "top_directions": [
+        "Nanosheet FETs",
+        "Research: semiconductor_materials",
+        "CFET (Complementary FET)",
+        "Gate-All-Around (GAA) FETs",
+        "Sub-2nm Process Technology"
+      ]
+    },
+    {
+      "lab": "mit-mtl",
+      "direction_count": 9,
+      "article_count": 9,
+      "top_directions": [
+        "In-Memory / Near-Memory Computing",
+        "Hardware Security & Root of Trust",
+        "Research: security",
+        "Silicon Photonics",
+        "Research: photonics"
+      ]
+    },
+    {
+      "lab": "semiwiki",
+      "direction_count": 3,
+      "article_count": 3,
+      "top_directions": [
+        "Research: risc-v",
+        "Research: ai_chip_architecture",
+        "Chiplet & UCIe Ecosystem"
+      ]
+    },
+    {
+      "lab": "semianalysis",
+      "direction_count": 3,
+      "article_count": 3,
+      "top_directions": [
+        "HBM (High Bandwidth Memory)",
+        "Research: dram scaling",
+        "Backside Power Delivery Network (BSPDN)"
+      ]
+    }
+  ],
+  "cross_reference": {
+    "total_convergences": 14,
+    "convergences": [
+      {
+        "direction": "Silicon Photonics",
+        "labs": [
+          "mit-mtl",
+          "semiengineering"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "Research: photonics",
+        "labs": [
+          "mit-mtl",
+          "semiengineering"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "CFET (Complementary FET)",
+        "labs": [
+          "imec",
+          "tsmc-research"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "2D Materials (Graphene, MoS2, etc.)",
+        "labs": [
+          "imec",
+          "mit-mtl"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "EUV Lithography",
+        "labs": [
+          "imec",
+          "intel-labs"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "High-NA EUV Lithography",
+        "labs": [
+          "imec",
+          "intel-labs"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "Neuromorphic Computing",
+        "labs": [
+          "intel-labs",
+          "mit-mtl"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "Gate-All-Around (GAA) FETs",
+        "labs": [
+          "imec",
+          "intel-labs",
+          "tsmc-research"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "Sub-2nm Process Technology",
+        "labs": [
+          "imec",
+          "intel-labs",
+          "tsmc-research"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "Hybrid Bonding (Direct Cu-Cu)",
+        "labs": [
+          "imec",
+          "semiengineering",
+          "tsmc-research"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "3D Stacking / 3D IC",
+        "labs": [
+          "imec",
+          "semiengineering",
+          "tsmc-research"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "direction": "Backside Power Delivery Network (BSPDN)",
+        "labs": [
+          "imec",
+          "intel-labs",
+          "semianalysis",
+          "tsmc-research"
+        ],
+        "strength": "strong"
+      },
+      {
+        "direction": "Research: ai_chip_architecture",
+        "labs": [
+          "intel-labs",
+          "mit-mtl",
+          "semiengineering",
+          "semiwiki"
+        ],
+        "strength": "strong"
+      },
+      {
+        "direction": "Chiplet & UCIe Ecosystem",
+        "labs": [
+          "mit-mtl",
+          "semiengineering",
+          "semiwiki",
+          "tsmc-research"
+        ],
+        "strength": "strong"
+      }
+    ]
+  },
+  "appendix": {
+    "lifecycle_distribution": {
+      "emerging": 18,
+      "growing": 7,
+      "mature": 4,
+      "declining": 3
+    },
+    "all_trends": [
+      {
+        "direction": "Forksheet FETs",
+        "lifecycle": "emerging",
+        "confidence": 0.38,
+        "labs_active": [
+          "imec"
+        ],
+        "article_count": 2,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "forksheet"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "imec",
+            "title": "Forksheet Transistors: Bridge Between Nanosheet and CFET — imec Outer Wall Forksheet at VLSI 2025",
+            "url": "https://www.imec-int.com/en/research/cmos"
+          }
+        ],
+        "score": 1.52
+      },
+      {
+        "direction": "Through-Silicon Via (TSV)",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "imec"
+        ],
+        "article_count": 1,
+        "domains": [
+          "advanced_packaging"
+        ],
+        "keywords": [
+          "tsv"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec and EVG Advance Hybrid Bonding for 3D Chip Architectures",
+            "url": "https://www.imec-int.com/en/research/advanced-packaging"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Quantum Computing",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "intel-labs"
+        ],
+        "article_count": 1,
+        "domains": [
+          "quantum_computing"
+        ],
+        "keywords": [
+          "qubit"
+        ],
+        "evidence": [
+          {
+            "lab": "intel-labs",
+            "title": "Intel and Argonne Deploy 12-Qubit Silicon Quantum Dot Processor",
+            "url": "https://www.intel.com/content/www/us/en/research/quantum-computing.html"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Silicon Quantum Computing",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "intel-labs"
+        ],
+        "article_count": 1,
+        "domains": [
+          "quantum_computing"
+        ],
+        "keywords": [
+          "silicon quantum"
+        ],
+        "evidence": [
+          {
+            "lab": "intel-labs",
+            "title": "Intel and Argonne Deploy 12-Qubit Silicon Quantum Dot Processor",
+            "url": "https://www.intel.com/content/www/us/en/research/quantum-computing.html"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Quantum Error Correction",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "intel-labs"
+        ],
+        "article_count": 1,
+        "domains": [
+          "quantum_computing"
+        ],
+        "keywords": [
+          "quantum error correction"
+        ],
+        "evidence": [
+          {
+            "lab": "intel-labs",
+            "title": "Intel and Argonne Deploy 12-Qubit Silicon Quantum Dot Processor",
+            "url": "https://www.intel.com/content/www/us/en/research/quantum-computing.html"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Nanosheet FETs",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "tsmc-research"
+        ],
+        "article_count": 1,
+        "domains": [
+          "advanced_process"
+        ],
+        "keywords": [
+          "nanosheet"
+        ],
+        "evidence": [
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC N2 (2nm) GAA Nanosheet — 65-75% Yield, 25 Tapeouts",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Research: semiconductor_materials",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "tsmc-research"
+        ],
+        "article_count": 1,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials"
+        ],
+        "keywords": [
+          "semiconductor_materials"
+        ],
+        "evidence": [
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC and Applied Materials Joint CFET R&D at EPIC Center",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "In-Memory / Near-Memory Computing",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "mit-mtl"
+        ],
+        "article_count": 1,
+        "domains": [
+          "semiconductor_materials",
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "in-memory computing"
+        ],
+        "evidence": [
+          {
+            "lab": "mit-mtl",
+            "title": "MTL Research: Wafer-Scale 2D Logic and Memory for In-Memory Computing",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/plasma-ai-hardware-wafer-scale-2d-logic-and-memory-memory-computing-0"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Hardware Security & Root of Trust",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "mit-mtl"
+        ],
+        "article_count": 1,
+        "domains": [
+          "security"
+        ],
+        "keywords": [
+          "hardware security"
+        ],
+        "evidence": [
+          {
+            "lab": "mit-mtl",
+            "title": "MTL: Terahertz and Low-Power Silicon Electronics for Hardware Security",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/embedding-trust-physical-layer-securing-hardware-through-terahertz-and-low"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Research: security",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "mit-mtl"
+        ],
+        "article_count": 1,
+        "domains": [
+          "security"
+        ],
+        "keywords": [
+          "security"
+        ],
+        "evidence": [
+          {
+            "lab": "mit-mtl",
+            "title": "MTL: Terahertz and Low-Power Silicon Electronics for Hardware Security",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/embedding-trust-physical-layer-securing-hardware-through-terahertz-and-low"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "ML for EDA (AI-Driven Design Automation)",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semiengineering"
+        ],
+        "article_count": 1,
+        "domains": [
+          "eda_design_automation",
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "ml-eda"
+        ],
+        "evidence": [
+          {
+            "lab": "semiengineering",
+            "title": "How the EDA Industry Will Evolve in 2026 — AI-Driven Design, Agentic AI",
+            "url": "https://semiengineering.com/how-the-eda-industry-will-evolve-in-2026/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Physical Design & Routing Optimization",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semiengineering"
+        ],
+        "article_count": 1,
+        "domains": [
+          "eda_design_automation",
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "physical design"
+        ],
+        "evidence": [
+          {
+            "lab": "semiengineering",
+            "title": "How the EDA Industry Will Evolve in 2026 — AI-Driven Design, Agentic AI",
+            "url": "https://semiengineering.com/how-the-eda-industry-will-evolve-in-2026/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Co-Packaged Optics (CPO)",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semiengineering"
+        ],
+        "article_count": 1,
+        "domains": [
+          "photonics",
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "co-packaged optics"
+        ],
+        "evidence": [
+          {
+            "lab": "semiengineering",
+            "title": "All AI Data Center Interconnects Will Be Optical Within 5 Years",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Research: manufacturing_equipment",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semiengineering"
+        ],
+        "article_count": 1,
+        "domains": [
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "manufacturing_equipment"
+        ],
+        "evidence": [
+          {
+            "lab": "semiengineering",
+            "title": "Critical Transition Toward Autonomous Semiconductor Fabs",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Semiconductor Metrology & Inspection",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semiengineering"
+        ],
+        "article_count": 1,
+        "domains": [
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "metrology"
+        ],
+        "evidence": [
+          {
+            "lab": "semiengineering",
+            "title": "Critical Transition Toward Autonomous Semiconductor Fabs",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Research: risc-v",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semiwiki"
+        ],
+        "article_count": 1,
+        "domains": [
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "risc-v"
+        ],
+        "evidence": [
+          {
+            "lab": "semiwiki",
+            "title": "CPU Returns to Center Stage for AI Agent Execution",
+            "url": "https://semiwiki.com/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "HBM (High Bandwidth Memory)",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semianalysis"
+        ],
+        "article_count": 1,
+        "domains": [
+          "memory_technology"
+        ],
+        "keywords": [
+          "hbm"
+        ],
+        "evidence": [
+          {
+            "lab": "semianalysis",
+            "title": "HBM Memory Supercycle — HBM4 16-Stack DRAM",
+            "url": "https://semianalysis.com/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Research: dram scaling",
+        "lifecycle": "emerging",
+        "confidence": 0.34,
+        "labs_active": [
+          "semianalysis"
+        ],
+        "article_count": 1,
+        "domains": [
+          "memory_technology"
+        ],
+        "keywords": [
+          "dram scaling"
+        ],
+        "evidence": [
+          {
+            "lab": "semianalysis",
+            "title": "HBM Memory Supercycle — HBM4 16-Stack DRAM",
+            "url": "https://semianalysis.com/"
+          }
+        ],
+        "score": 1.36
+      },
+      {
+        "direction": "Silicon Photonics",
+        "lifecycle": "growing",
+        "confidence": 0.51,
+        "labs_active": [
+          "mit-mtl",
+          "semiengineering"
+        ],
+        "article_count": 3,
+        "domains": [
+          "photonics",
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "silicon photonics"
+        ],
+        "evidence": [
+          {
+            "lab": "mit-mtl",
+            "title": "MIT MTL-GlobalFoundries Silicon Photonics AI Chip Research",
+            "url": "https://www.mtl.mit.edu/research"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MTL: Chiplet Interconnects and Photonic Networks (TSMC Collaboration)",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/2026"
+          },
+          {
+            "lab": "semiengineering",
+            "title": "All AI Data Center Interconnects Will Be Optical Within 5 Years",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.53
+      },
+      {
+        "direction": "Research: photonics",
+        "lifecycle": "growing",
+        "confidence": 0.51,
+        "labs_active": [
+          "mit-mtl",
+          "semiengineering"
+        ],
+        "article_count": 3,
+        "domains": [
+          "photonics",
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "photonics"
+        ],
+        "evidence": [
+          {
+            "lab": "mit-mtl",
+            "title": "MIT MTL-GlobalFoundries Silicon Photonics AI Chip Research",
+            "url": "https://www.mtl.mit.edu/research"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MTL: Chiplet Interconnects and Photonic Networks (TSMC Collaboration)",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/2026"
+          },
+          {
+            "lab": "semiengineering",
+            "title": "All AI Data Center Interconnects Will Be Optical Within 5 Years",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.53
+      },
+      {
+        "direction": "CFET (Complementary FET)",
+        "lifecycle": "growing",
+        "confidence": 0.48,
+        "labs_active": [
+          "imec",
+          "tsmc-research"
+        ],
+        "article_count": 2,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "cfet"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC and Applied Materials Joint CFET R&D at EPIC Center",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+          }
+        ],
+        "score": 1.44
+      },
+      {
+        "direction": "2D Materials (Graphene, MoS2, etc.)",
+        "lifecycle": "growing",
+        "confidence": 0.48,
+        "labs_active": [
+          "imec",
+          "mit-mtl"
+        ],
+        "article_count": 2,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "2d materials"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MTL Research: Wafer-Scale 2D Logic and Memory for In-Memory Computing",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/plasma-ai-hardware-wafer-scale-2d-logic-and-memory-memory-computing-0"
+          }
+        ],
+        "score": 1.44
+      },
+      {
+        "direction": "EUV Lithography",
+        "lifecycle": "growing",
+        "confidence": 0.48,
+        "labs_active": [
+          "imec",
+          "intel-labs"
+        ],
+        "article_count": 2,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "euv"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 14A / 10A / 7A Roadmap — High-NA EUV First-Mover Advantage",
+            "url": "https://www.intel.com/content/www/us/en/research/research-areas.html"
+          }
+        ],
+        "score": 1.44
+      },
+      {
+        "direction": "High-NA EUV Lithography",
+        "lifecycle": "growing",
+        "confidence": 0.48,
+        "labs_active": [
+          "imec",
+          "intel-labs"
+        ],
+        "article_count": 2,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "high-na"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 14A / 10A / 7A Roadmap — High-NA EUV First-Mover Advantage",
+            "url": "https://www.intel.com/content/www/us/en/research/research-areas.html"
+          }
+        ],
+        "score": 1.44
+      },
+      {
+        "direction": "Neuromorphic Computing",
+        "lifecycle": "growing",
+        "confidence": 0.48,
+        "labs_active": [
+          "intel-labs",
+          "mit-mtl"
+        ],
+        "article_count": 2,
+        "domains": [
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "neuromorphic"
+        ],
+        "evidence": [
+          {
+            "lab": "intel-labs",
+            "title": "Intel Loihi 3 Neuromorphic Processor — 4nm, 8M Neurons, 64B Synapses",
+            "url": "https://www.intel.com/content/www/us/en/research/neuromorphic-computing.html"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MTL Research: Wafer-Scale 2D Logic and Memory for In-Memory Computing",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/plasma-ai-hardware-wafer-scale-2d-logic-and-memory-memory-computing-0"
+          }
+        ],
+        "score": 1.44
+      },
+      {
+        "direction": "Gate-All-Around (GAA) FETs",
+        "lifecycle": "mature",
+        "confidence": 0.65,
+        "labs_active": [
+          "imec",
+          "intel-labs",
+          "tsmc-research"
+        ],
+        "article_count": 4,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "gaa"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "imec",
+            "title": "Forksheet Transistors: Bridge Between Nanosheet and CFET — imec Outer Wall Forksheet at VLSI 2025",
+            "url": "https://www.imec-int.com/en/research/cmos"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 18A Enters HVM — RibbonFET GAA and PowerVia Backside Power Delivery",
+            "url": "https://www.intel.com/content/www/us/en/research/overview.html"
+          },
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC N2 (2nm) GAA Nanosheet — 65-75% Yield, 25 Tapeouts",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+          }
+        ],
+        "score": 1.3
+      },
+      {
+        "direction": "Sub-2nm Process Technology",
+        "lifecycle": "mature",
+        "confidence": 0.65,
+        "labs_active": [
+          "imec",
+          "intel-labs",
+          "tsmc-research"
+        ],
+        "article_count": 4,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "sub-2nm"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 18A Enters HVM — RibbonFET GAA and PowerVia Backside Power Delivery",
+            "url": "https://www.intel.com/content/www/us/en/research/overview.html"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 14A / 10A / 7A Roadmap — High-NA EUV First-Mover Advantage",
+            "url": "https://www.intel.com/content/www/us/en/research/research-areas.html"
+          },
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC N2 (2nm) GAA Nanosheet — 65-75% Yield, 25 Tapeouts",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+          }
+        ],
+        "score": 1.3
+      },
+      {
+        "direction": "Hybrid Bonding (Direct Cu-Cu)",
+        "lifecycle": "mature",
+        "confidence": 0.61,
+        "labs_active": [
+          "imec",
+          "semiengineering",
+          "tsmc-research"
+        ],
+        "article_count": 3,
+        "domains": [
+          "advanced_packaging"
+        ],
+        "keywords": [
+          "hybrid bonding"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec and EVG Advance Hybrid Bonding for 3D Chip Architectures",
+            "url": "https://www.imec-int.com/en/research/advanced-packaging"
+          },
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC CoWoS and SoIC Advanced Packaging — 5.5-Reticle in Production",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/advanced_packaging"
+          },
+          {
+            "lab": "semiengineering",
+            "title": "Chiplets and Heterogeneous Integration Go Mainstream — UCIe 3.0",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.22
+      },
+      {
+        "direction": "3D Stacking / 3D IC",
+        "lifecycle": "mature",
+        "confidence": 0.61,
+        "labs_active": [
+          "imec",
+          "semiengineering",
+          "tsmc-research"
+        ],
+        "article_count": 3,
+        "domains": [
+          "advanced_packaging"
+        ],
+        "keywords": [
+          "3d stacking"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec and EVG Advance Hybrid Bonding for 3D Chip Architectures",
+            "url": "https://www.imec-int.com/en/research/advanced-packaging"
+          },
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC CoWoS and SoIC Advanced Packaging — 5.5-Reticle in Production",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/advanced_packaging"
+          },
+          {
+            "lab": "semiengineering",
+            "title": "Chiplets and Heterogeneous Integration Go Mainstream — UCIe 3.0",
+            "url": "https://semiengineering.com/"
+          }
+        ],
+        "score": 1.22
+      },
+      {
+        "direction": "Backside Power Delivery Network (BSPDN)",
+        "lifecycle": "declining",
+        "confidence": 0.82,
+        "labs_active": [
+          "imec",
+          "intel-labs",
+          "semianalysis",
+          "tsmc-research"
+        ],
+        "article_count": 6,
+        "domains": [
+          "advanced_process",
+          "semiconductor_materials",
+          "manufacturing_equipment"
+        ],
+        "keywords": [
+          "backside power",
+          "bspdn"
+        ],
+        "evidence": [
+          {
+            "lab": "imec",
+            "title": "Imec CFET Roadmap to A2 Node (2041) — Monolithic CFET with Embedded MDI",
+            "url": "https://www.imec-int.com/en/research"
+          },
+          {
+            "lab": "imec",
+            "title": "Forksheet Transistors: Bridge Between Nanosheet and CFET — imec Outer Wall Forksheet at VLSI 2025",
+            "url": "https://www.imec-int.com/en/research/cmos"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 18A Enters HVM — RibbonFET GAA and PowerVia Backside Power Delivery",
+            "url": "https://www.intel.com/content/www/us/en/research/overview.html"
+          },
+          {
+            "lab": "intel-labs",
+            "title": "Intel 14A / 10A / 7A Roadmap — High-NA EUV First-Mover Advantage",
+            "url": "https://www.intel.com/content/www/us/en/research/research-areas.html"
+          },
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC A16 (1.6nm) with Super Power Rail — Backside Power Delivery",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research"
+          }
+        ],
+        "score": 0.82
+      },
+      {
+        "direction": "Research: ai_chip_architecture",
+        "lifecycle": "declining",
+        "confidence": 0.79,
+        "labs_active": [
+          "intel-labs",
+          "mit-mtl",
+          "semiengineering",
+          "semiwiki"
+        ],
+        "article_count": 5,
+        "domains": [
+          "ai_chip_architecture"
+        ],
+        "keywords": [
+          "ai_chip_architecture"
+        ],
+        "evidence": [
+          {
+            "lab": "intel-labs",
+            "title": "Intel Loihi 3 Neuromorphic Processor — 4nm, 8M Neurons, 64B Synapses",
+            "url": "https://www.intel.com/content/www/us/en/research/neuromorphic-computing.html"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MIT MTL-GlobalFoundries Silicon Photonics AI Chip Research",
+            "url": "https://www.mtl.mit.edu/research"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MTL Research: Wafer-Scale 2D Logic and Memory for In-Memory Computing",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/plasma-ai-hardware-wafer-scale-2d-logic-and-memory-memory-computing-0"
+          },
+          {
+            "lab": "semiengineering",
+            "title": "How the EDA Industry Will Evolve in 2026 — AI-Driven Design, Agentic AI",
+            "url": "https://semiengineering.com/how-the-eda-industry-will-evolve-in-2026/"
+          },
+          {
+            "lab": "semiwiki",
+            "title": "RISC-V Becomes the Third Pillar of Computing — 25% Market Share",
+            "url": "https://semiwiki.com/"
+          }
+        ],
+        "score": 0.79
+      },
+      {
+        "direction": "Chiplet & UCIe Ecosystem",
+        "lifecycle": "declining",
+        "confidence": 0.75,
+        "labs_active": [
+          "mit-mtl",
+          "semiengineering",
+          "semiwiki",
+          "tsmc-research"
+        ],
+        "article_count": 4,
+        "domains": [
+          "advanced_packaging"
+        ],
+        "keywords": [
+          "chiplet",
+          "ucie"
+        ],
+        "evidence": [
+          {
+            "lab": "tsmc-research",
+            "title": "TSMC CoWoS and SoIC Advanced Packaging — 5.5-Reticle in Production",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/advanced_packaging"
+          },
+          {
+            "lab": "mit-mtl",
+            "title": "MTL: Chiplet Interconnects and Photonic Networks (TSMC Collaboration)",
+            "url": "https://www.mtl.mit.edu/events-seminars/seminars/2026"
+          },
+          {
+            "lab": "semiengineering",
+            "title": "Chiplets and Heterogeneous Integration Go Mainstream — UCIe 3.0",
+            "url": "https://semiengineering.com/"
+          },
+          {
+            "lab": "semiwiki",
+            "title": "RISC-V Becomes the Third Pillar of Computing — 25% Market Share",
+            "url": "https://semiwiki.com/"
+          }
+        ],
+        "score": 0.75
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+# Collection Configuration
+# 控制采集行为和调度策略
+
+collection:
+  default_mode: weekly
+  max_concurrent_requests: 5
+  request_delay_seconds: 1.5
+  timeout_seconds: 60
+  max_retries: 3
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+
+output:
+  base_dir: artifacts/
+  formats:
+    - json
+    - markdown
+  include_html: true
+  compress_after_days: 30
+
+scheduling:
+  daily:
+    description: "每日增量采集 — 仅Tier1更新检查"
+    tiers: [tier1]
+    max_per_lab: 5
+  weekly:
+    description: "每周全量采集 — Tier1+Tier2"
+    tiers: [tier1, tier2]
+    max_per_lab: 10
+  biweekly:
+    description: "双周全量 — Tier1+Tier2+Tier4+Tier5"
+    tiers: [tier1, tier2, tier4, tier5]
+    max_per_lab: 10
+  monthly:
+    description: "月度深度采集 — 全部Tiers"
+    tiers: [tier1, tier2, tier3, tier4, tier5, tier6]
+    max_per_lab: 20
+  deep:
+    description: "深度全采 — 所有来源+历史回溯"
+    tiers: [tier1, tier2, tier3, tier4, tier5, tier6]
+    max_per_lab: 50
+
+analysis:
+  min_trend_confidence: 0.6
+  cross_reference_min_sources: 2
+  clustering:
+    enabled: true
+    min_cluster_size: 2
+    similarity_threshold: 0.7
+  lifecycle:
+    emerging:
+      max_confidence: 0.4
+      min_sources: 1
+    growing:
+      min_confidence: 0.4
+      max_confidence: 0.7
+      min_sources: 2
+    mature:
+      min_confidence: 0.7
+      max_confidence: 0.9
+      min_sources: 3
+    declining:
+      min_confidence: 0.9
+
+report:
+  include_top_trends: 10
+  include_lab_activity: true
+  include_domain_summary: true
+  include_cross_references: true
+  include_appendix: true
+  max_evidence_per_trend: 5

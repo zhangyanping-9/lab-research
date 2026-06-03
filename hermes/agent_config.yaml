@@ -1,0 +1,60 @@
+# Hermes Agent Configuration
+# This config defines how the Hermes agent should invoke this skill.
+
+agent:
+  name: semiconductor-research-collector
+  version: 0.1.0
+  description: 全球半导体研究方向采集与分析智能体
+
+skill:
+  name: semiconductor-research-direction-collect
+  path: .claude/skills/semiconductor-research-direction-collect/SKILL.md
+
+tools:
+  definitions: hermes/tools.json
+  prompt_templates: hermes/prompts/
+
+workflow:
+  default_mode: weekly
+  default_labs:
+    - imec
+    - cea-leti
+    - intel-labs
+    - tsmc-research
+    - mit-mtl
+    - stanford-nanolab
+    - ibm-research
+    - nvidia-research
+    - imecas
+    - pkusemi
+
+  schedules:
+    weekly:
+      - tier1_labs: all
+      - tier2_labs: all
+    biweekly:
+      - tier4_labs: all
+      - tier5_labs: all
+    monthly:
+      - tier6_labs: all
+
+  analysis:
+    min_trend_confidence: 0.6
+    cross_reference_min_sources: 2
+    lifecycle_thresholds:
+      emerging: [0, 0.4]
+      growing: [0.4, 0.7]
+      mature: [0.7, 0.9]
+      declining: [0.9, 1.0]
+
+output:
+  artifacts_base: artifacts/
+  formats: [json, markdown]
+  include_raw_articles: true
+  compress_after_days: 30
+
+# Hermes-specific settings
+hermes:
+  memory_key: "semiconductor_research_directions"
+  auto_sync: false
+  batch_size: 5

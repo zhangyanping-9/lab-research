@@ -1,0 +1,673 @@
+# =============================================================================
+# 全球半导体研究方向采集 — 实验室与信息源注册表
+# =============================================================================
+# 分类体系:
+#   category: university_lab | research_institute | corporate_rd | consortium |
+#             government_lab | conference | blog
+#   tier: 1 (周采) | 2 (周采) | 3 (会期) | 4 (双周) | 5 (双周) | 6 (月采)
+#   domains: 研究方向领域标签
+# =============================================================================
+
+version: 2026-06-02
+total_sources: 120
+
+# ---------------------------------------------------------------------------
+# Tier 1: 世界级研究机构（每周采集）
+# ---------------------------------------------------------------------------
+tier1:
+  university_lab:
+    - id: mit-mtl
+      name: MIT Microsystems Technology Laboratories
+      homepage: https://www.mtl.mit.edu
+      research_page: https://www-mtl.mit.edu/research
+      publications_page: https://www-mtl.mit.edu/publications
+      region: north_america
+      domains: [advanced_process, advanced_packaging, ai_chip_architecture, quantum_computing]
+      description: MIT微系统技术实验室，专注于纳米制造、新型器件和微系统集成
+
+    - id: stanford-nanolab
+      name: Stanford Nanofabrication Facility
+      homepage: https://nanolab.stanford.edu
+      research_page: https://nanolab.stanford.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, manufacturing_equipment]
+      description: 斯坦福纳米制造设施，全球领先的开放式纳米制造研究平台
+
+    - id: ucberkeley-eecs
+      name: UC Berkeley EECS - Circuits & Devices
+      homepage: https://eecs.berkeley.edu
+      research_page: https://eecs.berkeley.edu/research/areas/circuits
+      publications_page: https://www2.eecs.berkeley.edu/Pubs/
+      region: north_america
+      domains: [eda_design_automation, ai_chip_architecture, advanced_process]
+      description: 伯克利电路与器件研究组，EDA和电路设计领域的先驱
+
+    - id: cmu-semicond
+      name: Carnegie Mellon Semiconductor
+      homepage: https://www.cmu.edu/engineering/semiconductor/
+      research_page: https://www.cmu.edu/engineering/semiconductor/research/
+      region: north_america
+      domains: [eda_design_automation, advanced_packaging, manufacturing_equipment]
+      description: CMU半导体研究计划，涵盖设计、制造和封装
+
+    - id: gatech-micro
+      name: Georgia Tech - Institute for Electronics and Nanotechnology
+      homepage: https://ien.gatech.edu
+      research_page: https://ien.gatech.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, manufacturing_equipment]
+      description: 佐治亚理工电子与纳米技术研究所
+
+    - id: ucla-device
+      name: UCLA Device Research Lab
+      homepage: https://www.seas.ucla.edu/~drl/
+      research_page: https://www.seas.ucla.edu/~drl/research.html
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, quantum_computing]
+      description: UCLA器件研究实验室，专注新型半导体器件
+
+    - id: epfl-micro
+      name: EPFL Micro/Nanoelectronics
+      homepage: https://www.epfl.ch/research/domains/micro-nano-electronics/
+      research_page: https://www.epfl.ch/research/domains/micro-nano-electronics/research/
+      region: europe
+      domains: [advanced_process, eda_design_automation, ai_chip_architecture]
+      description: 洛桑联邦理工学院微纳电子研究
+
+    - id: eth-ic
+      name: ETH Zurich - Integrated Circuits Lab
+      homepage: https://iis.ee.ethz.ch
+      research_page: https://iis.ee.ethz.ch/research.html
+      region: europe
+      domains: [ai_chip_architecture, eda_design_automation, chiplet_interconnect]
+      description: 苏黎世联邦理工学院集成电路实验室
+
+    - id: kuleuven-esat
+      name: KU Leuven ESAT - MICAS
+      homepage: https://www.esat.kuleuven.be/micas/
+      research_page: https://www.esat.kuleuven.be/micas/research
+      region: europe
+      domains: [ai_chip_architecture, eda_design_automation, chiplet_interconnect]
+      description: 鲁汶大学MICAS研究组，芯片设计
+
+    - id: tokyotech
+      name: Tokyo Institute of Technology - Semiconductor
+      homepage: https://www.titech.ac.jp/english/research/areas
+      research_page: https://www.titech.ac.jp/english/research/stories/semiconductor
+      region: asia
+      domains: [advanced_process, semiconductor_materials, manufacturing_equipment]
+      description: 东京工业大学半导体研究
+
+    - id: kaist-semi
+      name: KAIST Semiconductor
+      homepage: https://semiconductor.kaist.ac.kr
+      research_page: https://semiconductor.kaist.ac.kr/research/
+      region: asia
+      domains: [advanced_process, memory_technology, ai_chip_architecture]
+      description: 韩国科学技术院半导体研究中心
+
+    - id: postech-semi
+      name: POSTECH Semiconductor
+      homepage: https://semiconductor.postech.ac.kr
+      region: asia
+      domains: [advanced_process, memory_technology, semiconductor_materials]
+      description: 浦项工业大学半导体研究
+
+    - id: nus-semi
+      name: National University of Singapore - ECE
+      homepage: https://cde.nus.edu.sg/ece/research-areas/
+      research_page: https://cde.nus.edu.sg/ece/research-areas/microelectronics/
+      region: asia
+      domains: [advanced_packaging, semiconductor_materials, photonics]
+      description: 新加坡国立大学微电子研究
+
+    - id: ntu-sg
+      name: NTU Singapore - Microelectronics
+      homepage: https://www.ntu.edu.sg/engineering/research/research-thrusts/microelectronics
+      research_page: https://www.ntu.edu.sg/engineering/research/research-thrusts/microelectronics/research-programmes
+      region: asia
+      domains: [advanced_packaging, semiconductor_materials, photonics]
+      description: 南洋理工大学微电子研究
+
+    - id: tsinghua-semi
+      name: Tsinghua University - School of Integrated Circuits
+      homepage: https://www.sic.tsinghua.edu.cn
+      research_page: https://www.sic.tsinghua.edu.cn/Research.htm
+      region: asia
+      domains: [memory_technology, ai_chip_architecture, quantum_computing]
+      description: 清华大学集成电路学院
+
+    - id: pku-semi
+      name: Peking University - School of Integrated Circuits
+      homepage: https://sic.pku.edu.cn
+      research_page: https://sic.pku.edu.cn/Research/
+      region: asia
+      domains: [advanced_process, memory_technology, ai_chip_architecture]
+      description: 北京大学集成电路学院
+
+    - id: fudan-micro
+      name: Fudan University - Microelectronics
+      homepage: https://sme.fudan.edu.cn
+      research_page: https://sme.fudan.edu.cn/research
+      region: asia
+      domains: [eda_design_automation, ai_chip_architecture, advanced_packaging]
+      description: 复旦大学微电子学院
+
+  research_institute:
+    - id: imec
+      name: imec
+      homepage: https://www.imec-int.com
+      research_page: https://www.imec-int.com/en/research
+      publications_page: https://www.imec-int.com/en/research/publications
+      region: europe
+      domains: [advanced_process, advanced_packaging, photonics, quantum_computing, ai_chip_architecture, semiconductor_materials]
+      description: 全球领先的纳米电子和数字技术研究中心，在先进制程领域世界顶尖
+      labs:
+        - id: imec-cmos
+          name: imec CMOS Research
+          research_page: https://www.imec-int.com/en/research/cmos
+        - id: imec-packaging
+          name: imec Advanced Packaging
+          research_page: https://www.imec-int.com/en/research/advanced-packaging
+        - id: imec-photonics
+          name: imec Silicon Photonics
+          research_page: https://www.imec-int.com/en/research/silicon-photonics
+
+    - id: cea-leti
+      name: CEA-Leti
+      homepage: https://www.leti-cea.com
+      research_page: https://www.leti-cea.com/cea-tech/leti/english/Research
+      region: europe
+      domains: [advanced_process, advanced_packaging, photonics, ai_chip_architecture, quantum_computing]
+      description: 法国CEA-Leti，欧洲顶级微电子研究机构，FD-SOI和3D集成先驱
+
+    - id: fraunhofer-iisb
+      name: Fraunhofer IISB
+      homepage: https://www.iisb.fraunhofer.de
+      research_page: https://www.iisb.fraunhofer.de/en/research.html
+      region: europe
+      domains: [semiconductor_materials, manufacturing_equipment, advanced_packaging, reliability_test]
+      description: 弗劳恩霍夫集成电路研究所，功率半导体和SiC研究领先
+
+    - id: fraunhofer-isit
+      name: Fraunhofer ISIT
+      homepage: https://www.isit.fraunhofer.de
+      research_page: https://www.isit.fraunhofer.de/en/research.html
+      region: europe
+      domains: [advanced_process, semiconductor_materials, reliability_test]
+      description: 弗劳恩霍夫硅技术研究所
+
+    - id: tyndall
+      name: Tyndall National Institute
+      homepage: https://www.tyndall.ie
+      research_page: https://www.tyndall.ie/research
+      region: europe
+      domains: [photonics, advanced_packaging, semiconductor_materials, quantum_computing]
+      description: 爱尔兰廷德尔国家研究所，光子学和微电子研究
+
+    - id: vtt-finland
+      name: VTT Technical Research Centre of Finland
+      homepage: https://www.vttresearch.com
+      research_page: https://www.vttresearch.com/en/ourservices/microelectronics-and-quantum-technology
+      region: europe
+      domains: [advanced_packaging, photonics, quantum_computing]
+      description: 芬兰VTT技术研究中心，微电子和量子技术
+
+    - id: riken
+      name: RIKEN Center for Emergent Matter Science
+      homepage: https://www.riken.jp/en/research/labs/cems/
+      research_page: https://www.riken.jp/en/research/labs/cems/
+      region: asia
+      domains: [semiconductor_materials, quantum_computing, memory_technology]
+      description: 日本理化学研究所，新型材料与量子计算
+
+    - id: aist-jp
+      name: AIST - National Institute of Advanced Industrial Science and Technology
+      homepage: https://www.aist.go.jp
+      research_page: https://unit.aist.go.jp/dir/en/theme/semiconductor/
+      region: asia
+      domains: [advanced_process, semiconductor_materials, manufacturing_equipment]
+      description: 日本产业技术综合研究所半导体研究
+
+    - id: itri-taiwan
+      name: ITRI - Industrial Technology Research Institute
+      homepage: https://www.itri.org.tw
+      research_page: https://www.itri.org.tw/eng/TechnologyFocus
+      region: asia
+      domains: [advanced_process, advanced_packaging, manufacturing_equipment]
+      description: 台湾工业技术研究院
+
+    - id: ime-sg
+      name: IME - Institute of Microelectronics (Singapore)
+      homepage: https://www.ime.a-star.edu.sg
+      research_page: https://www.ime.a-star.edu.sg/research
+      region: asia
+      domains: [advanced_packaging, photonics, advanced_process]
+      description: 新加坡微电子研究院，先进封装领域世界领先
+
+    - id: imecas
+      name: IMECAS - Institute of Microelectronics, CAS
+      homepage: http://www.ime.ac.cn
+      research_page: http://www.ime.ac.cn/research/
+      region: asia
+      domains: [advanced_process, memory_technology, semiconductor_materials, ai_chip_architecture]
+      description: 中国科学院微电子研究所
+
+    - id: siat-cas
+      name: SIAT - Shenzhen Institute of Advanced Technology, CAS
+      homepage: https://www.siat.ac.cn
+      region: asia
+      domains: [ai_chip_architecture, semiconductor_materials, advanced_packaging]
+      description: 中国科学院深圳先进技术研究院
+
+    - id: ioe-cas
+      name: IOE - Institute of Optics and Electronics, CAS
+      homepage: http://www.ioe.ac.cn
+      region: asia
+      domains: [photonics, manufacturing_equipment]
+      description: 中国科学院光电技术研究所
+
+# ---------------------------------------------------------------------------
+# Tier 2: 企业 R&D 中心（每周采集）
+# ---------------------------------------------------------------------------
+tier2:
+  corporate_rd:
+    - id: intel-labs
+      name: Intel Labs
+      homepage: https://www.intel.com/content/www/us/en/research/overview.html
+      research_page: https://www.intel.com/content/www/us/en/research/research-areas.html
+      publications_page: https://www.intel.com/content/www/us/en/research/publications.html
+      region: north_america
+      domains: [advanced_process, advanced_packaging, quantum_computing, ai_chip_architecture, semiconductor_materials]
+      description: Intel研究院，先进制程、封装、量子计算领域研究
+
+    - id: tsmc-research
+      name: TSMC Research
+      homepage: https://www.tsmc.com/english
+      research_page: https://www.tsmc.com/english/dedicatedFoundry/technology/technology_research
+      region: asia
+      domains: [advanced_process, advanced_packaging, semiconductor_materials, manufacturing_equipment]
+      description: 台积电研究组织，先进工艺和封装技术
+
+    - id: samsung-sait
+      name: Samsung Advanced Institute of Technology (SAIT)
+      homepage: https://www.sait.samsung.co.kr
+      research_page: https://www.sait.samsung.co.kr/saithome/research.do
+      region: asia
+      domains: [advanced_process, memory_technology, semiconductor_materials, quantum_computing, advanced_packaging]
+      description: 三星综合技术院，存储器、材料和量子计算
+
+    - id: ibm-research
+      name: IBM Research
+      homepage: https://research.ibm.com
+      research_page: https://research.ibm.com/research-areas/semiconductors
+      region: north_america
+      domains: [advanced_process, advanced_packaging, quantum_computing, ai_chip_architecture]
+      description: IBM研究院，量子计算、AI芯片、先进封装研究
+
+    - id: nvidia-research
+      name: NVIDIA Research
+      homepage: https://research.nvidia.com
+      research_page: https://research.nvidia.com/research-areas/chip-design
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect, eda_design_automation]
+      description: NVIDIA研究院，AI加速器架构和芯片设计研究
+
+    - id: google-research-chip
+      name: Google Research - Silicon
+      homepage: https://research.google/teams/silicon/
+      research_page: https://research.google/teams/silicon/
+      region: north_america
+      domains: [ai_chip_architecture, eda_design_automation, chiplet_interconnect]
+      description: Google硅芯片研究，TPU架构和ML for EDA
+
+    - id: meta-ai-chip
+      name: Meta AI - Systems & Silicon
+      homepage: https://ai.meta.com/research/
+      research_page: https://ai.meta.com/research/#systems-and-silicon
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect]
+      description: Meta AI系统与芯片研究
+
+    - id: msr-silicon
+      name: Microsoft Research - Silicon
+      homepage: https://www.microsoft.com/en-us/research/research-area/silicon/
+      research_page: https://www.microsoft.com/en-us/research/research-area/silicon/
+      region: north_america
+      domains: [ai_chip_architecture, quantum_computing, chiplet_interconnect]
+      description: 微软研究院硅芯片研究，AI加速器和量子计算
+
+    - id: apple-silicon
+      name: Apple Silicon Research
+      homepage: https://machinelearning.apple.com/research
+      region: north_america
+      domains: [ai_chip_architecture, advanced_packaging, eda_design_automation]
+      description: Apple芯片研究，AI加速架构和先进封装
+
+    - id: asml-research
+      name: ASML Research
+      homepage: https://www.asml.com/en/technology/research
+      research_page: https://www.asml.com/en/technology/research
+      region: europe
+      domains: [manufacturing_equipment, advanced_process, semiconductor_materials]
+      description: ASML研究组织，EUV光刻技术
+
+    - id: amat-research
+      name: Applied Materials Research
+      homepage: https://www.appliedmaterials.com/us/en/innovations.html
+      research_page: https://www.appliedmaterials.com/us/en/innovations/research.html
+      region: north_america
+      domains: [manufacturing_equipment, semiconductor_materials, advanced_process]
+      description: 应用材料研究，沉积/刻蚀/材料工程
+
+    - id: lam-research
+      name: Lam Research
+      homepage: https://www.lamresearch.com/innovation/
+      research_page: https://www.lamresearch.com/innovation/research-and-development/
+      region: north_america
+      domains: [manufacturing_equipment, advanced_process, semiconductor_materials]
+      description: Lam Research研究，刻蚀和沉积技术
+
+    - id: synopsys-rd
+      name: Synopsys Research & Development
+      homepage: https://www.synopsys.com/blogs/chip-design.html
+      research_page: https://www.synopsys.com/company/research.html
+      region: north_america
+      domains: [eda_design_automation, ai_chip_architecture, chiplet_interconnect]
+      description: Synopsys研发，EDA和芯片设计自动化
+
+    - id: cadence-rd
+      name: Cadence Research
+      homepage: https://www.cadence.com/en_US/home/company/newsroom.html
+      region: north_america
+      domains: [eda_design_automation, ai_chip_architecture, chiplet_interconnect]
+      description: Cadence研发，EDA和系统设计
+
+    - id: huawei-semi
+      name: Huawei Semiconductor Research
+      homepage: https://www.hisilicon.com
+      region: asia
+      domains: [ai_chip_architecture, eda_design_automation, advanced_packaging, chiplet_interconnect]
+      description: 华为半导体研究，芯片架构和EDA
+
+    - id: qualcomm-rd
+      name: Qualcomm Research
+      homepage: https://www.qualcomm.com/research
+      research_page: https://www.qualcomm.com/research/artificial-intelligence/ai-research
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect, photonics]
+      description: 高通研究院，AI芯片和通信芯片
+
+# ---------------------------------------------------------------------------
+# Tier 3: 核心学术会议（会期采集）
+# ---------------------------------------------------------------------------
+tier3:
+  conference:
+    - id: iedm
+      name: IEEE IEDM - International Electron Devices Meeting
+      homepage: https://www.ieee-iedm.org
+      papers_page: https://www.ieee-iedm.org/past-programs/
+      region: north_america
+      domains: [advanced_process, memory_technology, semiconductor_materials, advanced_packaging]
+      description: 国际电子器件会议，器件物理和工艺技术顶级会议
+
+    - id: isscc
+      name: IEEE ISSCC - International Solid-State Circuits Conference
+      homepage: https://www.isscc.org
+      papers_page: https://www.isscc.org/program/
+      region: north_america
+      domains: [ai_chip_architecture, memory_technology, chiplet_interconnect, eda_design_automation]
+      description: 国际固态电路会议，芯片设计领域顶级会议
+
+    - id: vlsi-symposium
+      name: VLSI Symposium
+      homepage: https://www.vlsisymposium.org
+      papers_page: https://www.vlsisymposium.org/technical-program/
+      region: north_america
+      domains: [advanced_process, memory_technology, ai_chip_architecture, advanced_packaging]
+      description: VLSI技术研讨会，涵盖工艺和电路
+
+    - id: dac
+      name: DAC - Design Automation Conference
+      homepage: https://www.dac.com
+      papers_page: https://www.dac.com/technical-program
+      region: north_america
+      domains: [eda_design_automation, ai_chip_architecture, chiplet_interconnect]
+      description: 设计自动化会议，EDA领域旗舰会议
+
+    - id: asp-dac
+      name: ASP-DAC - Asia and South Pacific Design Automation Conference
+      homepage: https://www.aspdac.com
+      region: asia
+      domains: [eda_design_automation, ai_chip_architecture]
+      description: 亚太设计自动化会议
+
+    - id: etc
+      name: IEEE ETC - European Test Conference
+      homepage: https://etc.eu
+      region: europe
+      domains: [reliability_test, eda_design_automation]
+      description: 欧洲测试会议
+
+    - id: irps
+      name: IEEE IRPS - International Reliability Physics Symposium
+      homepage: https://www.irps.org
+      region: north_america
+      domains: [reliability_test, advanced_process, semiconductor_materials]
+      description: 国际可靠性物理研讨会
+
+    - id: epec
+      name: IEEE EPEC - Electronic Packaging Technology Conference
+      homepage: https://www.epecconference.org
+      region: asia
+      domains: [advanced_packaging, reliability_test]
+      description: 电子封装技术会议
+
+    - id: simc-proc
+      name: International Workshop on Semiconductor Manufacturing
+      homepage: https://www.semiconductor-manufacturing.org
+      region: asia
+      domains: [manufacturing_equipment, advanced_process, reliability_test]
+      description: 半导体制造国际研讨会
+
+# ---------------------------------------------------------------------------
+# Tier 4: 研究机构/联盟/协会（双周采集）
+# ---------------------------------------------------------------------------
+tier4:
+  consortium:
+    - id: semi-research
+      name: SEMI Research
+      homepage: https://www.semi.org/en/semi-news/topic/semiconductor-manufacturing
+      research_page: https://www.semi.org/en/research
+      region: north_america
+      domains: [manufacturing_equipment, advanced_process, advanced_packaging]
+      description: SEMI行业协会研究
+
+    - id: sia-research
+      name: SIA - Semiconductor Industry Association
+      homepage: https://www.semiconductors.org
+      research_page: https://www.semiconductors.org/research/
+      region: north_america
+      domains: [advanced_process, advanced_packaging]
+      description: 美国半导体行业协会政策与研究
+
+    - id: yole-intelligence
+      name: Yole Group
+      homepage: https://www.yolegroup.com
+      research_page: https://www.yolegroup.com/intelligence/
+      region: europe
+      domains: [advanced_packaging, semiconductor_materials, advanced_process, memory_technology]
+      description: Yole市场与技术研究，封装和化合物半导体领域权威
+
+    - id: techinsights
+      name: TechInsights
+      homepage: https://www.techinsights.com
+      region: north_america
+      domains: [advanced_process, memory_technology, advanced_packaging]
+      description: TechInsights技术分析，芯片反向工程与工艺分析
+
+    - id: trendforce
+      name: TrendForce
+      homepage: https://www.trendforce.com
+      region: asia
+      domains: [memory_technology, advanced_process, ai_chip_architecture]
+      description: TrendForce市场研究，存储器和Foundry情报
+
+    - id: imaps
+      name: IMAPS - International Microelectronics Assembly & Packaging Society
+      homepage: https://www.imaps.org
+      research_page: https://www.imaps.org/technical-resources/
+      region: north_america
+      domains: [advanced_packaging, semiconductor_materials]
+      description: 国际微电子组装与封装学会
+
+    - id: eps-ieee
+      name: IEEE Electronics Packaging Society
+      homepage: https://eps.ieee.org
+      region: north_america
+      domains: [advanced_packaging, reliability_test]
+      description: IEEE电子封装学会
+
+    - id: jisso
+      name: JISSO - Japan Institute of Electronics Packaging
+      homepage: https://www.jisso.jp
+      region: asia
+      domains: [advanced_packaging, reliability_test]
+      description: 日本电子封装学会
+
+    - id: sinano
+      name: Sino-American Silicon Nanoelectronics Consortium
+      homepage: https://www.sinano.org
+      region: asia
+      domains: [advanced_process, semiconductor_materials, quantum_computing]
+      description: 中美硅基纳米电子学联盟
+
+    - id: nist-semi
+      name: NIST Semiconductor Program
+      homepage: https://www.nist.gov/semiconductors
+      research_page: https://www.nist.gov/semiconductors/research-programs
+      region: north_america
+      domains: [manufacturing_equipment, reliability_test, advanced_process]
+      description: 美国国家标准与技术研究院半导体项目
+
+  research_institute:
+    - id: llnl-micro
+      name: Lawrence Livermore National Lab - Microelectronics
+      homepage: https://microelectronics.llnl.gov
+      research_page: https://microelectronics.llnl.gov/research
+      region: north_america
+      domains: [advanced_process, reliability_test, manufacturing_equipment]
+      description: 劳伦斯利弗莫尔国家实验室微电子
+
+    - id: snl-micro
+      name: Sandia National Labs - Microelectronics
+      homepage: https://www.sandia.gov/microelectronics/
+      region: north_america
+      domains: [reliability_test, security, advanced_process]
+      description: 桑迪亚国家实验室微电子与硬件安全
+
+# ---------------------------------------------------------------------------
+# Tier 5: 高质量技术博客/独立分析（双周采集）
+# ---------------------------------------------------------------------------
+tier5:
+  blog:
+    - id: semianalysis
+      name: SemiAnalysis
+      homepage: https://semianalysis.com
+      region: north_america
+      domains: [ai_chip_architecture, advanced_packaging, memory_technology, advanced_process]
+      description: AI芯片、HBM、先进封装深度分析
+
+    - id: fabricated-knowledge
+      name: Fabricated Knowledge
+      homepage: https://www.fabricatedknowledge.com
+      region: north_america
+      domains: [advanced_process, memory_technology, manufacturing_equipment]
+      description: 半导体技术与商业投资分析
+
+    - id: asianometry
+      name: Asianometry
+      homepage: https://www.asianometry.com
+      region: asia
+      domains: [advanced_process, memory_technology, manufacturing_equipment]
+      description: 半导体机制解释与产业背景
+
+    - id: chip-letter
+      name: The Chip Letter
+      homepage: https://thechipletter.substack.com
+      region: europe
+      domains: [advanced_process, memory_technology, ai_chip_architecture]
+      description: 芯片架构历史与演进
+
+    - id: chipsandcheese
+      name: Chips and Cheese
+      homepage: https://chipsandcheese.com
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect, memory_technology]
+      description: 处理器微架构深度评测
+
+    - id: semiwiki
+      name: SemiWiki
+      homepage: https://semiwiki.com
+      region: north_america
+      domains: [advanced_process, advanced_packaging, eda_design_automation, ai_chip_architecture]
+      description: 半导体行业评论与分析
+
+    - id: semiengineering
+      name: Semiconductor Engineering
+      homepage: https://semiengineering.com
+      region: north_america
+      domains: [advanced_process, advanced_packaging, manufacturing_equipment, eda_design_automation]
+      description: 半导体工程深度报告
+
+    - id: eejournal
+      name: EEJournal
+      homepage: https://www.eejournal.com
+      region: north_america
+      domains: [eda_design_automation, ai_chip_architecture, chiplet_interconnect]
+      description: 电子工程评论
+
+    - id: dr-castellano
+      name: Dr. Robert Castellano's Semiconductor Deep Dive
+      homepage: https://drrobertcastellano.substack.com
+      region: north_america
+      domains: [manufacturing_equipment, advanced_process, reliability_test]
+      description: WFE/量测/良率深度分析
+
+    - id: semi-ecosystem
+      name: Semiecosystem - Mark LaPedus
+      homepage: https://marklapedus.substack.com
+      region: north_america
+      domains: [advanced_process, advanced_packaging, manufacturing_equipment, reliability_test]
+      description: Foundry/封装/测试/设备深度分析
+
+# ---------------------------------------------------------------------------
+# Tier 6: 出版物/arXiv/学术搜索引擎（月采深度采集）
+# ---------------------------------------------------------------------------
+tier6:
+  - id: arxiv-semi
+    name: arXiv - Semiconductor Physics
+    homepage: https://arxiv.org
+    research_page: https://arxiv.org/list/cond-mat.mes-hall/recent
+    description: arXiv预印本，半导体物理方向
+    domains: [advanced_process, semiconductor_materials, quantum_computing]
+
+  - id: arxiv-cs-ar
+    name: arXiv - Hardware Architecture
+    homepage: https://arxiv.org
+    research_page: https://arxiv.org/list/cs.AR/recent
+    description: arXiv预印本，硬件架构方向
+    domains: [ai_chip_architecture, chiplet_interconnect]
+
+  - id: ieeexplore-semi
+    name: IEEE Xplore - Semiconductor
+    homepage: https://ieeexplore.ieee.org
+    region: north_america
+    domains: [advanced_process, eda_design_automation, reliability_test, ai_chip_architecture]
+    description: IEEE论文数据库半导体相关
+
+  - id: google-scholar-semi
+    name: Google Scholar - Semiconductor
+    homepage: https://scholar.google.com
+    domains: [advanced_process, memory_technology, ai_chip_architecture, semiconductor_materials]
+    description: Google Scholar高引半导体论文追踪

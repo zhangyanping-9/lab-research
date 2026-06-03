@@ -1,0 +1,166 @@
+[
+  {
+    "name": "collect_research_directions",
+    "description": "采集指定实验室的最新研究方向和论文信息",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "labs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "实验室ID列表，如 ['imec', 'intel-labs', 'mit-mtl']"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly", "deep"],
+          "description": "采集密度: daily=日采, weekly=周采, monthly=月采, deep=深度全采"
+        },
+        "max_per_lab": {
+          "type": "integer",
+          "description": "每实验室最多采集文章数",
+          "default": 10
+        },
+        "domains": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "限定领域过滤，如 ['advanced_process', 'ai_chip_architecture']",
+          "default": []
+        }
+      },
+      "required": ["labs"]
+    },
+    "returns": {
+      "type": "object",
+      "description": "采集结果摘要，含各实验室采集统计和文章列表路径"
+    }
+  },
+  {
+    "name": "analyze_research_trends",
+    "description": "分析已采集的研究数据，识别研究方向、趋势和技术成熟度",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "采集日期 YYYY-MM-DD，默认最新",
+          "default": ""
+        },
+        "min_confidence": {
+          "type": "number",
+          "description": "最小置信度阈值 0.0-1.0",
+          "default": 0.6
+        },
+        "domains": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "限定分析领域",
+          "default": []
+        },
+        "include_labs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "限定分析的实验室列表",
+          "default": []
+        }
+      }
+    },
+    "returns": {
+      "type": "object",
+      "description": "分析结果，含趋势列表、技术成熟度评估和跨实验室对比"
+    }
+  },
+  {
+    "name": "generate_insight_report",
+    "description": "基于采集和分析结果，生成研究方向洞察报告（JSON + Markdown）",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "报告日期 YYYY-MM-DD"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "markdown", "both"],
+          "description": "输出格式",
+          "default": "both"
+        },
+        "focus": {
+          "type": "string",
+          "description": "报告重点方向描述"
+        },
+        "include_labs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "限定包含的实验室"
+        }
+      }
+    },
+    "returns": {
+      "type": "object",
+      "description": "报告元信息和文件路径"
+    }
+  },
+  {
+    "name": "collect_and_report",
+    "description": "端到端一体化操作：采集 + 分析 + 报告一步完成",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "labs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "目标实验室ID列表"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly", "deep"],
+          "description": "采集密度",
+          "default": "weekly"
+        },
+        "focus": {
+          "type": "string",
+          "description": "报告重点关注方向"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "markdown", "both"],
+          "description": "输出格式",
+          "default": "both"
+        }
+      },
+      "required": ["labs"]
+    },
+    "returns": {
+      "type": "object",
+      "description": "采集统计、分析摘要、报告路径的完整结果"
+    }
+  },
+  {
+    "name": "list_available_labs",
+    "description": "列出注册表中所有可用的实验室、机构和信息源",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": ["university_lab", "research_institute", "corporate_rd", "consortium", "government_lab", "conference", "blog"],
+          "description": "按类别过滤"
+        },
+        "region": {
+          "type": "string",
+          "enum": ["asia", "europe", "north_america", "other"],
+          "description": "按区域过滤"
+        },
+        "domain": {
+          "type": "string",
+          "description": "按研究方向领域过滤"
+        }
+      }
+    },
+    "returns": {
+      "type": "array",
+      "description": "符合条件的实验室列表"
+    }
+  }
+]
