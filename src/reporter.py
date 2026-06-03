@@ -1,4 +1,7 @@
-"""Reporter — generates structured insight reports in JSON and Markdown."""
+"""Reporter — generates structured insight reports in JSON and Markdown.
+
+Supports both trend-level (statistical) and project-level (detailed profile) reports.
+"""
 
 from __future__ import annotations
 
@@ -8,7 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from src.analyzer import ResearchAnalyzer, TrendDirection
+from src.analyzer import ResearchAnalyzer, ProjectAnalyzer, TrendDirection
+from src.models import ResearchProject
 
 logger = logging.getLogger(__name__)
 
@@ -316,3 +320,207 @@ class InsightReporter:
             if t.lifecycle in dist:
                 dist[t.lifecycle] += 1
         return dist
+
+    # ------------------------------------------------------------------
+    # Project-level reports (deep mode)
+    # ------------------------------------------------------------------
+
+    def generate_project_profiles_markdown(
+        self,
+        project_analyzer: ProjectAnalyzer,
+        date_str: str,
+        lab_ids: list[str] | None = None,
+    ) -> str:
+        """为每个研究项目生成详细的 Markdown profile 报告。"""
+        reports = project_analyzer.generate_project_reports(lab_ids=lab_ids)
+
+        lines: list[str] = []
+        _w = lines.append
+
+        # Title
+        _w(f"# 美国半导体研究项目详细报告 — {date_str}")
+        _w("")
+        _w(f"> 生成时间: {datetime.now(timezone.utc).isoformat()[:19]}")
+        _w(f"> 项目总数: {len(reports)} | 覆盖实验室: {len(set(r['lab_id'] for r in reports))}")
+        _w("")
+        _w("---")
+        _w("")
+
+        # Table of Contents
+        _w("## 📑 目录")
+        _w("")
+        for i, report in enumerate(reports, 1):
+            lab = report.get("lab_name") or report["lab_id"]
+            name = report["project_name"][:80]
+            lifecycle_icon = LIFECYCLE_LABELS.get(report.get("lifecycle", ""), {}).get("en", "")
+            _w(f"{i}. [{lab}](#{_anchor(name)}) — {name} {lifecycle_icon}")
+        _w("")
+        _w("---")
+        _w("")
+
+        # Project profiles
+        for idx, report in enumerate(reports, 1):
+            name = report["project_name"]
+            lab = report.get("lab_name") or report["lab_id"]
+            url = report.get("url", "")
+            lifecycle = report.get("lifecycle", "")
+            confidence = report.get("confidence", 0)
+            domains = report.get("domains", [])
+
+            lifecycle_icon = LIFECYCLE_LABELS.get(lifecycle, {}).get("en", lifecycle)
+
+            _w(f"## {idx}. {name}")
+            _w("")
+            _w(f"- **实验室**: {lab}")
+            _w(f"- **生命周期**: {lifecycle_icon}")
+            _w(f"- **置信度**: {confidence:.1%}")
+            if domains:
+                domain_labels = [DOMAIN_LABELS.get(d, {}).get("en", d) for d in domains]
+                _w(f"- **研究领域**: {', '.join(domain_labels)}")
+            if url:
+                _w(f"- **来源**: [{url}]({url})")
+            _w("")
+
+            # Render sections
+            sections = report.get("sections", {})
+            section_order = [
+                ("overview", "📋 项目概述"),
+                ("objectives", "🎯 研究目标"),
+                ("approach", "🔬 技术路线"),
+                ("innovations", "💡 关键创新"),
+                ("team", "👥 研究团队"),
+                ("funding", "💰 资金信息"),
+                ("milestones", "📅 里程碑"),
+                ("metrics", "📊 技术指标"),
+                ("publications", "📚 相关发表"),
+            ]
+
+            for section_key, section_title in section_order:
+                content = sections.get(section_key, "")
+                if content:
+                    _w(f"### {section_title}")
+                    _w("")
+                    _w(content)
+                    _w("")
+
+            _w("---")
+            _w("")
+
+        # Methods note
+        _w("## 📎 方法说明")
+        _w("")
+        _w("- **采集方式**: HTTP 获取 + 启发式项目提取 + LLM 辅助")
+        _w("- **项目识别**: 基于研究页面链接分析和项目页面结构化提取")
+        _w("- **字段提取**: 标题/描述/目标/方法/团队/资金/里程碑 从 HTML 中自动提取")
+        _w("- **领域分类**: 基于关键词匹配 + 跨实验室交叉验证")
+        _w(f"- **报告生成时间**: {datetime.now(timezone.utc).isoformat()[:19]}")
+        _w("")
+
+        return "\n".join(lines)
+
+    def generate_project_portfolio_markdown(
+        self,
+        project_analyzer: ProjectAnalyzer,
+        date_str: str,
+    ) -> str:
+        """生成实验室项目组合概览报告。"""
+        portfolio = project_analyzer.lab_portfolio()
+        funding = project_analyzer.funding_summary()
+
+        lines: list[str] = []
+        _w = lines.append
+
+        _w(f"# 美国半导体研究项目组合概览 — {date_str}")
+        _w("")
+        _w(f"> 生成时间: {datetime.now(timezone.utc).isoformat()[:19]}")
+        _w(f"> {len(portfolio)} 个实验室 | {sum(p['project_count'] for p in portfolio)} 个项目")
+        _w("")
+
+        # Funding overview
+        _w("## 💰 资金概览")
+        _w("")
+        by_source = funding.get("by_source", {})
+        if by_source:
+            _w("| 资金来源 | 项目数 |")
+            _w("|---|---|")
+            for source, count in sorted(by_source.items(), key=lambda x: -x[1]):
+                _w(f"| {source} | {count} |")
+        _w("")
+
+        # Lab portfolio
+        _w("## 🏛️ 实验室项目组合")
+        _w("")
+        _w("| 实验室 | 项目数 | 主要领域 | 生命周期分布 | 关键项目 |")
+        _w("|---|---|---|---|---|")
+        for lab in portfolio[:25]:
+            name = lab["lab_name"][:30]
+            count = lab["project_count"]
+            domains = ", ".join(lab["domains"][:3])
+            lc_dist = ", ".join(f"{k}:{v}" for k, v in lab["lifecycle_distribution"].items() if v > 0)
+            key_proj = lab["key_projects"][0][:40] if lab["key_projects"] else "-"
+            _w(f"| {name} | {count} | {domains} | {lc_dist} | {key_proj} |")
+        _w("")
+
+        # Tech roadmap
+        _w("## 🗺️ 技术路线图")
+        _w("")
+        roadmap = project_analyzer.tech_roadmap()
+        for domain_entry in roadmap[:10]:
+            _w(f"### {domain_entry['domain']} ({domain_entry['project_count']} 个项目)")
+            _w("")
+            for m in domain_entry["milestones"][:10]:
+                status_icon = {"completed": "✅", "active": "🔄", "planned": "📋"}.get(
+                    m.get("status", ""), "⏳"
+                )
+                _w(f"- {status_icon} **{m['date']}** — {m['description'][:100]} "
+                   f"*(via {m['lab']})*")
+            _w("")
+
+        _w("---")
+        _w(f"*报告由 semi-research-direction-collect 自动生成*")
+        _w("")
+
+        return "\n".join(lines)
+
+    def save_project_report(
+        self,
+        project_analyzer: ProjectAnalyzer,
+        date_str: str,
+        lab_ids: list[str] | None = None,
+        base_dir: str | Path = "artifacts",
+    ) -> dict[str, str]:
+        """保存项目级报告到磁盘。"""
+        base = Path(base_dir) / date_str / "reports"
+        base.mkdir(parents=True, exist_ok=True)
+
+        file_map: dict[str, str] = {}
+
+        # Detailed project profiles
+        profiles_md = self.generate_project_profiles_markdown(
+            project_analyzer, date_str, lab_ids
+        )
+        profiles_path = base / f"project-profiles-{date_str}.md"
+        with open(profiles_path, "w", encoding="utf-8") as f:
+            f.write(profiles_md)
+        file_map["project_profiles"] = str(profiles_path)
+
+        # Portfolio overview
+        portfolio_md = self.generate_project_portfolio_markdown(
+            project_analyzer, date_str
+        )
+        portfolio_path = base / f"project-portfolio-{date_str}.md"
+        with open(portfolio_path, "w", encoding="utf-8") as f:
+            f.write(portfolio_md)
+        file_map["project_portfolio"] = str(portfolio_path)
+
+        logger.info("Project reports saved to %s", base)
+        return file_map
+
+
+def _anchor(text: str) -> str:
+    """Generate a markdown anchor from text."""
+    import re
+    text = text.lower()
+    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"\s+", "-", text.strip())
+    return text[:40]

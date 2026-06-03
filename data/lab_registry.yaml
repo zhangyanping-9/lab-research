@@ -8,8 +8,8 @@
 #   domains: 研究方向领域标签
 # =============================================================================
 
-version: 2026-06-02
-total_sources: 120
+version: 2026-06-03
+total_sources: 220
 
 # ---------------------------------------------------------------------------
 # Tier 1: 世界级研究机构（每周采集）
@@ -145,13 +145,454 @@ tier1:
       domains: [advanced_process, memory_technology, ai_chip_architecture]
       description: 北京大学集成电路学院
 
-    - id: fudan-micro
-      name: Fudan University - Microelectronics
-      homepage: https://sme.fudan.edu.cn
-      research_page: https://sme.fudan.edu.cn/research
-      region: asia
-      domains: [eda_design_automation, ai_chip_architecture, advanced_packaging]
-      description: 复旦大学微电子学院
+    - id: purdue-birck
+      name: Purdue University - Birck Nanotechnology Center
+      homepage: https://birck.research.purdue.edu
+      research_page: https://engineering.purdue.edu/semiconductors
+      region: north_america
+      domains: [advanced_process, advanced_packaging, semiconductor_materials, ai_chip_architecture, manufacturing_equipment]
+      description: 普渡大学Birck纳米技术中心，SMART USA数字孪生研究所牵头单位 ($1B+)，拥有25,000 sq ft洁净室
+      key_focus: [Digital Twins for Manufacturing, Advanced Packaging, Heterogeneous Integration, Wide Bandgap]
+      funding: ["$285M federal + $700M+ partner (SMART USA)", "CHIPS Act SCMC Hub"]
+      facilities: 25,000 sq ft Class 100 cleanroom, 8-inch wafer-scale, advanced packaging bay
+
+    - id: uiuc-hmntl
+      name: UIUC - Holonyak Micro & Nanotechnology Lab
+      homepage: https://hmntl.illinois.edu
+      research_page: https://hmntl.illinois.edu/research
+      region: north_america
+      domains: [semiconductor_materials, photonics, advanced_process, ai_chip_architecture]
+      description: 伊利诺伊大学香槟分校Holonyak微纳技术实验室，III-V化合物半导体全球领先，拥有北美最高能电子束光刻 (150kV, 4nm)
+      key_focus: [Compound Semiconductors, GaN, MicroLEDs, Quantum Photonics, High-Speed Electronics]
+      funding: ["SRC JUMP 2.0 - ENIGMA Center lead", "NSF IUCRC ASAP-EP"]
+
+    - id: umich-lnf
+      name: University of Michigan - Lurie Nanofabrication Facility
+      homepage: https://lnf.engin.umich.edu
+      research_page: https://lnf.engin.umich.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, quantum_computing, manufacturing_equipment]
+      description: 密歇根大学Lurie纳米制造设施，13,500 sq ft洁净室，135+工具，400+用户/年
+      key_focus: [Wide Bandgap, Quantum Devices, MEMS, Ferroelectric Devices, Nanophotonics]
+      funding: ["CHIPS Act SCMC Hub", "DoD Microelectronics Commons"]
+
+    - id: cornell-cnf
+      name: Cornell University - NanoScale Facility (CNF)
+      homepage: https://www.cnf.cornell.edu
+      research_page: https://www.cnf.cornell.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, quantum_computing, photonics]
+      description: 康奈尔纳米科技设施，1977年成立（首个NSF国家纳米制造用户设施），NORDTECH $8.2M升级
+      key_focus: [Topological Interconnects, 2D Materials, Superconducting Qubits, EUV Photoresists, AlN Transistors]
+      funding: ["SRC JUMP 2.0 - SUPREME Center lead", "NORDTECH $8.2M", "NSF NNCI"]
+
+    - id: utaustin-mrc
+      name: UT Austin - Microelectronics Research Center / Texas Institute for Electronics (TIE)
+      homepage: https://www.research.utexas.edu/mrc
+      research_page: https://tie.utexas.edu
+      region: north_america
+      domains: [advanced_packaging, advanced_process, semiconductor_materials, ai_chip_architecture]
+      description: 德州大学奥斯汀微电子研究中心，领导DARPA NGMM $840M项目，拥有84,000 sq ft 3DHI原型制造设施
+      key_focus: [3D Heterogeneous Integration, Advanced Packaging, Neuromorphic Computing, Tabletop EUV]
+      funding: ["DARPA NGMM $840M + $552M state", "Texas CHIPS Act"]
+
+    - id: pennstate-chimes
+      name: Penn State University - CHIMES / Nanofabrication Lab
+      homepage: https://www.mri.psu.edu/nanofabrication-lab
+      research_page: https://www.mri.psu.edu/chimes
+      region: north_america
+      domains: [advanced_packaging, advanced_process, semiconductor_materials]
+      description: 宾州州立大学CHIMES中心（SRC JUMP 2.0牵头），DARPA NGMM $7.5M，专注3D异构集成和玻璃基板封装
+      key_focus: [3D Heterogeneous Integration, Glass Substrate Packaging, GaN Power, 2D Materials]
+      funding: ["SRC JUMP 2.0 - CHIMES Center lead", "DARPA NGMM $7.5M", "CHIPS Act $4.3M MOCVD lab"]
+
+    - id: asu-swap
+      name: Arizona State University - SWAP Hub / NanoFab
+      homepage: https://cores.research.asu.edu/nanofab
+      research_page: https://microelectronics.asu.edu
+      region: north_america
+      domains: [advanced_packaging, semiconductor_materials, advanced_process, reliability_test]
+      description: 亚利桑那州立大学领导SWAP Hub (DoD Microelectronics Commons)，拥有250K sq ft MacroTechnology Works
+      key_focus: [Fan-Out WLP, Ultra-Wide Bandgap, Compound Semiconductors, 3DHI]
+      funding: ["CHIPS Act SWAP Hub lead ($21.3M Y2)", "Applied Materials $270M partnership"]
+
+    - id: ucsb-nanofab
+      name: UC Santa Barbara - Nanofabrication Facility
+      homepage: https://nanofab.ucsb.edu
+      research_page: https://nanofab.ucsb.edu/research
+      region: north_america
+      domains: [photonics, semiconductor_materials, quantum_computing, advanced_process]
+      description: UCSB纳米制造设施，12,000 sq ft洁净室，$60M+设备，全美大学纳米设施中工业用户最多 (55% industry)
+      key_focus: [Quantum Computing, GaN Power/RF, MicroLEDs, Silicon Photonics, III-V Compound Semiconductors]
+      funding: ["CHIPS Act CA DREAMS Hub ($16.2M GaN, $15.7M 5G/6G)"]
+
+    - id: caltech-kni
+      name: Caltech - Kavli Nanoscience Institute (KNI)
+      homepage: https://www.kni.caltech.edu
+      research_page: https://www.kni.caltech.edu/research
+      region: north_america
+      domains: [photonics, quantum_computing, semiconductor_materials]
+      description: 加州理工Kavli纳米科学研究所，7,500 sq ft洁净室，120+研究人员 (含JPL)
+      key_focus: [Quantum Matter, Nanophotonics, MEMS/NEMS, Neural Chips]
+
+    - id: harvard-cns
+      name: Harvard University - Center for Nanoscale Systems (CNS)
+      homepage: https://cns1.rc.fas.harvard.edu
+      research_page: https://cns1.rc.fas.harvard.edu/nanofabrication/
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, quantum_computing, photonics]
+      description: 哈佛大学纳米系统中心，10,000 sq ft洁净室，世界首台Elionix ELS-F125 (5nm, 125kV)，1,600+活跃用户
+      key_focus: [Nanoelectronics, Nanophotonics, MEMS, Quantum Science]
+      funding: ["NSF NNCI site"]
+
+    - id: princeton-mnfc
+      name: Princeton University - Micro/Nanofabrication Center (MNFC)
+      homepage: https://mnfc.princeton.edu
+      research_page: https://mnfc.princeton.edu/research
+      region: north_america
+      domains: [advanced_process, quantum_computing, photonics]
+      description: 普林斯顿微纳制造中心，15,000+ sq ft ISO 5/6/7洁净室，70+工具
+      key_focus: [Quantum Devices, Photonics, MEMS, High-Energy Physics Detectors]
+      funding: [MASH partner]
+
+    - id: columbia-cni
+      name: Columbia University - Columbia Nano Initiative (CNI)
+      homepage: https://cni.columbia.edu
+      research_page: https://cni.columbia.edu/research
+      region: north_america
+      domains: [photonics, advanced_process, semiconductor_materials, ai_chip_architecture]
+      description: 哥伦比亚大学纳米计划，领导SRC JUMP 2.0 CUBiC中心 (普适连接)
+      key_focus: [Silicon Photonics, Nanoelectronics, Flexible Electronics, Optical Interconnects]
+      funding: ["SRC JUMP 2.0 - CUBiC Center lead"]
+
+    - id: ucsd-nano3
+      name: UC San Diego - Nano3 / Qualcomm Institute
+      homepage: https://qi.ucsd.edu
+      research_page: https://qi.ucsd.edu/services/high-tech-research/nanofabrication-cleanroom-facility/
+      region: north_america
+      domains: [ai_chip_architecture, semiconductor_materials, advanced_process, photonics]
+      description: UCSD Nano3洁净室 (7,000 sq ft)，领导SRC JUMP 2.0 PRISM中心 (智能存储与内存)
+      key_focus: [5G/6G, AI Hardware, GaN Power, III-V Compounds, Emerging Memory]
+      funding: ["SRC JUMP 2.0 - PRISM Center lead", "NSF NNCI SDNI"]
+
+    - id: notre-dame-ndnf
+      name: University of Notre Dame - Nanofabrication Facility (NDNF)
+      homepage: https://nanofabrication.nd.edu
+      research_page: https://nanofabrication.nd.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, quantum_computing, reliability_test]
+      description: 圣母大学纳米制造设施，9,000 sq ft洁净室，220 GHz宽带测试设施 (2025)
+      key_focus: [Compound Semiconductors, Nanowires, Quantum, Ultra-Fast Transistors, 5G/6G]
+      funding: ["SRC/DARPA ASCENT Center", "CHIPS Act SCMC Hub"]
+
+    - id: wisconsin-nfc
+      name: University of Wisconsin-Madison - Nanoscale Fabrication Center
+      homepage: https://wcnt.wisc.edu
+      research_page: https://wcnt.wisc.edu/research
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, photonics]
+      description: 威斯康星大学麦迪逊纳米制造中心，10,000 sq ft洁净室，500+用户
+      key_focus: [Ultra-Wide Bandgap (AlGaN, AlN, GaN), Deep UV LEDs, MEMS, Silicon Photonics]
+
+    - id: maryland-nanocenter
+      name: University of Maryland - NanoCenter FabLab
+      homepage: https://www.nanocenter.umd.edu
+      research_page: https://www.nanocenter.umd.edu/facilities/fablab
+      region: north_america
+      domains: [ai_chip_architecture, security, semiconductor_materials]
+      description: 马里兰大学纳米中心，10,000 sq ft洁净室，专注芯片设计/硬件安全/神经形态
+      key_focus: [Hardware Security, Neuromorphic Chips, Chip Design, Advanced Manufacturing]
+
+    - id: ncsu-nnf
+      name: NC State University - Nanofabrication Facility / CLAWS Hub
+      homepage: https://nnf.ncsu.edu
+      research_page: https://nnf.ncsu.edu/research
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, photonics]
+      description: 北卡州立纳米制造设施，7,400 sq ft洁净室，领导CLAWS Hub (宽禁带半导体)
+      key_focus: [Wide Bandgap (GaN), III-V Devices, MEMS, Power Electronics]
+      funding: ["CHIPS Act CLAWS Hub lead", "NSF NNCI RTNN"]
+
+    - id: duke-smif
+      name: Duke University - Shared Materials Instrumentation Facility (SMIF)
+      homepage: https://smif.pratt.duke.edu
+      research_page: https://smif.pratt.duke.edu/research
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, ai_chip_architecture]
+      description: 杜克大学共享材料仪器设施，7,000 sq ft洁净室，$57M named ECE department (2026)
+      key_focus: [2D Materials Manufacturing, Printed Electronics, Neuromorphic, Quantum]
+
+    - id: usc-jonl
+      name: USC - John O'Brian Nanofabrication Laboratory / CA DREAMS Hub
+      homepage: https://rii.usc.edu/shared-resources/john-obrian-nanofabrication-laboratory/
+      research_page: https://ca-dreams.org
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, ai_chip_architecture]
+      description: 南加州大学领导CA DREAMS Hub ($31.9M DoD Microelectronics Commons)，MOSIS 2.0运行方
+      key_focus: [RF Technologies, Compound Semiconductors, MOSIS 2.0]
+      funding: ["CHIPS Act CA DREAMS Hub lead ($31.9M)"]
+
+    - id: northwestern-nufab
+      name: Northwestern University - NUFAB
+      homepage: https://www.nuance.northwestern.edu/facilities/nufab/
+      research_page: https://www.nuance.northwestern.edu/facilities/nufab/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, photonics]
+      description: 西北大学微纳制造设施，6,000+ sq ft Class 100洁净室，NSF NNCI SHyNE节点
+      key_focus: [Electronics, Photonics, MEMS, Sensors, Energy Devices]
+      funding: ["NSF NNCI SHyNE Resource"]
+
+    - id: jhu-apl
+      name: Johns Hopkins University - Applied Physics Lab Nanofab
+      homepage: https://www.jhuapl.edu
+      research_page: https://www.jhuapl.edu/work/programs/semiconductor
+      region: north_america
+      domains: [quantum_computing, semiconductor_materials, advanced_process, security]
+      description: 约翰霍普金斯APL纳米制造设施，20,000+ sq ft，国防/安全导向
+      key_focus: [Quantum Computing, SiC Magnetometers, Infrared Photonics, Metasurface Optics]
+      funding: [DoD/DARPA programs]
+
+    - id: osu-nanotechwest
+      name: Ohio State University - Nanotech West Laboratory
+      homepage: https://imr.osu.edu/core-facilities/nanotech-west-laboratory
+      research_page: https://imr.osu.edu/research/semiconductors
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, photonics, manufacturing_equipment]
+      description: 俄亥俄州立大学Nanotech West，俄亥俄最大洁净室 (6,000 sq ft)，宽禁带半导体中心 (50+ faculty)
+      key_focus: [Wide Bandgap (GaN, Ga2O3), Power Electronics, RF, Quantum, Photonics]
+      funding: ["Intel CAFE Center ($3M)", "DoD MMEC Hub"]
+
+    - id: rpi-mncr
+      name: RPI - Micro and Nanofabrication Cleanroom / Semiconductor CoLab
+      homepage: https://chips.rpi.edu/facilities-centers
+      research_page: https://chips.rpi.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, photonics, quantum_computing]
+      description: 伦斯勒理工微纳制造洁净室 + Albany NanoTech CoLab，6,000 sq ft
+      key_focus: [Atomic Lift-Off Nanofabrication, Terahertz Devices, UWBG, Quantum, RF]
+      funding: ["NORDTECH Hub", "Micron Northeast University Semiconductor Network"]
+
+    - id: suny-poly-cnse
+      name: SUNY Poly / UAlbany - CNSE at Albany NanoTech
+      homepage: https://www.sunypoly.edu
+      research_page: https://www.albany.edu/cnse
+      region: north_america
+      domains: [advanced_process, manufacturing_equipment, semiconductor_materials, quantum_computing]
+      description: SUNY Poly/UAlbany纳米科学与工程学院，位于Albany NanoTech Complex (1.65M sq ft, $24B+)
+      key_focus: [2nm Technology, SiC Power, Neuromorphic Computing, Quantum, High NA EUV]
+      funding: ["CHIPS Act $40M", "NORDTECH", "$6.25M Naval Research", "$5.5M AFRL neuromorphic"]
+
+    - id: binghamton-ieec
+      name: Binghamton University - IEEC / S3IP
+      homepage: https://www.binghamton.edu/s3ip
+      research_page: https://www.binghamton.edu/s3ip/research
+      region: north_america
+      domains: [advanced_packaging, reliability_test]
+      description: 宾汉姆顿大学集成电子工程中心，2.5D封装/异构集成专长，NY State先进技术中心
+      key_focus: [2.5D Packaging, Heterogeneous Integration, Thermal Management, Solder Reliability]
+      funding: ["$1.2M South Korea NNFC", "SRC CHIRP co-lead"]
+
+    - id: vt-ncfl
+      name: Virginia Tech - Nanoscale Characterization and Fabrication Lab (NCFL)
+      homepage: https://facilities.ictas.vt.edu
+      research_page: https://facilities.ictas.vt.edu/ncfl
+      region: north_america
+      domains: [quantum_computing, advanced_process, photonics, semiconductor_materials]
+      description: 弗吉尼亚理工NCFL，16,000 sq ft，拥有FEI Titan STEM和JEOL e-beam
+      key_focus: [Quantum Computing, Nanophotonics, Microelectronics, MEMS]
+      funding: [NSF NNCI NanoEarth, VAST Alliance]
+
+    - id: washington-wnf
+      name: University of Washington - Washington Nanofabrication Facility (WNF)
+      homepage: https://www.wnf.uw.edu
+      research_page: https://www.wnf.uw.edu/research
+      region: north_america
+      domains: [advanced_process, photonics, quantum_computing, semiconductor_materials]
+      description: 华盛顿大学WNF，太平洋西北最大公共洁净室 (15,000 sq ft)，100+工具，NNCI站点
+      key_focus: [Integrated Photonics, Quantum Computing, MEMS, 2D Materials]
+      funding: ["NSF NNCI NNI", "CHIPS Act Washington state initiative"]
+
+    - id: minnesota-mnc
+      name: University of Minnesota - Minnesota Nano Center (MNC)
+      homepage: https://cse.umn.edu/mnc
+      research_page: https://cse.umn.edu/mnc/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, quantum_computing]
+      description: 明尼苏达大学纳米中心，两个洁净室 (8,000 sq ft总)，$30M+设备
+      key_focus: [Advanced MOSFETs, Cryogenic CMOS, 2D Materials, Nanowires, Quantum]
+      funding: ["NSF NNCI MiNIC"]
+
+    - id: uflorida-nrf
+      name: University of Florida - Nanoscale Research Facility / Florida Semiconductor Institute
+      homepage: https://www.eng.ufl.edu/research/facilities-equipment/
+      research_page: https://fsi.eng.ufl.edu
+      region: north_america
+      domains: [advanced_packaging, semiconductor_materials, advanced_process, photonics]
+      description: 佛罗里达大学纳米研究设施 (7,300 sq ft)，Florida Semiconductor Institute
+      key_focus: [Heterogeneous Integration, MEMS, Wide Bandgap, Power Semiconductors, Photonics]
+      funding: ["NSF Central Florida Semiconductor Innovation Engine", "MMEC"]
+
+    - id: rit-nanofab
+      name: Rochester Institute of Technology - Semiconductor Nanofabrication Lab
+      homepage: https://www.rit.edu/nanofab/
+      research_page: https://www.rit.edu/nanofab/research
+      region: north_america
+      domains: [advanced_process, photonics, semiconductor_materials, quantum_computing]
+      description: RIT半导体纳米制造实验室，10,000 sq ft，全150mm CMOS流程，全美最老微电子工程本科
+      key_focus: [CMOS+X Integration, Integrated Photonics, MEMS, Nanomaterials, Quantum]
+      funding: ["NSF CMOS+X NRT ($3M)", "NSF EMERGE-MICRO"]
+
+    - id: arizona-nfc
+      name: University of Arizona - Nanofabrication Core Facility / Center for Semiconductor Manufacturing
+      homepage: https://cores.arizona.edu/facilities/nanofab-0
+      research_page: https://semiconductors.arizona.edu
+      region: north_america
+      domains: [advanced_process, photonics, quantum_computing, reliability_test]
+      description: 亚利桑那大学纳米制造核心设施，6,800 sq ft ($35.5M投资)，首台学术12-inch CMP
+      key_focus: [Semiconductor Manufacturing, Photonics, Quantum, Defect Analysis]
+
+    - id: uc-davis-cnm2
+      name: UC Davis - Center for Nano-MicroManufacturing (CNM2)
+      homepage: https://cnm2.ucdavis.edu
+      research_page: https://cnm2.ucdavis.edu/research
+      region: north_america
+      domains: [advanced_process, photonics, ai_chip_architecture]
+      description: 加州大学戴维斯纳米微制造中心，10,000 sq ft ISO 5洁净室
+      key_focus: [MEMS/BioMEMS, Photonics, III-V/Si Heterogeneous Integration, AI Hardware]
+      funding: ["CHIPS Act CA-Pacific-NW AI Hardware Hub"]
+
+    - id: nyu-tandon-nanofab
+      name: NYU Tandon - Nanofabrication Cleanroom
+      homepage: https://engineering.nyu.edu/research/nanofab
+      research_page: https://engineering.nyu.edu/research/nanofab/facilities
+      region: north_america
+      domains: [quantum_computing, semiconductor_materials]
+      description: 纽约大学Tandon纳米制造洁净室，首台Oxford PlasmaPro ASP ALD (超导量子)
+      key_focus: [2D Quantum Heterostructures, Superconducting Qubits, Bioelectronics]
+      funding: ["NORDTECH Hub ($40M DoD)"]
+
+    - id: colorado-cosinc
+      name: University of Colorado Boulder - COSINC
+      homepage: https://www.colorado.edu/facility/cosinc
+      research_page: https://www.colorado.edu/facility/cosinc/research
+      region: north_america
+      domains: [quantum_computing, photonics, advanced_process]
+      description: 科罗拉多大学博尔德分校COSINC，3,500 sq ft，National Quantum Nanofab (NQN) 在建 (~2028)
+      key_focus: [Quantum Devices, Photonics, Nonlinear Optics, Metasurfaces]
+      funding: ["NSF $20M National Quantum Nanofab"]
+
+    - id: utah-nanofab
+      name: University of Utah - Utah Nanofab
+      homepage: https://www.nanofab.utah.edu
+      research_page: https://www.nanofab.utah.edu/research
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, photonics]
+      description: 犹他大学纳米制造设施，18,000 sq ft (Intermountain West最大)，$45M总投资
+      key_focus: [Wide Bandgap (Ga2O3), Neural Prosthetics, MEMS, Biosensors]
+      funding: ["CHIPS Act UNICOS", "Micron Foundation ($1.25M)"]
+
+    - id: northeastern-knmrc
+      name: Northeastern University - Kostas Nanoscale Technology Center (KNMRC)
+      homepage: https://nanosi.northeastern.edu
+      research_page: https://nanosi.northeastern.edu/research
+      region: north_america
+      domains: [advanced_process, ai_chip_architecture, photonics]
+      description: 东北大学Kostas纳米技术研究中心，10,000 sq ft洁净室，Boston+Oakland双海岸布局
+      key_focus: [Zero-Power Sensing, 5G/6G, AI Hardware, Quantum, NanoOPS Additive Manufacturing]
+
+    - id: umass-chm
+      name: UMass Amherst - Center for Hierarchical Manufacturing (CHM)
+      homepage: https://www.umass.edu/chm
+      research_page: https://www.umass.edu/chm/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials]
+      description: 麻省大学阿默斯特层次制造中心，独有Roll-to-Roll纳米制造设施
+      key_focus: [Roll-to-Roll Nanomanufacturing, Nanoimprint Lithography, Directed Self-Assembly, Post-CMOS Computing]
+
+    - id: tamu-aggiefab
+      name: Texas A&M University - AggieFab Nanofabrication Facility
+      homepage: https://aggiefab.tamu.edu
+      research_page: https://aggiefab.tamu.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, photonics]
+      description: 德州农工AggieFab，6,500+ sq ft洁净室，$12M TEES + $5M HPE投资
+      key_focus: [Microelectronics, MEMS, Photonics, Advanced Materials, Sensors]
+
+    - id: isu-mrc
+      name: Iowa State University - Microelectronics Research Center (MRC)
+      homepage: https://www.mrc.iastate.edu
+      research_page: https://www.mrc.iastate.edu/research
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, photonics]
+      description: 爱荷华州立大学微电子研究中心
+      key_focus: [Microelectronics, Semiconductors, Photonics, Sensors, Nanomaterials]
+
+    - id: uark-music
+      name: University of Arkansas - MUSiC Semiconductor Fabrication Facility
+      homepage: https://music.uark.edu
+      research_page: https://music.uark.edu/research
+      region: north_america
+      domains: [semiconductor_materials, advanced_packaging, reliability_test]
+      description: 阿肯色大学MUSiC — 全美首个多用户SiC研究制造设施，端到端SiC器件开发
+      key_focus: [SiC Power Devices, Advanced Packaging, Power Electronics, Systems Integration]
+
+    - id: yale-cleanroom
+      name: Yale University - Cleanroom / YINQE
+      homepage: https://research.yale.edu/cores/cleanroom
+      region: north_america
+      domains: [quantum_computing, photonics, semiconductor_materials]
+      description: 耶鲁大学洁净室设施 + YINQE (纳米科学与量子工程研究所)
+      key_focus: [Quantum Computing, Mesoscopic Physics, Photonics, Materials Science]
+
+    - id: brown-ncf
+      name: Brown University - Nanofabrication Central Facility
+      homepage: https://www.brown.edu/Departments/Engineering/Labs/
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, photonics]
+      description: 布朗大学纳米制造中央设施，25+研究组
+      key_focus: [Ge Quantum-Dot Photodetectors, Nitride Transistors, Magnetic Tunnel Junctions]
+
+    - id: vanderbilt-vinse
+      name: Vanderbilt University - VINSE Cleanroom
+      homepage: https://www.vanderbilt.edu/vinse
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, photonics]
+      description: 范德堡大学纳米科学与工程研究所洁净室，10,000 sq ft ISO 5/6
+      key_focus: [Nanophotonics, 2D Materials, BioMEMS, CMOS-Compatible Processing]
+
+    - id: cwru-mfl
+      name: Case Western Reserve University - Microfabrication Lab (MFL)
+      homepage: https://cwru.corefacilities.org
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, manufacturing_equipment]
+      description: 凯斯西储大学微制造实验室，5,500 sq ft Class 100，1960年起世界知名微传感器中心
+      key_focus: [MEMS, Microsensors, Flexible Nanoelectronics, Optoelectronics]
+
+    - id: lehigh-incf
+      name: Lehigh University - Integrated Nanofabrication and Cleanroom Facility (INCF)
+      homepage: https://engineering.lehigh.edu/mse/research/facilities
+      region: north_america
+      domains: [semiconductor_materials, photonics, advanced_packaging]
+      description: 理海大学集成纳米制造洁净室，Sherman Fairchild固态研究中心
+      key_focus: [Compound Semiconductors, III-V/III-Nitride, Nanophotonics, Electronics Packaging]
+
+    - id: stonybrook-cfn
+      name: Stony Brook University - CFN / onsemi SiC Center
+      homepage: https://www.stonybrook.edu
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, advanced_packaging]
+      description: 石溪大学，使用Brookhaven国家实验室CFN设施，新建onsemi $20M SiC晶体生长中心 (2027)
+      key_focus: [SiC Power Semiconductors, 2D Materials, 3D ICs, Energy-Efficient ICs]
+      funding: ["$20M public-private onsemi partnership"]
+
+    - id: oregonstate-cormic
+      name: Oregon State University - Corvallis Microfluidics Tech Hub
+      homepage: https://engineering.oregonstate.edu
+      region: north_america
+      domains: [advanced_process, semiconductor_materials]
+      description: 俄勒冈州立大学CorMic Tech Hub ($45M EDA)，Huang Innovation Complex ($213M)
+      key_focus: [Semiconductor Manufacturing, Microfluidics]
+      funding: ["CorMic Tech Hub ($45M EDA)", "NVIDIA $50M Huang Complex"]
 
   research_institute:
     - id: imec
@@ -390,13 +831,216 @@ tier2:
       domains: [ai_chip_architecture, eda_design_automation, advanced_packaging, chiplet_interconnect]
       description: 华为半导体研究，芯片架构和EDA
 
-    - id: qualcomm-rd
-      name: Qualcomm Research
-      homepage: https://www.qualcomm.com/research
-      research_page: https://www.qualcomm.com/research/artificial-intelligence/ai-research
+    - id: micron-rd
+      name: Micron Technology Research & Development
+      homepage: https://www.micron.com/about/research-and-development
+      research_page: https://www.micron.com/about/our-company/innovation
+      publications_page: https://www.micron.com/about/blogs
+      region: north_america
+      domains: [memory_technology, advanced_process, advanced_packaging]
+      description: 美光科技R&D，DRAM/NAND工艺缩放、HBM4、3D DRAM、CXL内存、计算内存
+      key_focus: [HBM4, 3D DRAM, CXL Memory, Compute-in-Memory, GDDR7]
+
+    - id: ti-rd
+      name: Texas Instruments Research & Development
+      homepage: https://www.ti.com/about-ti/company/technology-and-manufacturing.html
+      research_page: https://www.ti.com/about-ti/technology.html
+      region: north_america
+      domains: [advanced_process, semiconductor_materials]
+      description: 德州仪器R&D，模拟/混合信号、嵌入式处理、GaN功率、抗辐射电子、45nm-130nm工艺
+      key_focus: [Analog Mixed-Signal, GaN Power, Rad-Hard Electronics, DLP]
+
+    - id: adi-rd
+      name: Analog Devices Research & Development
+      homepage: https://www.analog.com/en/about-adi/research-and-development.html
+      research_page: https://www.analog.com/en/education/technical-articles.html
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, reliability_test]
+      description: 亚德诺半导体R&D，精密模拟、MEMS传感器、RF/微波、汽车雷达
+      key_focus: [Precision Analog, MEMS Sensors, RF/Microwave, Automotive Radar]
+
+    - id: gf-labs
+      name: GlobalFoundries Labs
+      homepage: https://gf.com/technology/
+      research_page: https://gf.com/technology/research
+      region: north_america
+      domains: [advanced_process, photonics, advanced_packaging, semiconductor_materials]
+      description: GlobalFoundries R&D ($496M/年)，FD-SOI、硅光子学 (GF Fotonix)、RF SOI、SiGe、先进封装
+      key_focus: [FD-SOI, Silicon Photonics, RF SOI, SiGe, Advanced Packaging]
+      funding: ["$575M NY Advanced Packaging & Photonics Center"]
+
+    - id: broadcom-rd
+      name: Broadcom Research & Development
+      homepage: https://www.broadcom.com/company/about/research
       region: north_america
       domains: [ai_chip_architecture, chiplet_interconnect, photonics]
-      description: 高通研究院，AI芯片和通信芯片
+      description: Broadcom R&D，数据中心网络/交换芯片 (Tomahawk/Jericho)、serdes、AI加速器
+      key_focus: [Switch Silicon, SerDes, AI Accelerators, Optical Interconnects]
+
+    - id: marvell-rd
+      name: Marvell Technology Research
+      homepage: https://www.marvell.com/company/technology-development.html
+      research_page: https://www.marvell.com/blogs/
+      region: north_america
+      domains: [ai_chip_architecture, photonics, chiplet_interconnect]
+      description: Marvell技术研发，数据中心DPU、硅光子学、相干DSP、PCIe/CXL互联
+      key_focus: [Data Infrastructure DPUs, Silicon Photonics, Coherent DSP, 800GbE]
+
+    - id: amazon-annapurna
+      name: Amazon Annapurna Labs
+      homepage: https://www.aboutamazon.com/what-we-do/devices-services/annapurna-labs
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect]
+      description: Amazon Annapurna Labs，AWS Trainium/Inferentia AI芯片、Graviton Arm CPU、Nitro DPU
+      key_focus: [Trainium/Inferentia AI Accelerators, Graviton Arm CPUs, Nitro DPUs]
+
+    - id: wolfspeed-rd
+      name: Wolfspeed Innovation
+      homepage: https://www.wolfspeed.com/company/innovation/
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, manufacturing_equipment]
+      description: Wolfspeed创新中心，SiC衬底和外延、SiC MOSFET/二极管、GaN-on-SiC RF、200mm SiC制造
+      key_focus: [SiC Substrates, SiC MOSFETs, GaN-on-SiC RF, 200mm SiC Fab]
+
+    - id: onsemi-rd
+      name: onsemi Research & Development
+      homepage: https://www.onsemi.com/company/about-onsemi
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, manufacturing_equipment]
+      description: onsemi R&D，SiC功率器件 (Hudson NH + East Fishkill NY)、智能功率、汽车传感器
+      key_focus: [SiC Power Devices, Intelligent Power, Image Sensors, Automotive]
+
+    - id: kla-rd
+      name: KLA Corporation Research
+      homepage: https://www.kla.com/company/technology
+      region: north_america
+      domains: [manufacturing_equipment, advanced_process, reliability_test]
+      description: KLA研发，光学/电子束检测、缺陷复查、量测、过程控制
+      key_focus: [Wafer Inspection, E-beam Review, Metrology, Process Control]
+
+    - id: teradyne-rd
+      name: Teradyne Research & Development
+      homepage: https://www.teradyne.com/about
+      region: north_america
+      domains: [manufacturing_equipment, reliability_test]
+      description: Teradyne R&D，半导体ATE测试 (Ultraflex/J750/ETS)、机器人在测试中应用
+      key_focus: [ATE, Semiconductor Test, ML in Test]
+
+    - id: arm-us-research
+      name: Arm Research (US)
+      homepage: https://www.arm.com/research
+      region: north_america
+      domains: [ai_chip_architecture, eda_design_automation, chiplet_interconnect]
+      description: Arm美国研究院 (Austin TX)，CPU架构、AI加速、安全 (MTE/CHERI)、HPC (Neoverse)
+      key_focus: [CPU Architecture, AI Acceleration, CHERI Security, Neoverse HPC]
+
+    - id: rambus-rd
+      name: Rambus Labs
+      homepage: https://www.rambus.com/papers/
+      research_page: https://www.rambus.com/blogs/
+      region: north_america
+      domains: [memory_technology, chiplet_interconnect, security]
+      description: Rambus研究院，内存接口IP (HBM/DDR)、安全 (Silicon Root of Trust)、Chiplet互联
+      key_focus: [Memory Interface IP, Hardware Security, Chiplet Interconnect]
+
+    - id: entegris-rd
+      name: Entegris Innovation & R&D
+      homepage: https://www.entegris.com/en/about-us/innovation-and-rd.html
+      region: north_america
+      domains: [semiconductor_materials, manufacturing_equipment]
+      description: Entegris创新中心，化学过滤、CMP研磨液/垫、晶圆处理、光罩
+      key_focus: [Chemical Filtration, CMP Consumables, Wafer Handling, Photomask]
+
+    - id: dupont-electronics
+      name: DuPont Electronics & Industrial R&D
+      homepage: https://www.dupont.com/electronic-materials.html
+      region: north_america
+      domains: [semiconductor_materials, advanced_process]
+      description: 杜邦电子材料研发，光刻胶 (Cyclotene/Kapton/Pyralux)、CMP垫、EUV材料
+      key_focus: [Photoresists, CMP Pads, EUV Materials, LTCC]
+
+    - id: brewerscience
+      name: Brewer Science Research
+      homepage: https://www.brewerscience.com/research/publications/
+      research_page: https://www.brewerscience.com/research/
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, advanced_packaging]
+      description: Brewer Science研究，EUV底层、临时键合/解键合、碳纳米管传感器
+      key_focus: [EUV Underlayers, Temporary Bonding/Debonding, CNT Sensors]
+
+    - id: microchip-rd
+      name: Microchip Technology R&D
+      homepage: https://www.microchip.com/en-us/about/technology
+      region: north_america
+      domains: [ai_chip_architecture, semiconductor_materials, security]
+      description: Microchip技术研发，MCU、FPGA (PolarFire)、SiC、嵌入式安全
+      key_focus: [Low-Power MCUs, FPGAs, SiC Power, Embedded Security]
+
+    - id: skywater-rd
+      name: SkyWater Technology R&D
+      homepage: https://www.skywatertechnology.com/technology/
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, security]
+      description: SkyWater技术研发，130nm开源CMOS (SKY130 PDK)、抗辐射、先进封装、DoD/DARPA项目
+      key_focus: [Open-Source CMOS, Rad-Hard, ROICs, DARPA-funded]
+
+    - id: qorvo-rd
+      name: Qorvo Innovation
+      homepage: https://www.qorvo.com/innovation
+      region: north_america
+      domains: [semiconductor_materials, photonics]
+      description: Qorvo创新，RF SAW/BAW滤波器、GaN RF、5G/6G、UWB、国防
+      key_focus: [RF Filters, GaN RF, 5G/6G, UWB, Defense Electronics]
+
+    - id: cerebras
+      name: Cerebras Systems Research
+      homepage: https://www.cerebras.ai/research
+      research_page: https://www.cerebras.ai/blog
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect]
+      description: Cerebras系统研究，晶圆级AI芯片 (WSE-3, 4万亿晶体管)、稀疏计算、科学计算
+      key_focus: [Wafer-Scale Integration, Sparse Compute, ML Training/Inference]
+
+    - id: d-matrix
+      name: d-Matrix Research
+      homepage: https://www.d-matrix.ai/company/technology/
+      region: north_america
+      domains: [ai_chip_architecture, memory_technology, advanced_packaging]
+      description: d-Matrix研究，数字存算一体 (DIMC) AI推理、Corsair/Nighthawk平台、chiplet + 有机基板
+      key_focus: [Digital In-Memory Compute, LLM Inference, Chiplet Architecture]
+      funding: ["$450M total, Microsoft-backed"]
+
+    - id: tenstorrent
+      name: Tenstorrent Research
+      homepage: https://tenstorrent.com/research
+      region: north_america
+      domains: [ai_chip_architecture]
+      description: Tenstorrent AI芯片研究 (Jim Keller领导)，RISC-V AI加速器、Grayskull/Wormhole/Blackhole
+      key_focus: [RISC-V AI Acceleration, Spatial Architecture, Open-Source Stack]
+
+    - id: lightmatter
+      name: Lightmatter Research
+      homepage: https://lightmatter.com/technology/
+      region: north_america
+      domains: [photonics, ai_chip_architecture, chiplet_interconnect]
+      description: Lightmatter光子AI芯片研究，硅光子AI加速器 (Envise)、光子互联 (Lightpath)
+      key_focus: [Silicon Photonic AI Accelerators, Photonic Interconnects, Optical Computing]
+
+    - id: celestial-ai
+      name: Celestial AI Research
+      homepage: https://celestial.ai/technology/
+      region: north_america
+      domains: [photonics, memory_technology, chiplet_interconnect]
+      description: Celestial AI光子互联研究，Photonic Fabric™ (32 TB共享内存, 115 Tbps)，$175M融资
+      key_focus: [Photonic Interconnects, HBM3E Co-Packaged, Optical Memory Disaggregation]
+
+    - id: ayar-labs
+      name: Ayar Labs Research
+      homepage: https://www.ayarlabs.com/technology/
+      region: north_america
+      domains: [photonics, chiplet_interconnect, advanced_packaging]
+      description: Ayar Labs研究，硅光子I/O (TeraPHY™, 1 Tbps/chiplet)、多波长激光 (SuperNova™)
+      key_focus: [Optical I/O Chiplets, UCIe Optical Retimer, Co-Packaged Optics]
 
 # ---------------------------------------------------------------------------
 # Tier 3: 核心学术会议（会期采集）
@@ -557,14 +1201,177 @@ tier4:
       research_page: https://microelectronics.llnl.gov/research
       region: north_america
       domains: [advanced_process, reliability_test, manufacturing_equipment]
-      description: 劳伦斯利弗莫尔国家实验室微电子
+      description: 劳伦斯利弗莫尔国家实验室微电子，Center for Micro & Nanotechnology (Class 100洁净室)
+      key_focus: [2-Photon Lithography, MEMS, RF Photonics, Radiation Hardening]
 
     - id: snl-micro
       name: Sandia National Labs - Microelectronics
       homepage: https://www.sandia.gov/microelectronics/
       region: north_america
       domains: [reliability_test, security, advanced_process]
-      description: 桑迪亚国家实验室微电子与硬件安全
+      description: 桑迪亚国家实验室微电子与硬件安全，MESA微制造综合体，$45M抗辐射研究
+      key_focus: [Rad-Hard Electronics, GaN Power, III-V MBE, Analog In-Memory Computing]
+
+    - id: ornl-micro
+      name: Oak Ridge National Lab - Microelectronics
+      homepage: https://www.ornl.gov/group/microelectronics
+      research_page: https://www.ornl.gov/group/microelectronics
+      region: north_america
+      domains: [advanced_process, semiconductor_materials, ai_chip_architecture]
+      description: 橡树岭国家实验室微电子，CNMS纳米材料中心，AI驱动材料发现
+      key_focus: [Autonomous Materials Discovery, Embedded Microelectronics, CNMS]
+      funding: ["DOE MSRC ($179M for 10 labs)"]
+
+    - id: anl-quantum
+      name: Argonne National Lab - Quantum / Semiconductor
+      homepage: https://www.anl.gov/quantum
+      research_page: https://www.anl.gov/cnm
+      region: north_america
+      domains: [quantum_computing, semiconductor_materials]
+      description: 阿贡国家实验室量子与半导体，Q-NEXT量子中心 ($125M)，Center for Nanoscale Materials
+      key_focus: [Quantum Networks, Electron-on-Solid-Neon Qubits, Si Quantum Processors]
+      funding: ["Q-NEXT ($125M renewal)", "DOE MSRC", "Advanced Photon Source"]
+
+    - id: lbnl-molecular
+      name: Lawrence Berkeley National Lab - Molecular Foundry
+      homepage: https://www.lbl.gov
+      research_page: https://foundry.lbl.gov
+      region: north_america
+      domains: [semiconductor_materials, quantum_computing, photonics]
+      description: 劳伦斯伯克利国家实验室Molecular Foundry，NCEM电子显微镜中心
+      key_focus: [Photon-Avalanching Nanoparticles, Short-Range Ordering in Semiconductors, NCEM]
+
+    - id: lanl-semiconductor
+      name: Los Alamos National Lab - Semiconductor
+      homepage: https://www.lanl.gov/projects/national-security-science/semiconductor.php
+      region: north_america
+      domains: [quantum_computing, semiconductor_materials]
+      description: 洛斯阿拉莫斯国家实验室半导体，量子机器学习，DARPA Quantum Benchmarking Initiative
+      key_focus: [Quantum ML, Colloidal Quantum Dot Lasers, Beyond Moore's Law, CINT]
+
+    - id: pnnl-micro
+      name: Pacific Northwest National Lab - Electronic Materials
+      homepage: https://www.pnnl.gov/electronic-materials
+      region: north_america
+      domains: [security, semiconductor_materials]
+      description: 太平洋西北国家实验室，微电子网络安全、电子材料发现
+      key_focus: [Cybersecurity for Microelectronics, Hardware Security, Materials Discovery]
+
+    - id: bnl-cfn
+      name: Brookhaven National Lab - Center for Functional Nanomaterials (CFN)
+      homepage: https://www.bnl.gov/cfn/
+      research_page: https://www.bnl.gov/materials/
+      region: north_america
+      domains: [semiconductor_materials, quantum_computing]
+      description: 布鲁克海文国家实验室CFN，NSLS-II同步辐射，DNA自组装3D纳米电子
+      key_focus: [Nanomaterials, Synchrotron Metrology, Self-Assembly, Superconducting Quantum]
+
+    - id: nrel-widebandgap
+      name: NREL - Wide Bandgap Semiconductors
+      homepage: https://www.nrel.gov/materials-science/wide-bandgap-semiconductors
+      research_page: https://www.nrel.gov/materials-science/wide-bandgap-semiconductors/research.html
+      region: north_america
+      domains: [semiconductor_materials, advanced_process]
+      description: 国家可再生能源实验室宽禁带半导体，高通量筛选1300+ UWBG化合物
+      key_focus: [Ultra-Wide Bandgap (GaN, AlGaN, Ga2O3), High-Throughput Screening, Substrate Engineering]
+
+    - id: slac-micro
+      name: SLAC National Lab - Semiconductor Characterization
+      homepage: https://www6.slac.stanford.edu/research
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, photonics]
+      description: SLAC国家加速器实验室，LCLS/LCLS-II X射线FEL，领导2个DOE MSRC项目
+      key_focus: [X-ray Characterization, Phase-Change Materials, MeV-UED, MSRC ESTEEM/AUREIS]
+
+    - id: fermilab-sqms
+      name: Fermilab - SQMS Center
+      homepage: https://sqms.fnal.gov
+      region: north_america
+      domains: [quantum_computing]
+      description: 费米实验室SQMS中心 ($125M 2025-2030)，>1ms transmon相干时间，超导量子比特
+      key_focus: [Superconducting Qubits, Cavity Qudits, Quantum Sensing]
+      funding: ["SQMS Center ($125M renewal)"]
+
+    - id: darpa-eri
+      name: DARPA - Electronics Resurgence Initiative (ERI 2.0)
+      homepage: https://www.darpa.mil/research/programs/electronics-resurgence-initiative
+      region: north_america
+      domains: [advanced_packaging, advanced_process, ai_chip_architecture, quantum_computing]
+      description: DARPA电子复兴计划2.0，包含JUMP 2.0, NGMM ($840M), Minitherms3D等
+      key_focus: [3DHI, NGMM, Next-Gen Microelectronics, ERI 2.0 Portfolio]
+      funding: ["DARPA NGMM $840M + $1.4B total", "JUMP 2.0 $331M (2023-2028)"]
+
+    - id: afrl-micro
+      name: Air Force Research Lab (AFRL) - Semiconductors
+      homepage: https://afresearchlab.com
+      region: north_america
+      domains: [semiconductor_materials, photonics, quantum_computing, advanced_process]
+      description: 美国空军研究实验室半导体，MINSAV、神经形态雷达、量子光子学
+      key_focus: [GaN RF, GaN-on-Si BiCMOS, Neuromorphic Radar, Quantum Photonics]
+      funding: ["PsiQuantum $10.8M", "Xanadu quantum"]
+
+    - id: nrl-electronics
+      name: Naval Research Lab (NRL) - Electronics Division
+      homepage: https://www.nrl.navy.mil
+      region: north_america
+      domains: [semiconductor_materials, advanced_process, reliability_test]
+      description: 美国海军研究实验室电子科学部，GaN/AlN RTD (>5G速度)，海军量子信息研究中心
+      key_focus: [GaN/AlN RTDs, Vacuum Electronics, SiGe Radiation Effects, Quantum]
+
+    - id: arl-semiconductor
+      name: Army Research Lab (ARL/DEVCOM) - Semiconductor
+      homepage: https://www.arl.army.mil
+      region: north_america
+      domains: [semiconductor_materials, security, advanced_process]
+      description: 美国陆军研究实验室半导体，Center for Semiconductor Modeling (CSM)，超宽禁带RF
+      key_focus: [Ultra-WBG RF, Field Programmable Neural Array, CSM]
+      funding: ["OSU Ultra-WBG RF Center ($7.5M)"]
+
+    - id: ny-creates
+      name: NY CREATES / Albany NanoTech Complex
+      homepage: https://ny-creates.org
+      research_page: https://ny-creates.org/research
+      region: north_america
+      domains: [advanced_process, manufacturing_equipment, advanced_packaging, semiconductor_materials]
+      description: NY CREATES管理Albany NanoTech Complex ($25B+投资)，NSTC EUV Accelerator ($825M)，北美首个High NA EUV中心
+      key_focus: [High NA EUV Lithography, 3DHI, NanoFab Reflection ($1B), Sub-2nm Technology]
+      funding: ["CHIPS Act $825M EUV Accelerator", "NY State $1B NanoFab Reflection"]
+
+    - id: mit-ll
+      name: MIT Lincoln Laboratory - Microsystems Prototyping Foundry
+      homepage: https://www.ll.mit.edu/r-d/advanced-technology/microsystems-prototyping-foundry
+      region: north_america
+      domains: [advanced_packaging, advanced_process, quantum_computing, security]
+      description: MIT林肯实验室微系统原型制造设施，DARPA Minitherms3D、Chiplet集成、超导存储器
+      key_focus: [3DHI Thermal Management, Bumpless Chiplet Integration, Superconducting Memory]
+
+    - id: natcast-nstc
+      name: Natcast / National Semiconductor Technology Center (NSTC)
+      homepage: https://natcast.org
+      region: north_america
+      domains: [advanced_process, advanced_packaging, manufacturing_equipment]
+      description: 国家半导体技术中心 (CHIPS Act $6.3B)，100+成员，运营EUV Accelerator
+      key_focus: [EUV Accelerator, Design & Collaboration Facility, NSTC Strategic Plan]
+      funding: ["CHIPS Act $6.3B + $825M EUV Accelerator"]
+
+    - id: semi-research-corp
+      name: Semiconductor Research Corporation (SRC)
+      homepage: https://www.src.org
+      research_page: https://www.src.org/program/jump2/
+      region: north_america
+      domains: [advanced_packaging, advanced_process, ai_chip_architecture, semiconductor_materials]
+      description: 半导体研究公司，管理JUMP 2.0 (SRC+DARPA, $331M, 7个研究中心)
+      key_focus: [JUMP 2.0 Centers (7), CHIMES, SUPREME, CUBiC, PRISM, COCOSYS, CogniSense, ENIGMA]
+      funding: ["SRC JUMP 2.0 ($331M, 2023-2028)"]
+
+    - id: microelectronics-commons
+      name: DoD Microelectronics Commons (8 Regional Hubs)
+      homepage: https://microelectronicscommons.org
+      region: north_america
+      domains: [advanced_packaging, advanced_process, semiconductor_materials, security]
+      description: 国防部微电子Commons ($2B，8个区域中心)，覆盖30+州
+      key_focus: [SWAP Hub (ASU), CA DREAMS (USC), NORDTECH, SCMC, MMEC, CLAWS Hub, NEMC, NW-AI-Hub]
+      funding: ["CHIPS Act / DoD $2B"]
 
 # ---------------------------------------------------------------------------
 # Tier 5: 高质量技术博客/独立分析（双周采集）

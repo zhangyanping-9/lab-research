@@ -1,10 +1,11 @@
 # Hermes Agent Configuration
-# This config defines how the Hermes agent should invoke this skill.
+# 本配置文件定义了 Hermes 智能体如何调用半导体研究方向采集 Skill。
+# 安装方式: 将本目录复制到 Hermes 的 skills/semiconductor-research-direction-collect/
 
 agent:
   name: semiconductor-research-collector
-  version: 0.1.0
-  description: 全球半导体研究方向采集与分析智能体
+  version: 0.2.0
+  description: 全球半导体研究方向采集与分析智能体，覆盖169+信源
 
 skill:
   name: semiconductor-research-direction-collect
@@ -14,30 +15,88 @@ tools:
   definitions: hermes/tools.json
   prompt_templates: hermes/prompts/
 
+# --- 采集工作流定义 ---
 workflow:
-  default_mode: weekly
+  # 两种采集模式
+  modes:
+    basic:
+      description: 基础方向统计 — 轻量级，适合每周采集
+      max_per_lab: 10
+      tools: [collect_research_directions, analyze_research_trends, generate_insight_report, collect_and_report]
+    detailed:
+      description: 深度项目详情 — 提取每个研究项目的完整信息，适合月度/深度采集
+      max_projects_per_lab: 5
+      tools: [collect_project_details, generate_project_reports, collect_and_report_deep]
+
+  # 默认实验室（全球关键信源 + 美国重点信源）
   default_labs:
-    - imec
-    - cea-leti
-    - intel-labs
-    - tsmc-research
-    - mit-mtl
-    - stanford-nanolab
-    - ibm-research
-    - nvidia-research
-    - imecas
-    - pkusemi
+    global:
+      - imec
+      - cea-leti
+      - intel-labs
+      - tsmc-research
+      - samsung-sait
+      - ibm-research
+      - nvidia-research
+      - mit-mtl
+      - stanford-nanolab
+    us_universities:
+      - purdue-birck
+      - cornell-cnf
+      - utaustin-mrc
+      - uiuc-hmntl
+      - umich-lnf
+      - pennstate-chimes
+      - asu-swap
+      - ucsb-nanofab
+      - columbia-cni
+      - ucsd-nano3
+    us_corporate:
+      - micron-rd
+      - ti-rd
+      - gf-labs
+      - broadcom-rd
+      - marvell-rd
+      - qualcomm-rd
+      - cerebras
+    us_institutes:
+      - ny-creates
+      - darpa-eri
+      - natcast-nstc
+      - ornl-micro
+      - anl-quantum
 
+  # 采集调度
   schedules:
+    daily:
+      description: 每日增量 — 仅检查Tier1更新
+      tiers: [tier1]
+      max_per_lab: 3
+      detail_level: basic
     weekly:
-      - tier1_labs: all
-      - tier2_labs: all
+      description: 每周全量 — Tier1+Tier2
+      tiers: [tier1, tier2]
+      max_per_lab: 10
+      detail_level: basic
     biweekly:
-      - tier4_labs: all
-      - tier5_labs: all
+      description: 双周全量 — Tier1+Tier2+Tier4+Tier5
+      tiers: [tier1, tier2, tier4, tier5]
+      max_per_lab: 10
+      detail_level: basic
     monthly:
-      - tier6_labs: all
+      description: 月度深度 — 全部Tiers + 项目详情提取
+      tiers: [tier1, tier2, tier3, tier4, tier5, tier6]
+      max_per_lab: 20
+      max_projects_per_lab: 5
+      detail_level: detailed
+    deep:
+      description: 深度全采 — 所有来源 + 历史回溯 + 项目详情
+      tiers: [tier1, tier2, tier3, tier4, tier5, tier6]
+      max_per_lab: 50
+      max_projects_per_lab: 10
+      detail_level: detailed
 
+  # 分析参数
   analysis:
     min_trend_confidence: 0.6
     cross_reference_min_sources: 2
@@ -46,15 +105,49 @@ workflow:
       growing: [0.4, 0.7]
       mature: [0.7, 0.9]
       declining: [0.9, 1.0]
+    project_clustering:
+      enabled: true
+      min_cluster_size: 2
+      similarity_threshold: 0.7
 
 output:
   artifacts_base: artifacts/
   formats: [json, markdown]
   include_raw_articles: true
+  include_project_details: true
   compress_after_days: 30
 
-# Hermes-specific settings
+# --- Hermes 智能体特定设置 ---
 hermes:
+  # 支持的 Hermes 版本
+  min_hermes_version: "0.1.0"
+
+  # 记忆键名（Hermes 会用此键存储/检索采集结果）
   memory_key: "semiconductor_research_directions"
-  auto_sync: false
+
+  # 自动同步到 Hermes 记忆
+  auto_sync: true
+
+  # 每批处理的实验室数
   batch_size: 5
+
+  # 工具调用超时（秒）
+  tool_timeout: 120
+
+  # 输出 schema 版本
+  schema_version: "0.2.0"
+
+  # 领域标签映射（Hermes 内部使用）
+  domain_labels:
+    advanced_process: { en: "Advanced Process Technology", zh: "先进制程技术" }
+    advanced_packaging: { en: "Advanced Packaging", zh: "先进封装" }
+    memory_technology: { en: "Memory Technology", zh: "存储器技术" }
+    ai_chip_architecture: { en: "AI Chip Architecture", zh: "AI芯片架构" }
+    eda_design_automation: { en: "EDA & Design Automation", zh: "EDA设计自动化" }
+    semiconductor_materials: { en: "Semiconductor Materials", zh: "半导体材料" }
+    quantum_computing: { en: "Quantum Computing", zh: "量子计算" }
+    photonics: { en: "Silicon Photonics", zh: "硅光子学" }
+    manufacturing_equipment: { en: "Manufacturing Equipment", zh: "制造装备与工艺" }
+    reliability_test: { en: "Reliability & Test", zh: "可靠性与测试" }
+    security: { en: "Hardware Security", zh: "硬件安全" }
+    chiplet_interconnect: { en: "Chiplet Interconnect", zh: "Chiplet互联" }

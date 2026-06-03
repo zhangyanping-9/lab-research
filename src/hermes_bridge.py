@@ -2,6 +2,10 @@
 
 对外暴露的工具接口Hermes智能体可以直接调用。
 所有输入和输出均为结构化 JSON，符合 Hermes 工具调用规范。
+
+Supports two collection modes:
+  - basic: fast article-level collection (weekly)
+  - detailed: deep project-level collection (monthly/deep)
 """
 
 from __future__ import annotations
@@ -10,14 +14,22 @@ import json
 import logging
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
-from src.analyzer import ResearchAnalyzer
-from src.collector import CollectedArticle, collect_from_lab, save_articles
+from src.analyzer import ResearchAnalyzer, ProjectAnalyzer
+from src.collector import (
+    CollectedArticle,
+    collect_from_lab,
+    collect_projects_from_lab,
+    save_articles,
+    save_projects,
+)
 from src.registry import LabRegistry
 from src.reporter import InsightReporter
 
 logger = logging.getLogger(__name__)
+
+DetailLevel = Literal["basic", "detailed"]
 
 
 class HermesBridge:
@@ -368,6 +380,177 @@ class HermesBridge:
         }
 
     # ------------------------------------------------------------------
+    # Tool: collect_project_details (deep mode)
+    # ------------------------------------------------------------------
+
+    def collect_project_details(
+        self,
+        labs: list[str],
+        max_projects_per_lab: int = 5,
+    ) -> dict[str, Any]:
+        """深度采集模式 — 从指定实验室收集详细研究项目信息。
+
+        与 collect_research_directions 的区别:
+        - 后者收集文章列表 (轻量，适合周采)
+        - 本工具提取项目详情 (深度，适合月采/深度采)
+        - 返回结构化项目信息含目标/团队/资金/里程碑等
+
+        Args:
+            labs: 实验室 ID 列表
+            max_projects_per_lab: 每实验室最大项目数
+
+        Returns:
+            项目采集结果
+        """
+        logger.info("HermesBridge: collect_project_details labs=%s", labs)
+
+        self.registry.load()
+        lab_entries = self.registry.resolve_ids(labs)
+        if not lab_entries:
+            lab_entries = self.registry.find(lab_ids=labs)
+
+        if not lab_entries:
+            return {
+                "status": "error",
+                "error": f"未找到实验室: {labs}",
+            }
+
+        all_projects: dict[str, list] = {}
+        total = 0
+        errors = []
+
+        for lab in lab_entries[:10]:  # limit per run
+            try:
+                projects = collect_projects_from_lab(
+                    lab, max_projects=max_projects_per_lab
+                )
+                if projects:
+                    all_projects[lab.get("id", "unknown")] = projects
+                    total += len(projects)
+            except Exception as exc:
+                errors.append({"lab": lab.get("id"), "error": str(exc)})
+
+        # Save
+        file_map = save_projects(all_projects, self._date_str)
+
+        return {
+            "status": "success",
+            "date": self._date_str,
+            "labs_collected": len(all_projects),
+            "total_projects": total,
+            "projects_by_lab": {
+                lab_id: len(projs) for lab_id, projs in all_projects.items()
+            },
+            "file_paths": file_map,
+            "errors": errors if errors else None,
+        }
+
+    # ------------------------------------------------------------------
+    # Tool: generate_project_reports
+    # ------------------------------------------------------------------
+
+    def generate_project_reports(
+        self,
+        date: str | None = None,
+        lab_ids: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """基于已采集的项目数据生成详细项目报告。
+
+        Args:
+            date: 日期
+            lab_ids: 限定实验室
+
+        Returns:
+            报告文件路径
+        """
+        date = date or self._date_str
+        logger.info("HermesBridge: generate_project_reports date=%s", date)
+
+        project_analyzer = ProjectAnalyzer()
+        projects = project_analyzer.load_projects(
+            date, lab_ids=lab_ids
+        )
+
+        if not projects:
+            return {
+                "status": "warning",
+                "message": f"{date} 没有找到项目数据。请先运行 collect_project_details。",
+            }
+
+        # Save project analysis
+        analysis_files = project_analyzer.save_project_analysis(date)
+
+        # Generate markdown reports
+        report_files = self.reporter.save_project_report(
+            project_analyzer, date, lab_ids=lab_ids
+        )
+
+        portfolio = project_analyzer.lab_portfolio()
+        funding = project_analyzer.funding_summary()
+
+        return {
+            "status": "success",
+            "date": date,
+            "total_projects": len(projects),
+            "labs_covered": len(portfolio),
+            "funding_summary": funding,
+            "lab_portfolio_summary": [
+                {
+                    "lab_id": p["lab_id"],
+                    "lab_name": p["lab_name"],
+                    "project_count": p["project_count"],
+                    "key_projects": p["key_projects"],
+                }
+                for p in portfolio[:15]
+            ],
+            "analysis_files": analysis_files,
+            "report_files": report_files,
+        }
+
+    # ------------------------------------------------------------------
+    # Tool: collect_and_report (deep mode)
+    # ------------------------------------------------------------------
+
+    def collect_and_report_deep(
+        self,
+        labs: list[str],
+        mode: str = "deep",
+        focus: str = "",
+    ) -> dict[str, Any]:
+        """深度端到端操作: 项目采集 + 分析 + 详细报告。
+
+        Args:
+            labs: 实验室 ID 列表
+            mode: 采集模式 (建议 deep/monthly)
+            focus: 报告重点关注
+
+        Returns:
+            完整结果
+        """
+        logger.info("HermesBridge: collect_and_report_deep labs=%s mode=%s", labs, mode)
+
+        # Step 1: Collect projects
+        collect_result = self.collect_project_details(
+            labs, max_projects_per_lab=5
+        )
+        if collect_result.get("status") == "error":
+            return collect_result
+
+        date = collect_result["date"]
+
+        # Step 2: Generate project reports
+        report_result = self.generate_project_reports(date=date)
+
+        return {
+            "status": "success",
+            "summary": f"完成 {date} 的深度采集与分析，覆盖 {collect_result['labs_collected']} 个实验室，"
+                       f"采集 {collect_result['total_projects']} 个研究项目",
+            "date": date,
+            "collection": collect_result,
+            "report": report_result,
+        }
+
+    # ------------------------------------------------------------------
     # Summary
     # ------------------------------------------------------------------
 
@@ -383,6 +566,9 @@ class HermesBridge:
                 "analyze_research_trends",
                 "generate_insight_report",
                 "collect_and_report",
+                "collect_project_details",
+                "generate_project_reports",
+                "collect_and_report_deep",
                 "list_available_labs",
             ],
             "last_run_date": self._date_str,

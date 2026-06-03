@@ -1,64 +1,29 @@
-"""Collector — orchestrates crawling of lab research pages."""
+"""Collector — orchestrates crawling of lab research pages.
+
+Supports two collection modes:
+  - fast (CollectedArticle): lightweight, suitable for weekly collection
+  - deep (ResearchProject): detailed project profiles, suitable for monthly/deep collection
+"""
 
 from __future__ import annotations
 
 import json
 import logging
+import re
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urljoin
 
 import httpx
 from bs4 import BeautifulSoup
 
 from src.config import settings
-from src.registry import LabRegistry
+from src.models import CollectedArticle, ResearchProject
 
 logger = logging.getLogger(__name__)
-
-# ---------------------------------------------------------------------------
-# Data models
-# ---------------------------------------------------------------------------
-
-
-@dataclass
-class CollectedArticle:
-    """单个采集到的研究文章。"""
-
-    lab_id: str
-    title: str
-    url: str
-    published_at: str
-    summary: str
-    keywords: list[str] = field(default_factory=list)
-    domains: list[str] = field(default_factory=list)
-    lifecycle: str = "unknown"
-    page_type: str = "unknown"
-    confidence: float = 0.0
-    author: str = ""
-    source_html_path: str = ""
-    captured_at: str = ""
-    quality_flags: dict[str, bool] = field(default_factory=dict)
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "lab_id": self.lab_id,
-            "title": self.title,
-            "url": self.url,
-            "published_at": self.published_at,
-            "summary": self.summary,
-            "keywords": self.keywords,
-            "domains": self.domains,
-            "lifecycle": self.lifecycle,
-            "page_type": self.page_type,
-            "confidence": self.confidence,
-            "author": self.author,
-            "source_html_path": self.source_html_path,
-            "captured_at": self.captured_at,
-            "quality_flags": self.quality_flags,
-        }
 
 
 # ---------------------------------------------------------------------------
@@ -473,9 +438,375 @@ def save_articles(
     return file_map
 
 
+# ---------------------------------------------------------------------------
+# Project-level collection (deep mode)
+# ---------------------------------------------------------------------------
+
+# Keywords for identifying project-specific pages (as opposed to news/list pages)
+PROJECT_PAGE_SIGNALS = [
+    "project", "grant", "award", "funding", "milestone", "roadmap",
+    "initiative", "center", "consortium", "collaboration", "team",
+    "progress", "breakthrough", "demonstration", "prototype",
+]
+
+PROJECT_SECTION_SIGNALS = {
+    "objectives": ["objective", "goal", "aim", "target", "mission"],
+    "approach": ["approach", "method", "methodology", "technique", "strategy", "architecture"],
+    "team": ["team", "investigator", "pi", "researcher", "faculty", "professor", "lead"],
+    "funding": ["funding", "grant", "award", "sponsor", "budget", "support"],
+    "milestones": ["milestone", "timeline", "schedule", "phase", "deliverable", "roadmap"],
+    "publications": ["publication", "paper", "patent", "article", "conference", "journal"],
+    "results": ["result", "demonstration", "prototype", "achievement", "performance", "measured"],
+}
+
+
+def extract_project_details(
+    html: str,
+    url: str,
+    lab_id: str,
+    lab_name: str = "",
+) -> ResearchProject | None:
+    """从 HTML 页面中提取结构化研究项目信息。
+
+    使用启发式方法识别项目相关段落并提取关键字段。
+    对于最佳结果，应配合 LLM 进行提取 — 此函数提供基线提取。
+    """
+    soup = BeautifulSoup(html, "lxml")
+
+    # Remove non-content elements
+    for tag in soup.select("script, style, nav, footer, header, aside, .sidebar, .comments, .cookie"):
+        tag.decompose()
+
+    # ---- Title ----
+    title = ""
+    if soup.title:
+        title = soup.title.get_text(strip=True)
+    h1 = soup.find("h1")
+    if h1:
+        title = h1.get_text(strip=True)
+    # Clean common suffixes
+    for suffix in [" | MIT MTL", " | imec", " | Intel", " | NVIDIA Research",
+                    " | IBM Research", " - Research", " | Research"]:
+        if suffix in title:
+            title = title.replace(suffix, "")
+
+    # ---- Find main content area ----
+    content = soup.find("article") or soup.find("main") or soup.find("body")
+    if not content:
+        content = soup
+
+    # Get all text blocks (paragraphs, list items, headings)
+    text_blocks: list[dict[str, Any]] = []
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4", "div"]):
+        text = tag.get_text(strip=True)
+        if not text or len(text) < 20:
+            continue
+        tag_name = tag.name
+        text_blocks.append({"tag": tag_name, "text": text})
+
+    # ---- Description (concatenate first meaningful paragraphs) ----
+    description_parts = []
+    for block in text_blocks[:10]:
+        if block["tag"] in ("p", "div"):
+            description_parts.append(block["text"])
+            if len(" ".join(description_parts)) > 800:
+                break
+    description = " ".join(description_parts)[:2000]
+
+    # ---- Section extraction ----
+    sections: dict[str, list[str]] = {}
+    current_section = "overview"
+    for block in text_blocks:
+        text = block["text"]
+        # Check if this block is a heading
+        if block["tag"] in ("h2", "h3", "h4"):
+            text_lower = text.lower()
+            for section_key, signals in PROJECT_SECTION_SIGNALS.items():
+                if any(s in text_lower for s in signals):
+                    current_section = section_key
+                    break
+        sections.setdefault(current_section, []).append(text)
+
+    # ---- Extract structured fields ----
+    objectives = []
+    for text in sections.get("objectives", []):
+        # Look for bullet points or numbered items
+        for obj_signal in ["- ", "• ", "1.", "2.", "3.", "4.", "5."]:
+            if obj_signal in text:
+                # Split on common patterns
+                parts = re.split(r"[-•]|\d+\.", text)
+                for part in parts:
+                    part = part.strip()
+                    if len(part) > 15:
+                        objectives.append(part[:300])
+    if not objectives:
+        # Fallback: grab first few sentences from objectives section
+        obj_text = " ".join(sections.get("objectives", []))
+        objectives = [s.strip() for s in obj_text.split(".") if len(s.strip()) > 20][:5]
+
+    approach = " ".join(sections.get("approach", []))[:1000] if sections.get("approach") else ""
+
+    # ---- Team/PI extraction ----
+    pis = []
+    team_text = " ".join(sections.get("team", []))
+    # Look for professor/faculty names (common patterns)
+    pi_patterns = [
+        r"(?:Prof\.|Professor|Dr\.)\s+([A-Z][a-z]+(?:\s+[A-Z]\.)?\s+[A-Z][a-z]+)",
+        r"([A-Z][a-z]+ [A-Z][a-z]+),?\s*(?:Professor|Associate Professor|Assistant Professor|Director|Lead)",
+    ]
+    for pat in pi_patterns:
+        for match in re.finditer(pat, team_text):
+            name = match.group(1).strip()
+            if name not in pis and len(name) > 5:
+                pis.append(name)
+
+    # ---- Funding extraction ----
+    funding_source = ""
+    funding_amount = ""
+    funding_text = " ".join(sections.get("funding", []))
+    # Amount patterns
+    amount_patterns = [
+        r"\$(\d+(?:\.\d+)?)\s*(million|billion|M|B|K)",
+        r"(\d+(?:\.\d+)?)\s*(million|billion)\s*(?:dollars|USD)",
+    ]
+    for pat in amount_patterns:
+        m = re.search(pat, funding_text, re.IGNORECASE)
+        if m:
+            funding_amount = f"${m.group(1)} {m.group(2)}"
+            break
+
+    # Source patterns
+    for source in ["DARPA", "NSF", "CHIPS Act", "DoD", "DOE", "SRC", "ARPA-E",
+                    "NIST", "AFOSR", "ONR", "ARO", "Internal", "Industry"]:
+        if source.lower() in funding_text.lower():
+            funding_source = source
+            break
+
+    # ---- Publications ----
+    publications: list[dict[str, str]] = []
+    for text in sections.get("publications", []):
+        # Find DOI-like patterns
+        doi_match = re.search(r"10\.\d{4,}/[^\s]+", text)
+        if doi_match:
+            publications.append({"doi": doi_match.group(), "title": text[:200]})
+        # Find arXiv IDs
+        arxiv_match = re.search(r"arxiv:(\d+\.\d+)", text, re.IGNORECASE)
+        if arxiv_match:
+            publications.append({"arxiv": arxiv_match.group(1), "title": text[:200]})
+
+    # ---- Milestones ----
+    milestones: list[dict[str, str]] = []
+    for text in sections.get("milestones", []):
+        # Look for dates
+        date_match = re.search(r"(20\d{2}(?:-\d{2})?|Q[1-4]\s*20\d{2})", text)
+        if date_match:
+            milestones.append({
+                "date": date_match.group(),
+                "description": text[:200],
+                "status": "completed" if any(w in text.lower() for w in
+                    ["completed", "achieved", "demonstrated", "published"]) else "planned",
+            })
+
+    # ---- Classify domains and lifecycle ----
+    all_text = f"{title} {description} {' '.join(objectives)} {approach}"
+    keywords = classify_domains(all_text)
+    domains = list(set(keywords))
+    confidence = min(1.0, 0.4 + len(keywords) * 0.08 + len(objectives) * 0.03 + len(milestones) * 0.05)
+    lifecycle = estimate_lifecycle(keywords, confidence)
+
+    # ---- Assemble project ----
+    project = ResearchProject(
+        lab_id=lab_id,
+        lab_name=lab_name,
+        project_name=title,
+        url=url,
+        description=description,
+        objectives=objectives[:10],
+        approach=approach,
+        key_innovations=[],
+        principal_investigators=pis[:10],
+        team_size=str(len(pis)) if pis else "",
+        collaborators=[],
+        funding_source=funding_source,
+        funding_amount=funding_amount,
+        status="active" if description else "",
+        milestones=milestones[:10],
+        publications=publications[:10],
+        domains=domains,
+        keywords=keywords,
+        lifecycle=lifecycle,
+        confidence=round(confidence, 2),
+        source_type="webpage",
+    )
+
+    return project
+
+
+def find_project_links(html: str, base_url: str) -> list[dict[str, str]]:
+    """从研究页面中发现项目详情页链接。"""
+    soup = BeautifulSoup(html, "lxml")
+    links = soup.find_all("a", href=True)
+
+    candidates = []
+    for link in links:
+        href = link.get("href", "")
+        text = link.get_text(strip=True)
+        if not text or len(text) < 10:
+            continue
+
+        # Check if link text contains project-related signals
+        text_lower = text.lower()
+        href_lower = href.lower()
+
+        is_project = any(
+            s in text_lower or s in href_lower
+            for s in PROJECT_PAGE_SIGNALS
+        )
+        # Also match research topics (capitalized technical terms)
+        has_technical_terms = bool(re.search(
+            r"(?:GAA|CFET|BSPDN|EUV|3D|2D|Chiplet|HBM|GaN|SiC|CMOS|FET|FinFET|"
+            r"Nanosheet|Quantum|Photonics|Neuromorphic|Packaging|Interconnect|"
+            r"Memory|DRAM|NAND|MRAM|Architecture|Process|Integration)",
+            text
+        ))
+
+        if is_project or has_technical_terms:
+            if href.startswith("/"):
+                href = urljoin(base_url, href)
+            elif not href.startswith("http"):
+                continue
+
+            # Deduplicate by URL
+            if not any(c["url"] == href for c in candidates):
+                candidates.append({"url": href, "title": text})
+
+    return candidates[:20]
+
+
+def collect_projects_from_lab(
+    lab: dict[str, Any],
+    max_projects: int = 5,
+    client: httpx.Client | None = None,
+) -> list[ResearchProject]:
+    """从单个实验室采集详细研究项目信息 (深度采集模式)。"""
+    projects: list[ResearchProject] = []
+    now = datetime.now(timezone.utc).isoformat()
+    close_client = client is None
+    client = client or make_client()
+
+    lab_id = lab.get("id", "unknown")
+    lab_name = lab.get("name", "")
+
+    try:
+        # Step 1: Get research page to discover project links
+        urls_to_try = []
+        for key in ["research_page", "publications_page", "papers_page", "homepage"]:
+            if lab.get(key):
+                urls_to_try.append(lab[key])
+
+        project_candidates: list[dict[str, str]] = []
+
+        for url in urls_to_try[:3]:
+            html = fetch_page(url, client)
+            if not html:
+                continue
+
+            # Find project links
+            found = find_project_links(html, url)
+            project_candidates.extend(found)
+
+            if len(project_candidates) >= max_projects * 2:
+                break
+
+        # Deduplicate
+        seen_urls: set[str] = set()
+        unique_candidates = []
+        for c in project_candidates:
+            if c["url"] not in seen_urls:
+                seen_urls.add(c["url"])
+                unique_candidates.append(c)
+
+        # Step 2: Visit each project page and extract details
+        for candidate in unique_candidates[:max_projects * 2]:
+            if len(projects) >= max_projects:
+                break
+
+            project_html = fetch_page(candidate["url"], client)
+            if not project_html:
+                continue
+
+            project = extract_project_details(
+                project_html, candidate["url"], lab_id, lab_name
+            )
+
+            if project and project.description:
+                # Don't include if it looks like a list/home page
+                if len(project.description) > 50:
+                    projects.append(project)
+                    time.sleep(settings.http_delay)
+
+    finally:
+        if close_client:
+            client.close()
+
+    # If no projects found, create a minimal entry
+    if not projects and lab.get("description"):
+        projects.append(ResearchProject(
+            lab_id=lab_id,
+            lab_name=lab_name,
+            project_name=f"{lab_name} — Research Overview",
+            url=lab.get("homepage", ""),
+            description=lab.get("description", ""),
+            domains=lab.get("domains", []),
+            key_innovations=lab.get("key_focus", []),
+            funding_amount=lab.get("funding", [""])[0] if lab.get("funding") else "",
+            lifecycle="growing",
+            confidence=0.3,
+            source_type="registry_entry",
+        ))
+
+    return projects
+
+
+def save_projects(
+    results: dict[str, list[ResearchProject]],
+    date_str: str,
+    base_dir: str | Path = "artifacts",
+) -> dict[str, list[str]]:
+    """将项目采集结果保存到磁盘。"""
+    base = Path(base_dir) / date_str / "projects"
+    file_map: dict[str, list[str]] = {}
+
+    for lab_id, projects in results.items():
+        lab_dir = base / lab_id
+        lab_dir.mkdir(parents=True, exist_ok=True)
+        paths: list[str] = []
+
+        for proj in projects:
+            data = proj.to_dict()
+            slug = _make_slug(proj.project_name)[:60] or f"project_{proj.project_id}"
+            json_path = lab_dir / f"{slug}.json"
+            with open(json_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            paths.append(str(json_path))
+
+        # Combined JSON
+        combined_path = lab_dir / "_all_projects.json"
+        with open(combined_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "lab_id": lab_id,
+                "project_count": len(projects),
+                "projects": [p.to_dict() for p in projects],
+            }, f, ensure_ascii=False, indent=2)
+        paths.append(str(combined_path))
+
+        file_map[lab_id] = paths
+
+    return file_map
+
+
 def _make_slug(text: str) -> str:
     """Convert text to a URL-safe slug."""
-    import re
     text = text.lower()
     text = re.sub(r"[^a-z0-9\s-]", "", text)
     text = re.sub(r"\s+", "-", text.strip())

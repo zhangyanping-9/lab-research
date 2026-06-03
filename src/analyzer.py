@@ -1,4 +1,7 @@
-"""Analyzer — research direction clustering, trend detection, lifecycle assessment."""
+"""Analyzer — research direction clustering, trend detection, lifecycle assessment.
+
+Supports both article-level (fast) and project-level (deep) analysis.
+"""
 
 from __future__ import annotations
 
@@ -10,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from src.collector import CollectedArticle, DOMAIN_KEYWORDS
+from src.models import ResearchProject, ProjectTimeline
 
 logger = logging.getLogger(__name__)
 
@@ -364,6 +368,258 @@ class ResearchAnalyzer:
             }
             for t in trends
         ]
+
+
+# ---------------------------------------------------------------------------
+# Project-level analyzer (deep mode)
+# ---------------------------------------------------------------------------
+
+
+class ProjectAnalyzer:
+    """研究项目级分析器：项目聚类、时间线跟踪、投资组合分析。"""
+
+    def __init__(self) -> None:
+        self.projects: list[ResearchProject] = []
+
+    def load_projects(
+        self,
+        date_str: str,
+        base_dir: str | Path = "artifacts",
+        lab_ids: list[str] | None = None,
+        domains: list[str] | None = None,
+    ) -> list[ResearchProject]:
+        """从磁盘加载研究项目。"""
+        base = Path(base_dir) / date_str / "projects"
+        if not base.exists():
+            # Fallback: try articles directory
+            base = Path(base_dir) / date_str / "articles"
+            if not base.exists():
+                logger.warning("No projects or articles found for %s", date_str)
+                return []
+
+        projects: list[ResearchProject] = []
+        for lab_dir in base.iterdir():
+            if not lab_dir.is_dir():
+                continue
+            if lab_ids and lab_dir.name not in lab_ids:
+                continue
+
+            for f in lab_dir.glob("*.json"):
+                if f.name.startswith("_all"):
+                    continue
+                try:
+                    with open(f, encoding="utf-8") as fh:
+                        data = json.load(fh)
+                    # Try as ResearchProject first, fallback to CollectedArticle
+                    if "project_id" in data:
+                        proj = ResearchProject.from_dict(data)
+                    else:
+                        # Convert CollectedArticle to minimal ResearchProject
+                        proj = ResearchProject(
+                            project_id=f"{data.get('lab_id', 'unknown')}-{_make_slug_id(data.get('title', ''))}",
+                            lab_id=data.get("lab_id", "unknown"),
+                            project_name=data.get("title", ""),
+                            url=data.get("url", ""),
+                            description=data.get("summary", ""),
+                            domains=data.get("domains", []),
+                            keywords=data.get("keywords", []),
+                            lifecycle=data.get("lifecycle", "unknown"),
+                            confidence=data.get("confidence", 0.0),
+                            source_type="article_converted",
+                        )
+                    if domains and not any(d in proj.domains for d in domains):
+                        continue
+                    projects.append(proj)
+                except Exception as exc:
+                    logger.warning("Failed to load project from %s: %s", f, exc)
+
+        self.projects = projects
+        logger.info("Loaded %d projects for analysis", len(projects))
+        return projects
+
+    def cluster_by_domain(self) -> dict[str, list[ResearchProject]]:
+        """按领域聚类项目。"""
+        clusters: dict[str, list[ResearchProject]] = defaultdict(list)
+        for proj in self.projects:
+            for domain in proj.domains:
+                clusters[domain].append(proj)
+        return dict(clusters)
+
+    def cluster_by_lifecycle(self) -> dict[str, list[ResearchProject]]:
+        """按生命周期阶段聚类。"""
+        clusters: dict[str, list[ResearchProject]] = defaultdict(list)
+        for proj in self.projects:
+            clusters[proj.lifecycle].append(proj)
+        return dict(clusters)
+
+    def funding_summary(self) -> dict[str, Any]:
+        """资金分布摘要。"""
+        sources: Counter[str] = Counter()
+        total_amounts: list[str] = []
+        for proj in self.projects:
+            if proj.funding_source:
+                sources[proj.funding_source] += 1
+            if proj.funding_amount:
+                total_amounts.append(proj.funding_amount)
+
+        return {
+            "by_source": dict(sources.most_common(10)),
+            "total_projects_with_funding": sum(sources.values()),
+            "funding_amounts": total_amounts[:20],
+        }
+
+    def lab_portfolio(self) -> list[dict[str, Any]]:
+        """各实验室的项目组合分析。"""
+        lab_projects: dict[str, list[ResearchProject]] = defaultdict(list)
+        for proj in self.projects:
+            lab_projects[proj.lab_id].append(proj)
+
+        portfolio = []
+        for lab_id, projects in sorted(lab_projects.items(),
+                                        key=lambda x: -len(x[1])):
+            domains_set = set()
+            lifecycle_counts: Counter[str] = Counter()
+            total_confidence = 0.0
+            for p in projects:
+                for d in p.domains:
+                    domains_set.add(d)
+                lifecycle_counts[p.lifecycle] += 1
+                total_confidence += p.confidence
+
+            portfolio.append({
+                "lab_id": lab_id,
+                "lab_name": projects[0].lab_name or lab_id,
+                "project_count": len(projects),
+                "domains": sorted(domains_set),
+                "lifecycle_distribution": dict(lifecycle_counts),
+                "avg_confidence": round(total_confidence / len(projects), 2) if projects else 0,
+                "key_projects": [p.project_name for p in projects[:3]],
+            })
+
+        return portfolio
+
+    def tech_roadmap(self) -> list[dict[str, Any]]:
+        """生成技术路线图 — 按领域组织项目时间线。"""
+        roadmap: list[dict[str, Any]] = []
+        domain_clusters = self.cluster_by_domain()
+
+        for domain, projects in sorted(domain_clusters.items()):
+            milestones = []
+            for proj in projects:
+                for m in proj.milestones:
+                    milestones.append({
+                        "date": m.get("date", "TBD"),
+                        "description": m.get("description", ""),
+                        "status": m.get("status", "planned"),
+                        "project": proj.project_name,
+                        "lab": proj.lab_id,
+                    })
+
+            # Sort by date
+            milestones.sort(key=lambda m: m["date"])
+
+            roadmap.append({
+                "domain": domain,
+                "project_count": len(projects),
+                "milestones": milestones[:30],
+            })
+
+        return roadmap
+
+    def generate_project_reports(
+        self,
+        lab_ids: list[str] | None = None,
+    ) -> list[dict[str, Any]]:
+        """为每个项目生成详细报告结构。"""
+        reports = []
+        target = self.projects
+        if lab_ids:
+            target = [p for p in target if p.lab_id in lab_ids]
+
+        for proj in target:
+            sections = proj.detail_sections()
+            reports.append({
+                "project_id": proj.project_id,
+                "project_name": proj.project_name,
+                "lab_id": proj.lab_id,
+                "lab_name": proj.lab_name,
+                "url": proj.url,
+                "lifecycle": proj.lifecycle,
+                "confidence": proj.confidence,
+                "domains": proj.domains,
+                "sections": sections,
+            })
+
+        return sorted(reports, key=lambda r: -r["confidence"])
+
+    def save_project_analysis(
+        self,
+        date_str: str,
+        base_dir: str | Path = "artifacts",
+    ) -> dict[str, str]:
+        """保存项目级分析结果。"""
+        base = Path(base_dir) / date_str / "analysis"
+        base.mkdir(parents=True, exist_ok=True)
+
+        file_map: dict[str, str] = {}
+
+        # Project portfolio
+        portfolio = self.lab_portfolio()
+        portfolio_path = base / "project_portfolio.json"
+        with open(portfolio_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "analysis_date": date_str,
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "total_projects": len(self.projects),
+                "lab_count": len(portfolio),
+                "portfolio": portfolio,
+            }, f, ensure_ascii=False, indent=2)
+        file_map["project_portfolio"] = str(portfolio_path)
+
+        # Funding summary
+        funding = self.funding_summary()
+        funding_path = base / "funding_summary.json"
+        with open(funding_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "analysis_date": date_str,
+                "funding": funding,
+            }, f, ensure_ascii=False, indent=2)
+        file_map["funding_summary"] = str(funding_path)
+
+        # Tech roadmap
+        roadmap = self.tech_roadmap()
+        roadmap_path = base / "tech_roadmap.json"
+        with open(roadmap_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "analysis_date": date_str,
+                "domains_covered": len(roadmap),
+                "roadmap": roadmap,
+            }, f, ensure_ascii=False, indent=2)
+        file_map["tech_roadmap"] = str(roadmap_path)
+
+        # Detailed project reports
+        reports = self.generate_project_reports()
+        reports_path = base / "project_reports.json"
+        with open(reports_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "analysis_date": date_str,
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "project_count": len(reports),
+                "reports": reports,
+            }, f, ensure_ascii=False, indent=2)
+        file_map["project_reports"] = str(reports_path)
+
+        logger.info("Project analysis saved to %s", base)
+        return file_map
+
+
+def _make_slug_id(text: str) -> str:
+    """Make a short slug from text for ID generation."""
+    import re as _re
+    text = text.lower()
+    text = _re.sub(r"[^a-z0-9\s-]", "", text)
+    text = _re.sub(r"\s+", "-", text.strip())
+    return text[:30]
 
 
 # ---------------------------------------------------------------------------

@@ -22,22 +22,27 @@ scheduling:
     description: "每日增量采集 — 仅Tier1更新检查"
     tiers: [tier1]
     max_per_lab: 5
+    detail_level: basic
   weekly:
     description: "每周全量采集 — Tier1+Tier2"
     tiers: [tier1, tier2]
     max_per_lab: 10
+    detail_level: basic
   biweekly:
     description: "双周全量 — Tier1+Tier2+Tier4+Tier5"
     tiers: [tier1, tier2, tier4, tier5]
     max_per_lab: 10
+    detail_level: basic
   monthly:
     description: "月度深度采集 — 全部Tiers"
     tiers: [tier1, tier2, tier3, tier4, tier5, tier6]
     max_per_lab: 20
+    detail_level: detailed
   deep:
-    description: "深度全采 — 所有来源+历史回溯"
+    description: "深度全采 — 所有来源+历史回溯+项目详情提取"
     tiers: [tier1, tier2, tier3, tier4, tier5, tier6]
     max_per_lab: 50
+    detail_level: detailed
 
 analysis:
   min_trend_confidence: 0.6

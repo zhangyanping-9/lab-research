@@ -60,7 +60,7 @@ def main() -> None:
 
     parser.add_argument("--labs", help="实验室 ID 列表，逗号分隔")
     parser.add_argument("--mode", choices=["daily", "weekly", "monthly", "deep"],
-                        default="weekly", help="采集密度")
+                        default="weekly", help="采集密度 (monthly/deep = 深度项目模式)")
     parser.add_argument("--focus", default="", help="报告重点关注方向")
     parser.add_argument("--format", choices=["json", "markdown", "both"],
                         default="both", help="报告输出格式")
@@ -69,6 +69,8 @@ def main() -> None:
                         help="仅采集，跳过分析和报告")
     parser.add_argument("--report-only", action="store_true",
                         help="仅从已有数据生成报告")
+    parser.add_argument("--project-mode", action="store_true",
+                        help="启用深度项目采集模式 (含项目详细描述)")
     parser.add_argument("--list-labs", action="store_true",
                         help="列出可用实验室")
     parser.add_argument("--category", help="实验室类别过滤")
@@ -123,15 +125,27 @@ def main() -> None:
 
     if args.skip_analysis:
         # Collect only
-        result = bridge.collect_research_directions(
-            labs=lab_list, mode=args.mode,
-        )
+        if args.project_mode:
+            result = bridge.collect_project_details(
+                labs=lab_list,
+                max_projects_per_lab=5,
+            )
+        else:
+            result = bridge.collect_research_directions(
+                labs=lab_list, mode=args.mode,
+            )
     else:
         # End-to-end
-        result = bridge.collect_and_report(
-            labs=lab_list, mode=args.mode,
-            focus=args.focus, format=args.format,
-        )
+        if args.project_mode or args.mode in ("monthly", "deep"):
+            result = bridge.collect_and_report_deep(
+                labs=lab_list, mode=args.mode,
+                focus=args.focus,
+            )
+        else:
+            result = bridge.collect_and_report(
+                labs=lab_list, mode=args.mode,
+                focus=args.focus, format=args.format,
+            )
 
     _print_result(result, args.hermes_output)
 

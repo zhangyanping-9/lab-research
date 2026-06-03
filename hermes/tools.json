@@ -162,5 +162,80 @@
       "type": "array",
       "description": "符合条件的实验室列表"
     }
+  },
+  {
+    "name": "collect_project_details",
+    "description": "深度采集模式 — 从指定实验室收集详细研究项目信息 (含目标/团队/资金/里程碑/技术指标)",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "labs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "实验室ID列表"
+        },
+        "max_projects_per_lab": {
+          "type": "integer",
+          "description": "每实验室最多采集项目数",
+          "default": 5
+        }
+      },
+      "required": ["labs"]
+    },
+    "returns": {
+      "type": "object",
+      "description": "各实验室项目采集结果和文件路径"
+    }
+  },
+  {
+    "name": "generate_project_reports",
+    "description": "基于已采集的项目数据，生成详细的研究项目报告 (Markdown profile + 项目组合概览)",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "数据日期 YYYY-MM-DD"
+        },
+        "lab_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "限定实验室ID列表"
+        }
+      }
+    },
+    "returns": {
+      "type": "object",
+      "description": "报告文件路径、项目组合、资金摘要"
+    }
+  },
+  {
+    "name": "collect_and_report_deep",
+    "description": "深度端到端操作: 项目采集 + 分析 + 详细研究项目报告 (含每个项目的详细介绍)",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "labs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "目标实验室ID列表"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["monthly", "deep"],
+          "description": "采集模式",
+          "default": "deep"
+        },
+        "focus": {
+          "type": "string",
+          "description": "报告重点关注方向"
+        }
+      },
+      "required": ["labs"]
+    },
+    "returns": {
+      "type": "object",
+      "description": "包含项目采集、分析、报告的完整结果"
+    }
   }
 ]
