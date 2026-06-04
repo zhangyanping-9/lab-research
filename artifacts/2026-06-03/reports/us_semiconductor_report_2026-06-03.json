@@ -1,0 +1,350 @@
+{
+  "report_meta": {
+    "title": "美国半导体研究方向深度报告 2025-2026",
+    "generated_at": "2026-06-03",
+    "labs_covered": 129,
+    "source_categories": {
+      "university_labs": 53,
+      "corporate_rd": 36,
+      "research_institutes": 20,
+      "government_labs": 9,
+      "consortia": 11,
+      "blogs_conferences": 11
+    },
+    "trends_identified": 20,
+    "domains_analyzed": 12,
+    "data_collection": "11 parallel research agents covering all US sources"
+  },
+  "top_emerging_trends": [
+    {
+      "rank": 1,
+      "direction": "GAAFET + 背面供电网络 (BSPDN)",
+      "lifecycle": "growing",
+      "confidence": 0.95,
+      "domain": "advanced_process",
+      "source_count": 15,
+      "key_labs": ["intel-labs", "tsmc-research", "ibm-research", "suny-poly-cnse", "ny-creates"],
+      "summary": "GAAFET (Nanosheet/RibbonFET) 正式进入量产时代。Intel 18A (RibbonFET+PowerVia) 已量产，TSMC N2 2025 H2进入HVM。背面供电成为2nm/Angstrom节点标配。"
+    },
+    {
+      "rank": 2,
+      "direction": "HBM4 高带宽存储器",
+      "lifecycle": "growing",
+      "confidence": 0.95,
+      "domain": "memory_technology",
+      "source_count": 12,
+      "key_labs": ["micron-rd", "samsung-sait", "nvidia-research", "ibm-research"],
+      "summary": "2026年HBM产能全部售罄。HBM4基片移至逻辑工艺节点，VDDQ降至0.75V (功耗-32%)。Micron HBM4: 36GB/包, 2TB/s。"
+    },
+    {
+      "rank": 3,
+      "direction": "共封装光学 (CPO) 光互联",
+      "lifecycle": "emerging",
+      "confidence": 0.92,
+      "domain": "photonics",
+      "source_count": 10,
+      "key_labs": ["lightmatter", "ayar-labs", "celestial-ai", "intel-labs", "gf-labs", "nvidia-research", "broadcom-rd"],
+      "summary": "2026年是CPO拐点年。Lightmatter Passage 114Tbps + NVLink Fusion。Ayar Labs TeraPHY 8Tbps 2026年中量产。Celestial AI/Marvell $5.5B收购。"
+    },
+    {
+      "rank": 4,
+      "direction": "Agentic AI EDA 自主芯片设计",
+      "lifecycle": "emerging",
+      "confidence": 0.90,
+      "domain": "eda_design_automation",
+      "source_count": 8,
+      "key_labs": ["synopsys-rd", "cadence-rd", "google-research-chip"],
+      "summary": "Synopsys AgentEngineer和Cadence ChipStack引入多智能体自主设计工作流，将前端设计周期从4-6月压缩至数周。RTL验证40x加速。"
+    },
+    {
+      "rank": 5,
+      "direction": "2D材料晶体管 (WSe2, MoS2)",
+      "lifecycle": "emerging",
+      "confidence": 0.85,
+      "domain": "semiconductor_materials",
+      "source_count": 7,
+      "key_labs": ["cornell-cnf", "ucsb-nanofab", "cmu-semicond", "imec"],
+      "summary": "IEDM 2025: imec+TSMC展示单层WSe2 pFET (300mm)。UCSB NXFET: WS2 GAA实现10x集成密度，沟道<5nm。"
+    },
+    {
+      "rank": 6,
+      "direction": "超宽禁带半导体 (Ga2O3, AlN, Diamond)",
+      "lifecycle": "emerging",
+      "confidence": 0.85,
+      "domain": "semiconductor_materials",
+      "source_count": 5,
+      "key_labs": ["osu-nanotechwest", "nrel-widebandgap", "afrl-micro"],
+      "summary": "OSU Ga2O3 MOCVD 20um drift层，>11kV GaN二极管。NREL筛选1300+ UWBG化合物，InBO3达Si的6000x BFOM。"
+    },
+    {
+      "rank": 7,
+      "direction": "容错量子计算 (Fault-Tolerant QC)",
+      "lifecycle": "emerging",
+      "confidence": 0.85,
+      "domain": "quantum_computing",
+      "source_count": 6,
+      "key_labs": ["ibm-research", "intel-labs", "fermilab-sqms", "caltech-kni", "anl-quantum"],
+      "summary": "IBM重构路线图: 2029 Starling 200逻辑量子比特/1亿门。Fermilab SQMS $125M续期，1ms transmon。"
+    },
+    {
+      "rank": 8,
+      "direction": "数字孪生制造 (Digital Twins)",
+      "lifecycle": "emerging",
+      "confidence": 0.82,
+      "domain": "manufacturing_equipment",
+      "source_count": 4,
+      "key_labs": ["purdue-birck", "asu-swap", "nist-semi"],
+      "summary": "Purdue SMART USA $285M+$700M，150+组织。Dassault 3DEXPERIENCE平台。三星+Omniverse虚拟工厂。"
+    },
+    {
+      "rank": 9,
+      "direction": "3D DRAM 新范式",
+      "lifecycle": "emerging",
+      "confidence": 0.80,
+      "domain": "memory_technology",
+      "source_count": 4,
+      "key_labs": ["samsung-sait", "micron-rd", "suny-poly-cnse"],
+      "summary": "Samsung 4F COP DRAM: 垂直沟道晶体管+混合键合，97.3%面积效率。Kioxia氧化半导体3D DRAM (IEDM 2025)。"
+    },
+    {
+      "rank": 10,
+      "direction": "Chiplet + UCIe 2.0 生态系统",
+      "lifecycle": "growing",
+      "confidence": 0.88,
+      "domain": "chiplet_interconnect",
+      "source_count": 6,
+      "key_labs": ["broadcom-rd", "synopsys-rd", "intel-labs", "utautsin-mrc"],
+      "summary": "UCIe 2.0标准覆盖2D/2.5D/3D配置。Broadcom XDSiP: TSMC N2, 6000mm²/包, 12 HBM。TSMC aLSI: 12.35Tb/s/mm。"
+    },
+    {
+      "rank": 11,
+      "direction": "存内计算 (CIM) >50 TFLOPS/W",
+      "lifecycle": "growing",
+      "confidence": 0.80,
+      "domain": "ai_chip_architecture",
+      "source_count": 4,
+      "key_labs": ["nthu", "tsmc-research", "samsung-sait", "d-matrix"],
+      "summary": "NTHU+TSMC ReRAM CIM: 90.2 TFLOPS/W。d-Matrix Corsair: 2.4 PFLOPS MXINT8, <2ms延迟。"
+    },
+    {
+      "rank": 12,
+      "direction": "铁电存储器 (FeRAM, FeFET)",
+      "lifecycle": "growing",
+      "confidence": 0.80,
+      "domain": "memory_technology",
+      "source_count": 4,
+      "key_labs": ["ucberkeley-eecs", "micron-rd", "imec"],
+      "summary": "UC Berkeley Science 2026: TiO2原子级铁电。Micron 41nm pitch NVDRAM。"
+    },
+    {
+      "rank": 13,
+      "direction": "神经形态计算芯片",
+      "lifecycle": "growing",
+      "confidence": 0.78,
+      "domain": "ai_chip_architecture",
+      "source_count": 4,
+      "key_labs": ["ucsd-nano3", "umich-lnf", "intel-labs"],
+      "summary": "UCSD质子型镍酸盐 _Nature Nanotech_ 2026。UMich Bi2Se3忆阻器全模拟网络。Intel Loihi 2 MatMul-free LLM。"
+    },
+    {
+      "rank": 14,
+      "direction": "GaN 300mm 平台化",
+      "lifecycle": "growing",
+      "confidence": 0.82,
+      "domain": "semiconductor_materials",
+      "source_count": 4,
+      "key_labs": ["ti-rd", "wolfspeed-rd", "onsemi-rd"],
+      "summary": "TI会津工厂GaN产能翻4倍，300mm GaN验证成功。Wolfspeed全球首片300mm单晶SiC晶圆。"
+    },
+    {
+      "rank": 15,
+      "direction": "CHERI 硬件安全架构",
+      "lifecycle": "emerging",
+      "confidence": 0.75,
+      "domain": "security",
+      "source_count": 3,
+      "key_labs": ["arm-us-research", "darpa-eri"],
+      "summary": "Arm Morello CHERI硬件强制内存安全。DARPA SBIR Phase II ($1.8M \"SWITCH\")。商业化推进 (EnSilica, SCI Semiconductor)。"
+    },
+    {
+      "rank": 16,
+      "direction": "High-NA EUV 光刻",
+      "lifecycle": "emerging",
+      "confidence": 0.88,
+      "domain": "manufacturing_equipment",
+      "source_count": 5,
+      "key_labs": ["suny-poly-cnse", "ny-creates", "intel-labs", "ibm-research"],
+      "summary": "SUNY Poly CNSE $825M EUV加速器，ASML EXE:5200B 2026年中交付。Intel 14A使用High-NA EUV。"
+    },
+    {
+      "rank": 17,
+      "direction": "光子 AI 计算",
+      "lifecycle": "emerging",
+      "confidence": 0.72,
+      "domain": "photonics",
+      "source_count": 2,
+      "key_labs": ["lightmatter", "uflorida-nrf"],
+      "summary": "Lightmatter Envise光子AI加速器。UF FSI在ISS测试光子AI芯片，10-100x能效提升。"
+    },
+    {
+      "rank": 18,
+      "direction": "增量纳米制造 (Additive Nano)",
+      "lifecycle": "emerging",
+      "confidence": 0.60,
+      "domain": "manufacturing_equipment",
+      "source_count": 2,
+      "key_labs": ["northeastern-knmrc", "stanford-nanolab"],
+      "summary": "Northeastern室温/常压增量制造，成本仅为传统~1%。Stanford MetaLitho3D 1000x吞吐量。"
+    },
+    {
+      "rank": 19,
+      "direction": "混合键合 <2um 节距",
+      "lifecycle": "growing",
+      "confidence": 0.82,
+      "domain": "advanced_packaging",
+      "source_count": 4,
+      "key_labs": ["imec", "tsmc-research", "pennstate-chimes"],
+      "summary": "<2um节距下良率由应力主导。imec 250nm节距混合键合。TSMC SoIC-​X。"
+    },
+    {
+      "rank": 20,
+      "direction": "玻璃基板先进封装",
+      "lifecycle": "emerging",
+      "confidence": 0.70,
+      "domain": "advanced_packaging",
+      "source_count": 3,
+      "key_labs": ["pennstate-chimes", "binghamton-ieec", "intel-labs"],
+      "summary": "玻璃基板解决大尺寸封装翘曲问题, CTE与硅匹配。但脆性、边缘损伤、微裂纹仍是可靠性挑战。"
+    }
+  ],
+  "domain_summary": {
+    "advanced_process": { "trends": 3, "labs_active": 25, "top_direction": "GAAFET+BSPDN", "lifecycle": "growing" },
+    "advanced_packaging": { "trends": 3, "labs_active": 20, "top_direction": "3D Heterogeneous Integration", "lifecycle": "growing" },
+    "memory_technology": { "trends": 3, "labs_active": 10, "top_direction": "HBM4", "lifecycle": "growing" },
+    "ai_chip_architecture": { "trends": 3, "labs_active": 18, "top_direction": "Inference-Specialized Silicon", "lifecycle": "growing" },
+    "eda_design_automation": { "trends": 1, "labs_active": 5, "top_direction": "Agentic AI EDA", "lifecycle": "emerging" },
+    "semiconductor_materials": { "trends": 4, "labs_active": 22, "top_direction": "UWBG (Ga2O3, AlN, Diamond)", "lifecycle": "emerging" },
+    "quantum_computing": { "trends": 1, "labs_active": 12, "top_direction": "Fault-Tolerant Quantum Computing", "lifecycle": "emerging" },
+    "chiplet_interconnect": { "trends": 1, "labs_active": 8, "top_direction": "UCIe 2.0 Ecosystem", "lifecycle": "growing" },
+    "photonics": { "trends": 2, "labs_active": 12, "top_direction": "Co-Packaged Optics", "lifecycle": "emerging" },
+    "manufacturing_equipment": { "trends": 3, "labs_active": 10, "top_direction": "High-NA EUV", "lifecycle": "emerging" },
+    "reliability_test": { "trends": 0, "labs_active": 5, "top_direction": "3D IC Thermal Management", "lifecycle": "growing" },
+    "security": { "trends": 1, "labs_active": 4, "top_direction": "CHERI Hardware Security", "lifecycle": "emerging" }
+  },
+  "lab_activity_top20": [
+    {"rank": 1, "lab_id": "intel-labs", "lab_name": "Intel Labs", "category": "corporate_rd", "direction_count": 7, "key_projects": ["18A/14A", "OCI", "Loihi 2", "Quantum"]},
+    {"rank": 2, "lab_id": "nvidia-research", "lab_name": "NVIDIA Research", "category": "corporate_rd", "direction_count": 6, "key_projects": ["Rubin", "Vera", "NVLink 6", "CPO"]},
+    {"rank": 3, "lab_id": "mit-mtl", "lab_name": "MIT MTL", "category": "university_lab", "direction_count": 8, "key_projects": ["SORBET", "SiPh+GF", "ECRAM", "Superconducting"]},
+    {"rank": 4, "lab_id": "utautsin-mrc", "lab_name": "UT Austin TIE", "category": "university_lab", "direction_count": 5, "key_projects": ["NGMM 3DHI", "Neuromorphic", "Tabletop EUV"]},
+    {"rank": 5, "lab_id": "purdue-birck", "lab_name": "Purdue Birck", "category": "university_lab", "direction_count": 6, "key_projects": ["SMART USA", "Digital Twins"]},
+    {"rank": 6, "lab_id": "ibm-research", "lab_name": "IBM Research", "category": "corporate_rd", "direction_count": 5, "key_projects": ["Quantum Roadmap", "Sub-1nm"]},
+    {"rank": 7, "lab_id": "stanford-nanolab", "lab_name": "Stanford SNF", "category": "university_lab", "direction_count": 6, "key_projects": ["MetaLitho3D", "TSMC Partnership"]},
+    {"rank": 8, "lab_id": "ucberkeley-eecs", "lab_name": "UC Berkeley", "category": "university_lab", "direction_count": 7, "key_projects": ["NC FET", "FeFET", "BSIM-NN"]},
+    {"rank": 9, "lab_id": "cornell-cnf", "lab_name": "Cornell CNF", "category": "university_lab", "direction_count": 5, "key_projects": ["SUPREME", "Topological Interconnects"]},
+    {"rank": 10, "lab_id": "lightmatter", "lab_name": "Lightmatter", "category": "corporate_rd", "direction_count": 4, "key_projects": ["Passage", "NVLink Fusion"]},
+    {"rank": 11, "lab_id": "ayar-labs", "lab_name": "Ayar Labs", "category": "corporate_rd", "direction_count": 3, "key_projects": ["TeraPHY", "SuperNova"]},
+    {"rank": 12, "lab_id": "ucla-device", "lab_name": "UCLA Device Lab", "category": "university_lab", "direction_count": 6, "key_projects": ["Si-IF", "CTT", "Quantum", "THz"]},
+    {"rank": 13, "lab_id": "micron-rd", "lab_name": "Micron", "category": "corporate_rd", "direction_count": 4, "key_projects": ["HBM4", "1-Gamma", "3D DRAM"]},
+    {"rank": 14, "lab_id": "google-research-chip", "lab_name": "Google Silicon", "category": "corporate_rd", "direction_count": 5, "key_projects": ["TPU v7 Ironwood", "OCS"]},
+    {"rank": 15, "lab_id": "caltech-kni", "lab_name": "Caltech KNI", "category": "university_lab", "direction_count": 5, "key_projects": ["Quantum Networks", "Metasurfaces"]},
+    {"rank": 16, "lab_id": "meta-ai-chip", "lab_name": "Meta AI", "category": "corporate_rd", "direction_count": 5, "key_projects": ["MTIA 300-500", "2nm"]},
+    {"rank": 17, "lab_id": "suny-poly-cnse", "lab_name": "SUNY Poly CNSE", "category": "university_lab", "direction_count": 4, "key_projects": ["High NA EUV", "NSTC"]},
+    {"rank": 18, "lab_id": "uiuc-hmntl", "lab_name": "UIUC Holonyak", "category": "university_lab", "direction_count": 6, "key_projects": ["InP QD Lasers", "Wide Bandgap"]},
+    {"rank": 19, "lab_id": "osu-nanotechwest", "lab_name": "OSU Nanotech West", "category": "university_lab", "direction_count": 5, "key_projects": ["Ga2O3", ">11kV GaN"]},
+    {"rank": 20, "lab_id": "ny-creates", "lab_name": "NY CREATES", "category": "research_institute", "direction_count": 4, "key_projects": ["EUV Accelerator", "Sub-2nm"]}
+  ],
+  "cross_references": {
+    "total_convergences": 12,
+    "major_convergences": [
+      {"technology": "GAAFET+BSPDN", "sources": ["intel-labs", "tsmc-research", "ibm-research", "suny-poly-cnse", "ny-creates"], "strength": "critical_mass"},
+      {"technology": "CPO Silicon Photonics", "sources": ["lightmatter", "ayar-labs", "intel-labs", "gf-labs", "nvidia-research"], "strength": "critical_mass"},
+      {"technology": "HBM4", "sources": ["micron-rd", "samsung-sait", "nvidia-research", "ibm-research"], "strength": "critical_mass"},
+      {"technology": "Agentic AI EDA", "sources": ["synopsys-rd", "cadence-rd", "google-research-chip"], "strength": "converging"},
+      {"technology": "2D Material FETs", "sources": ["cornell-cnf", "ucsb-nanofab", "cmu-semicond"], "strength": "early_convergence"},
+      {"technology": "UWBG Ga2O3", "sources": ["osu-nanotechwest", "nrel-widebandgap", "afrl-micro"], "strength": "early_convergence"}
+    ],
+    "funding_map": {
+      "chips_act_related": [
+        {"program": "NSTC", "amount": "$6.3B", "lead": "Natcast"},
+        {"program": "SMART USA", "amount": "$285M + $700M+ partner", "lead": "Purdue"},
+        {"program": "NGMM", "amount": "$840M DARPA + $552M state", "lead": "UT Austin"},
+        {"program": "Microelectronics Commons", "amount": "$2B total", "lead": "DoD (8 Hubs)"},
+        {"program": "Albany EUV Accelerator", "amount": "$825M", "lead": "NY CREATES"},
+        {"program": "NanoFab Reflection", "amount": "$1B state", "lead": "NY"}
+      ],
+      "dod_darpa": [
+        {"program": "ERI 2.0", "amount": "$1.4B+"},
+        {"program": "JUMP 2.0", "amount": "$331M"},
+        {"program": "Q-NEXT", "amount": "$125M/5yr"},
+        {"program": "SQMS", "amount": "$125M/5yr"}
+      ],
+      "venture_capital": [
+        {"company": "Cerebras", "amount": "$95B market cap (IPO)"},
+        {"company": "Lightmatter", "amount": "~$850M raised, $4.4B valuation"},
+        {"company": "Ayar Labs", "amount": "~$870M raised, $3.75B valuation"},
+        {"company": "SambaNova", "amount": "~$1.5B raised, $5B+ valuation"}
+      ]
+    }
+  },
+  "key_projects": [
+    {
+      "project_name": "NGMM National 3DHI Center",
+      "lab_id": "utautsin-mrc",
+      "description": "DARPA资助的美国首个开放式3D异构集成制造中心，总投资~$1.4B (DARPA $840M + 德州 $552M)。拥有84,000 sq ft 3DHI原型制造设施。",
+      "objectives": ["建设美国首个开放3D异构集成制造设施", "开发相控阵雷达/红外焦平面/紧凑电源转换器三个示范项目", "建立端到端3DHI设计到制造流程"],
+      "technical_approach": "3D异构集成、先进封装、小芯片互联",
+      "key_innovations": ["全面3DHI原型能力", "面向国防/商业双用途"],
+      "funding": "$1.4B",
+      "status": "active"
+    },
+    {
+      "project_name": "SMART USA Digital Twin Institute",
+      "lab_id": "purdue-birck",
+      "description": "CHIPS制造USA资助的数字孪生研究所，覆盖材料→反应器→芯片→封装→设备全尺度AI驱动虚拟制造。",
+      "objectives": ["开发半导体制造全尺度数字孪生", "AI引导实验与沉浸式教育培训", "150+组织协作网络"],
+      "technical_approach": "Dassault 3DEXPERIENCE平台, AI数字孪生, 虚拟洁净室训练",
+      "key_innovations": ["Virtual Birck AI驱动数字孪生", "多尺度数字孪生集成"],
+      "funding": "$285M + $700M+ partner",
+      "status": "active"
+    },
+    {
+      "project_name": "NVIDIA Rubin Platform",
+      "lab_id": "nvidia-research",
+      "description": "第6代GPU架构，336B晶体管N3制程，搭配Vera CPU (88核Armv9.2)。Vera Rubin NVL72: 3.6 EFLOPS FP4, 20.7TB HBM。",
+      "objectives": ["下一代AI训练/推理平台", "多芯片系统集成 (CPU+GPU+Switch+NIC+DPU+Ethernet)"],
+      "technical_approach": "TSMC N3制程, HBM4, NVLink 6, 第3代Transformer Engine",
+      "key_innovations": ["384GB HBM4E (Ultra)", "Speculative Decoding硬件3-4x加速", "机架级机密计算"],
+      "funding": "NVIDIA内部R&D",
+      "status": "production"
+    },
+    {
+      "project_name": "IBM Fault-Tolerant Quantum Roadmap",
+      "lab_id": "ibm-research",
+      "description": "从量子比特数向容错和模块化的根本性路线图重构。2029目标: 200逻辑量子比特、1亿门容错量子计算。",
+      "objectives": ["Nighthawk 120 qubit (2025)", "Kookaburra 模块化qLDPC (2026)", "Starling 200逻辑qubit (2029)", "Blue Jay 2000逻辑qubit (2033)"],
+      "technical_approach": "超导transmon, qLDPC纠错, 实时解码<480ns, 模块化互联",
+      "key_innovations": ["c-coupler片上长距离连接", "实时纠错10x超前", "Cisco网络化分布式量子计算"],
+      "funding": "IBM内部 + Albany 300mm fab合作",
+      "status": "active"
+    },
+    {
+      "project_name": "Lightmatter Passage + NVLink Fusion",
+      "lab_id": "lightmatter",
+      "description": "首款3D堆叠硅光子引擎 + 外部激光源 (Guide)。加入NVIDIA NVLink Fusion生态系统，实现114Tbps有源光子中介层。",
+      "objectives": ["替换铜互联", "AI数据中心机架级光子互联"],
+      "technical_approach": "DWDM双向单光纤, 微环调制器, 3D堆叠硅光",
+      "key_innovations": ["1.6Tbps/光纤 (Qualcomm合作)", "46%光纤减少", "~2pJ/bit能效"],
+      "funding": "~$850M, $4.4B估值",
+      "status": "sampling late 2026"
+    }
+  ],
+  "market_outlook": {
+    "global_semiconductor_sales_2026": "$1 trillion (SIA projection, first time ever)",
+    "global_equipment_sales_2026": "$1,450B (+9.0% YoY)",
+    "hbm_market_2027": "$33B (from $4B in 2023)",
+    "advanced_packaging_market_2026": "$49-59B",
+    "ai_chip_market_cagr": "~40-50% through 2028",
+    "coWoS_monthly_capacity": "120k-130k wafers (end 2026)",
+    "US_semiconductor_jobs_gap": "67,100 unfilled by 2030"
+  }
+}
