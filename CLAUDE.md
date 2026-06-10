@@ -7,7 +7,7 @@
 ```
 ┌──────────────────┐    ┌─────────────────┐    ┌──────────────────┐
 │  Hermes Agent    │◄──►│   Collector     │◄──►│  Lab Registry    │
-│  (控制/调度层)     │    │   (采集层)       │    │  (100+ 实验室)    │
+│  (控制/调度层)     │    │   (采集层)       │    │  (172+ 信源)    │
 └──────────────────┘    └────────┬────────┘    └──────────────────┘
                                  │
                           ┌──────▼──────┐
@@ -43,12 +43,13 @@ semi-research-direction-collect/
 │   ├── config.py            # 全局配置
 │   ├── registry.py          # 实验室注册表加载与管理
 │   ├── collector.py         # 采集编排
-│   ├── extractor.py         # 内容提取
+│   ├── models.py            # 数据模型 (CollectedArticle, ResearchProject)
 │   ├── analyzer.py          # 研究方向分析 & 趋势识别
 │   ├── reporter.py          # 报告生成
+│   ├── report_page_generator.py  # HTML 报告页面生成
 │   └── hermes_bridge.py     # Hermes 智能体适配
 ├── data/
-│   ├── lab_registry.yaml    # 实验室注册表（100+ 来源）
+│   ├── lab_registry.yaml    # 实验室注册表（172+ 信源）
 │   └── collection_config.yaml
 ├── hermes/
 │   ├── tools.json           # Hermes 工具定义
@@ -99,5 +100,6 @@ cd scripts && python collect_and_report.py --labs imec,intel-labs --mode weekly
 - 趋势判定需要跨实验室交叉验证
 - 保存原始 HTML 和结构化提取结果
 - 产出物必须对 Hermes 智能体可消费（JSON Schema + Markdown 双格式）
+- 自动生成 HTML 报告页面（通过 report_page_generator.py），包含 Hero、TOC、Digest、趋势分析等模块
 - 不要将主页/列表页视为采集成功 — 必须提取到具体研究内容页
 - 研究方向需要标注: emerging | growing | mature | declining

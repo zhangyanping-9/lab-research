@@ -8,8 +8,8 @@
 #   domains: 研究方向领域标签
 # =============================================================================
 
-version: 2026-06-03
-total_sources: 220
+version: 2026-06-11
+total_sources: 172
 
 # ---------------------------------------------------------------------------
 # Tier 1: 世界级研究机构（每周采集）
@@ -1041,6 +1041,33 @@ tier2:
       domains: [photonics, chiplet_interconnect, advanced_packaging]
       description: Ayar Labs研究，硅光子I/O (TeraPHY™, 1 Tbps/chiplet)、多波长激光 (SuperNova™)
       key_focus: [Optical I/O Chiplets, UCIe Optical Retimer, Co-Packaged Optics]
+
+    - id: amd-research
+      name: AMD Research
+      homepage: https://www.amd.com/en/corporate/research.html
+      research_page: https://www.amd.com/en/research.html
+      region: north_america
+      domains: [ai_chip_architecture, advanced_packaging, chiplet_interconnect, eda_design_automation]
+      description: AMD研究院，GPU/CDNA/RDNA架构、3D Chiplet封装、AI推理优化、自适应SoC
+      key_focus: [GPU Architecture, 3D Chiplet, AI Inference, Adaptive Computing, CDNA/RDNA]
+
+    - id: qualcomm-research
+      name: Qualcomm Research
+      homepage: https://www.qualcomm.com/research
+      research_page: https://www.qualcomm.com/research/artificial-intelligence
+      region: north_america
+      domains: [ai_chip_architecture, advanced_process, photonics, chiplet_interconnect]
+      description: Qualcomm研究院，AI引擎、连接芯片、NPU架构、Always-On AI、WiFi/BT/5G SoC
+      key_focus: [AI Engine, NPU Architecture, On-Device AI, RF/Analog, 5G/6G]
+
+    - id: sambanova
+      name: SambaNova Systems Research
+      homepage: https://sambanova.ai
+      research_page: https://sambanova.ai/research
+      region: north_america
+      domains: [ai_chip_architecture, chiplet_interconnect]
+      description: SambaNova系统研究，可重构数据流架构 (RDU)、SN40L/SN50芯片、大模型训练/推理
+      key_focus: [Reconfigurable Dataflow Architecture, LLM Training/Inference, SN-Server]
 
 # ---------------------------------------------------------------------------
 # Tier 3: 核心学术会议（会期采集）

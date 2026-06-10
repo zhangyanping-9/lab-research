@@ -2,7 +2,7 @@
 
 > 全球半导体实验室研究方向采集与洞察系统
 
-**目标**: 定期收集全球 100+ 半导体实验室/研究机构/企业 R&D 中心的最新研究方向，通过结构化分析和洞察提炼，生成可供 Hermes 智能体消费的研究报告。
+**目标**: 定期收集全球 172+ 半导体实验室/研究机构/企业 R&D 中心的**研究方向**，通过结构化分析和洞察提炼，生成可供 Hermes 智能体消费的研究报告。
 
 与传统的半导体新闻聚合（如 [semi-research](https://github.com/pty819/semi-research.git)）不同，本系统聚焦于 **研究前沿（Research Frontier）** ，追踪的是「未来 2-5 年的技术方向」，而非「本周的财报与订单」。
 
@@ -80,16 +80,16 @@ hermes/prompts/           # 分阶段 Prompt 模板
 
 ## 信息源覆盖
 
-系统注册表包含 **120+ 信息源**，分为 6 个采集层级：
+系统注册表包含 **172+ 信息源**，分为 6 个采集层级：
 
 | 层级 | 类型 | 采集频率 | 数量 | 示例 |
 |---|---|---|---|---|
-| Tier 1 | 世界级研究机构 | 每周 | ~25 | imec, CEA-Leti, MIT MTL, 北大微电子 |
-| Tier 2 | 企业 R&D 中心 | 每周 | ~20 | Intel Labs, TSMC Research, NVIDIA Research |
-| Tier 3 | 学术会议 | 会期 | ~10 | IEDM, ISSCC, VLSI Symposium, DAC |
-| Tier 4 | 研究机构/联盟 | 双周 | ~15 | SEMI Research, Yole, TrendForce |
-| Tier 5 | 技术博客/独立分析 | 双周 | ~15 | SemiAnalysis, Asianometry, ChipsAndCheese |
-| Tier 6 | 出版物/arXiv | 月度 | ~5 | arXiv, IEEE Xplore, Google Scholar |
+| Tier 1 | 世界级研究机构 & 大学 | 每周 | ~76 | MIT MTL, Purdue Birck, Cornell CNF, imec, 北大微电子 |
+| Tier 2 | 企业 R&D 中心 | 每周 | ~43 | Intel Labs, NVIDIA Research, AMD Research, Micron, TSMC Research |
+| Tier 3 | 学术会议 | 会期 | ~9 | IEDM, ISSCC, VLSI Symposium, DAC |
+| Tier 4 | 政府/联盟/国家实验室 | 双周 | ~30 | DARPA ERI, NSTC, SRC JUMP 2.0, DoD Microelectronics Commons |
+| Tier 5 | 技术博客/独立分析 | 双周 | ~10 | SemiAnalysis, Asianometry, ChipsAndCheese |
+| Tier 6 | 出版物/arXiv | 月度 | ~4 | arXiv, IEEE Xplore, Google Scholar |
 
 ## 产出物
 
@@ -110,7 +110,18 @@ artifacts/{date}/
 │   └── cross_reference.json
 └── reports/             # 洞察报告
     ├── semiconductor-research-insight-{date}.json   # Hermes 可消费
-    └── semiconductor-research-insight-{date}.md     # 人类可读
+    ├── semiconductor-research-insight-{date}.md     # 人类可读
+    ├── semiconductor-report-{date}.html             # HTML 报告页面
+    └── index.html                                   # 报告索引页
+
+## Web 报告页面
+
+每次采集完成后自动生成精美的 HTML 报告页面，参考 [gathering.xian.li/semireport](https://gathering.xian.li/semireport) 的视觉风格，涵盖 Hero、TOC、Digest、趋势分析、领域统计、实验室活跃度、交叉引用等模块。同时自动生成报告索引页，方便按日期浏览历史报告。
+
+```bash
+# 启动本地报告网站
+python scripts/serve_reports.py --open
+# 访问 http://localhost:8080/ 查看所有报告索引
 ```
 
 ## 研究方向标签体系
@@ -125,11 +136,14 @@ artifacts/{date}/
 
 | 工具 | 描述 | 必需参数 |
 |---|---|---|
-| `collect_research_directions` | 采集指定实验室研究方向 | labs |
+| `collect_research_directions` | 采集指定实验室研究方向（基础模式） | labs |
 | `analyze_research_trends` | 分析趋势 | (可选 date) |
 | `generate_insight_report` | 生成洞察报告 | (可选 date) |
-| `collect_and_report` | 端到端一体化 | labs |
 | `list_available_labs` | 列出可用实验室 | (可选 filters) |
+| `collect_project_details` | 深度采集——提取项目详情 | labs |
+| `generate_project_reports` | 生成项目详细报告 | (可选 date) |
+| `collect_and_report` | 端到端一体化（基础模式） | labs |
+| `collect_and_report_deep` | 端到端一体化（深度模式） | labs |
 
 ## 示例输出（JSON 报告）
 
@@ -160,7 +174,7 @@ artifacts/{date}/
 | 维度 | semi-research (参考项目) | 本系统 |
 |---|---|---|
 | **焦点** | 产业新闻 (财报、订单、市场) | 研究前沿 (论文、技术路线、实验室方向) |
-| **信息源** | 80+ 新闻/媒体源 | 120+ 实验室/研究机构/会议 |
+| **信息源** | 80+ 新闻/媒体源 | 172+ 实验室/研究机构/企业R&D |
 | **分析维度** | 重要性排名、分类 | 研究方向聚类、生命周期、跨实验室交叉验证 |
-| **输出** | HTML/PDF 双语周报 | JSON (Hermes) + Markdown 洞察报告 |
+| **输出** | HTML/PDF 双语周报 | JSON (Hermes) + Markdown + HTML 报告页面 |
 | **Agent 接口** | Playwright MCP Skill | Hermes 工具定义 + JSON Schema |

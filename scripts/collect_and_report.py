@@ -3,14 +3,17 @@
 半导体研究方向采集与洞察报告 — 主入口
 
 Usage:
-    # 端到端采集+分析+报告
+    # 端到端采集+分析+报告（完成后自动生成 HTML 报告页面）
     python collect_and_report.py --labs imec,intel-labs --mode weekly
 
     # 仅采集
     python collect_and_report.py --labs imec,cea-leti --mode weekly --skip-analysis
 
-    # 仅从已有数据生成报告
+    # 仅从已有数据生成报告（含 HTML 页面）
     python collect_and_report.py --date 2026-06-02 --report-only
+
+    # 跳过 HTML 页面生成
+    python collect_and_report.py --labs imec --no-html
 
     # 列出可用实验室
     python collect_and_report.py --list-labs
@@ -80,9 +83,15 @@ def main() -> None:
     parser.add_argument("--verbose", "-v", action="store_true", help="详细日志")
     parser.add_argument("--hermes-output", action="store_true",
                         help="输出 Hermes 可消费的 JSON (stdout)")
+    parser.add_argument("--generate-html", action="store_true",
+                        help="生成 HTML 报告页面 (artifacts/{date}/reports/semiconductor-report.html)")
+    parser.add_argument("--no-html", action="store_true",
+                        help="跳过 HTML 报告页面生成")
 
     args = parser.parse_args()
     setup_logging(args.verbose)
+
+    from src.report_page_generator import ReportPageGenerator
 
     bridge = HermesBridge()
 
@@ -113,6 +122,7 @@ def main() -> None:
             date=args.date, format=args.format, focus=args.focus,
         )
         _print_result(result, args.hermes_output)
+        _generate_html_if_needed(args, result)
         return
 
     # --labs is required for collection
@@ -148,6 +158,33 @@ def main() -> None:
             )
 
     _print_result(result, args.hermes_output)
+    _generate_html_if_needed(args, result)
+
+
+def _generate_html_if_needed(args: argparse.Namespace, result: dict) -> None:
+    """Generate HTML report page if requested."""
+    if args.no_html:
+        return
+    if args.hermes_output:
+        return
+    if result.get("status") != "success":
+        return
+
+    date_str = result.get("date", "")
+    if not date_str:
+        return
+
+    try:
+        gen = ReportPageGenerator("artifacts")
+        html_path = gen.generate(date_str)
+        # Update index
+        from pathlib import Path
+        idx_path = Path("artifacts/index.html")
+        idx_path.write_text(gen.generate_index_page(), encoding="utf-8")
+        print(f"  📄 HTML 报告页面: {html_path}")
+        print(f"  📇 报告索引: {idx_path.resolve()}")
+    except Exception as exc:
+        logger.warning("HTML report generation failed (non-fatal): %s", exc)
 
 
 def _print_result(result: dict, hermes_output: bool = False) -> None:

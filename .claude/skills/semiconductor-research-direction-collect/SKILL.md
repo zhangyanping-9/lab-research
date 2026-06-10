@@ -2,9 +2,10 @@
 name: semiconductor-research-direction-collect
 description: >-
   全球半导体实验室研究方向采集与洞察系统。
-  覆盖169+信源（53所美国大学+40家企业R&D+33家研究机构），
+  覆盖172+信源（53所美国大学+43家企业R&D+33家研究机构），
   支持基础方向统计和深度项目详情两种采集模式，
-  生成结构化洞察报告并输出Hermes可消费JSON。
+  自动生成结构化洞察报告+HTML可视化报告页面，
+  输出Hermes可消费JSON。
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob, WebFetch, WebSearch
 ---
 
@@ -36,12 +37,12 @@ allowed-tools: Read, Write, Edit, Bash, Grep, Glob, WebFetch, WebSearch
 - 📊 技术指标 (node, power, frequency...)
 - 📚 相关论文/专利
 
-## 信息源覆盖（169+ 信源）
+## 信息源覆盖（172+ 信源）
 
 | 层级 | 类型 | 采集频率 | 数量 | 代表性新增信源 |
 |---|---|---|---|---|
 | Tier 1 | 大学/研究机构 | 每周 | ~76 | Purdue(SMART USA), Cornell(CNF/SUPREME), UT Austin(TIE/NGMM) |
-| Tier 2 | 企业R&D | 每周 | ~40 | Micron, TI, GF Labs, Broadcom, Cerebras, Lightmatter |
+| Tier 2 | 企业R&D | 每周 | ~43 | Micron, TI, GF Labs, Broadcom, Cerebras, Lightmatter, AMD Research, SambaNova |
 | Tier 3 | 学术会议 | 会期 | ~9 | IEDM, ISSCC, VLSI Symposium, DAC |
 | Tier 4 | 政府/联盟 | 双周 | ~30 | DARPA ERI, NY CREATES, DOE MSRC, NSTC, SRC JUMP 2.0 |
 | Tier 5 | 技术博客 | 双周 | ~10 | SemiAnalysis, ChipsAndCheese, SemiEngineering |
@@ -51,7 +52,7 @@ allowed-tools: Read, Write, Edit, Bash, Grep, Glob, WebFetch, WebSearch
 
 **美国大学 (53所)**: MIT MTL, Stanford Nanolab, UC Berkeley, CMU, Georgia Tech, Purdue(Birck/SMART USA $1B+), UIUC(HMNTL), Michigan(LNF), Cornell(CNF/SUPREME), UT Austin(TIE/NGMM $840M), Penn State(CHIMES), ASU(SWAP Hub), UCSB, Caltech(KNI), Harvard(CNS), Princeton(MNFC), Columbia(CUBiC), UCSD(PRISM), Notre Dame, Wisconsin, Maryland, NC State(CLAWS), Duke, USC(CA DREAMS), Northwestern, JHU/APL, Ohio State, RPI, SUNY Poly(Albany NanoTech), Binghamton, Virginia Tech, Washington(WNF), Minnesota(MNC), Florida, RIT, Arizona, UC Davis, NYU Tandon, Colorado(NQN), Utah, Northeastern, UMass, Texas A&M, Iowa State, Arkansas(MUSiC SiC), Yale, Brown, Vanderbilt, Case Western, Lehigh, Stony Brook, Oregon State
 
-**美国企业R&D (40家)**: Intel Labs, IBM Research, NVIDIA Research, Google Silicon, Microsoft Silicon, Meta AI, Apple Silicon, AMD Research, Qualcomm Research, Micron, TI, ADI, GF Labs, Broadcom, Marvell, Amazon Annapurna, Wolfspeed, onsemi, KLA, Lam Research, Applied Materials, Teradyne, Synopsys, Cadence, Arm US, Rambus, Entegris, DuPont, Brewer Science, Microchip, SkyWater, Qorvo, Cerebras, d-Matrix, Tenstorrent, Lightmatter, Celestial AI, Ayar Labs, SambaNova
+**美国企业R&D (43家)**: Intel Labs, IBM Research, NVIDIA Research, Google Silicon, Microsoft Silicon, Meta AI, Apple Silicon, AMD Research, Qualcomm Research, Micron, TI, ADI, GF Labs, Broadcom, Marvell, Amazon Annapurna, Wolfspeed, onsemi, KLA, Lam Research, Applied Materials, Teradyne, Synopsys, Cadence, Arm US, Rambus, Entegris, DuPont, Brewer Science, Microchip, SkyWater, Qorvo, Cerebras, d-Matrix, Tenstorrent, Lightmatter, Celestial AI, Ayar Labs, SambaNova
 
 **美国政府/研究机构 (29个)**: DARPA ERI 2.0, AFRL, NRL, ARL, ORNL, ANL, LBNL, LANL, LLNL, Sandia, PNNL, BNL/CFN, NREL, SLAC, Fermilab(SQMS), NY CREATES/Albany NanoTech ($25B+), MIT Lincoln Lab, Natcast/NSTC ($6.3B), SRC(JUMP 2.0), DoD Microelectronics Commons (8 Hubs), NIST, SIA, IMAPS, IEEE EPS
 
